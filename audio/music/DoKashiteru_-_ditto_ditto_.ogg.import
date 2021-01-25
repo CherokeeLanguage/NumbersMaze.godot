@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/DoKashiteru_-_ditto_ditto_.ogg-381aee2ebe8a49c1402928064d4797d5.oggstr"
+
+[deps]
+
+source_file="res://audio/music/DoKashiteru_-_ditto_ditto_.ogg"
+dest_files=[ "res://.import/DoKashiteru_-_ditto_ditto_.ogg-381aee2ebe8a49c1402928064d4797d5.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

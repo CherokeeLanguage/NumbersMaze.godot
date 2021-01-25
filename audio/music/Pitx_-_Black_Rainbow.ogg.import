@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Pitx_-_Black_Rainbow.ogg-88e26876a7444d65e39816e70f57b7c2.oggstr"
+
+[deps]
+
+source_file="res://audio/music/Pitx_-_Black_Rainbow.ogg"
+dest_files=[ "res://.import/Pitx_-_Black_Rainbow.ogg-88e26876a7444d65e39816e70f57b7c2.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

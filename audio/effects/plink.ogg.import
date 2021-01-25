@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/plink.ogg-ff1698cb376040619110583c64d5f2c4.oggstr"
+
+[deps]
+
+source_file="res://audio/effects/plink.ogg"
+dest_files=[ "res://.import/plink.ogg-ff1698cb376040619110583c64d5f2c4.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

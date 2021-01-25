@@ -5,9 +5,9 @@
 [node name="Main" type="Node"]
 script = ExtResource( 1 )
 
-[node name="UI" type="Node" parent="."]
-
 [node name="World" type="Node" parent="."]
+
+[node name="UI" type="Node" parent="."]
 
 [node name="Camera" type="Camera2D" parent="."]
 smoothing_enabled = true

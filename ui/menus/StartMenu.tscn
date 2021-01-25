@@ -1,0 +1,106 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://ui/menus/title-bar-style-box.tres" type="StyleBox" id=1]
+[ext_resource path="res://fonts/CherokeeHandone-128.tres" type="DynamicFont" id=3]
+[ext_resource path="res://audio/SoundFx.tscn" type="PackedScene" id=5]
+[ext_resource path="res://ui/menus/StartMenu.gd" type="Script" id=6]
+[ext_resource path="res://audio/Music.tscn" type="PackedScene" id=7]
+[ext_resource path="res://ui/menus/BaseMenu.tscn" type="PackedScene" id=8]
+
+[node name="StartMenu" instance=ExtResource( 8 )]
+script = ExtResource( 6 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." index="1"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+alignment = 1
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Spacer_0" type="Control" parent="VBoxContainer" index="0"]
+margin_right = 1920.0
+margin_bottom = 76.0
+size_flags_vertical = 3
+
+[node name="GameTitle" type="Label" parent="VBoxContainer" index="1"]
+margin_left = 226.0
+margin_top = 80.0
+margin_right = 1694.0
+margin_bottom = 255.0
+size_flags_horizontal = 4
+custom_styles/normal = ExtResource( 1 )
+custom_fonts/font = ExtResource( 3 )
+text = "Cherokee Numbers Maze"
+align = 1
+
+[node name="Spacer_1" type="Control" parent="VBoxContainer" index="2"]
+margin_top = 259.0
+margin_right = 1920.0
+margin_bottom = 259.0
+size_flags_vertical = 2
+
+[node name="PlayGame" type="Button" parent="VBoxContainer" index="3"]
+margin_left = 721.0
+margin_top = 339.0
+margin_right = 1199.0
+margin_bottom = 481.0
+size_flags_horizontal = 4
+text = "Play Game"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Options" type="Button" parent="VBoxContainer" index="4"]
+margin_left = 784.0
+margin_top = 485.0
+margin_right = 1135.0
+margin_bottom = 627.0
+size_flags_horizontal = 4
+disabled = true
+text = "Options"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="About" type="Button" parent="VBoxContainer" index="5"]
+margin_left = 807.0
+margin_top = 631.0
+margin_right = 1113.0
+margin_bottom = 773.0
+size_flags_horizontal = 4
+disabled = true
+text = "About"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Quit" type="Button" parent="VBoxContainer" index="6"]
+margin_left = 844.0
+margin_top = 777.0
+margin_right = 1075.0
+margin_bottom = 919.0
+size_flags_horizontal = 4
+size_flags_vertical = 0
+disabled = true
+text = "Quit"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Spacer_2" type="Control" parent="VBoxContainer" index="7"]
+margin_top = 923.0
+margin_right = 1920.0
+margin_bottom = 923.0
+size_flags_vertical = 2
+
+[node name="Spacer_3" type="Control" parent="VBoxContainer" index="8"]
+margin_top = 1003.0
+margin_right = 1920.0
+margin_bottom = 1003.0
+size_flags_vertical = 2
+
+[node name="Music" parent="." index="2" instance=ExtResource( 7 )]
+
+[node name="SoundFx" parent="." index="3" instance=ExtResource( 5 )]

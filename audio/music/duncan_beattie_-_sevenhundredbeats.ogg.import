@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/duncan_beattie_-_sevenhundredbeats.ogg-03d4782ba3d7ad46b50112727d3908b5.oggstr"
+
+[deps]
+
+source_file="res://audio/music/duncan_beattie_-_sevenhundredbeats.ogg"
+dest_files=[ "res://.import/duncan_beattie_-_sevenhundredbeats.ogg-03d4782ba3d7ad46b50112727d3908b5.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

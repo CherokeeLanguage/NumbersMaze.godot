@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/George_Ellinas_-_Pulse_(George_Ellinas_remix).ogg-8675e9d0d28b598c2ba81ad384dbc609.oggstr"
+
+[deps]
+
+source_file="res://audio/music-startmenu/George_Ellinas_-_Pulse_(George_Ellinas_remix).ogg"
+dest_files=[ "res://.import/George_Ellinas_-_Pulse_(George_Ellinas_remix).ogg-8675e9d0d28b598c2ba81ad384dbc609.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

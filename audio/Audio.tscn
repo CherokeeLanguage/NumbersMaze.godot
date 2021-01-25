@@ -1,0 +1,14 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://main/SoundFx.gd" type="Script" id=1]
+[ext_resource path="res://main/Music.gd" type="Script" id=2]
+[ext_resource path="res://audio/SoundFx.tscn" type="PackedScene" id=3]
+[ext_resource path="res://audio/Music.tscn" type="PackedScene" id=4]
+
+[node name="Audio" type="Node"]
+
+[node name="Music" type="Node" parent="." instance=ExtResource( 4 )]
+script = ExtResource( 2 )
+
+[node name="SoundFx" type="Node" parent="." instance=ExtResource( 3 )]
+script = ExtResource( 1 )

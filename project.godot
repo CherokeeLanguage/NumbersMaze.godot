@@ -19,10 +19,20 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://ui/menus/BaseMenu.gd"
 }, {
+"base": "Reference",
+"class": "GameSlot",
+"language": "GDScript",
+"path": "res://scripts/classes/GameSlot.gd"
+}, {
 "base": "Node",
 "class": "Main",
 "language": "GDScript",
 "path": "res://main/Main.gd"
+}, {
+"base": "Object",
+"class": "MazeGenerator",
+"language": "GDScript",
+"path": "res://scripts/maze/MazeGenerator.gd"
 }, {
 "base": "Node",
 "class": "Music",
@@ -42,7 +52,9 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "AboutMenu": "",
 "BaseMenu": "",
+"GameSlot": "",
 "Main": "",
+"MazeGenerator": "",
 "Music": "",
 "SoundFx": "",
 "StartMenu": ""

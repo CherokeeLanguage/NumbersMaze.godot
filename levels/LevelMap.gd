@@ -3,6 +3,7 @@ extends Node2D
 class_name LevelMap
 
 onready var map: = $TileMap
+onready var backdrop: = $TextureRect
 
 var level:int = 1
 
@@ -12,7 +13,7 @@ var portals:Array
 var rng:RandomNumberGenerator
 
 func _ready():
-	generate()
+	pass
 	
 func randomPortal()->Vector2:
 	return portals[rng.randi_range(0, portals.size()-1)]
@@ -26,13 +27,9 @@ func generate()->void:
 	#for procgen maze
 	mg = MazeGenerator.new()
 	mg.rseed=level
+	mg.level=level
 	mg.generate()
 	
-	for portal in mg.portals:
-		if portal is Vector2:
-			portals.append(map.map_to_world(portal))
-			print(str(portal)+" => "+str(map.map_to_world(portal)))
-
 	map.set_cell(-1, -1, 20)
 	map.set_cell(mg.width, -1, 21)
 	map.set_cell(-1, mg.height, 22)
@@ -63,4 +60,18 @@ func generate()->void:
 				map.set_cell(-1, y, 19)
 			if x==mg.width-1:
 				map.set_cell(mg.width, y, 17)
+				
+	for portal in mg.portals:
+		if portal is Vector2:
+			var world_portal:Vector2
+			world_portal = map.map_to_world(portal) # top left corner
+			world_portal.x+=map.cell_size.x/2
+			world_portal.y+=map.cell_size.y/2
+			portals.append(world_portal)
+			#print(str(portal)+" => "+str(map.map_to_world(portal)))
 			
+	backdrop.texture = load("res://graphics/floor-tiles/floor1.png")
+	backdrop.rect_global_position=Vector2.ZERO#(64,64)
+	backdrop.rect_size.x=map.cell_size.x*mg.width
+	backdrop.rect_size.y=map.cell_size.y*mg.height
+

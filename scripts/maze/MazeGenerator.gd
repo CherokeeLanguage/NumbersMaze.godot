@@ -60,12 +60,12 @@ func dump()->void:
 func generate()->void:
 	print_debug("MazeGenerator#generator")
 	
-	width = level / 3 + 7
-	height = level / 3 + 4
-	if (width > 16):
-		width = 16 + level / 16
-	if (height > 9):
-		height = 9 + level / 9
+	width = int(ceil(level/3.0)) + 11
+	height = int(ceil(level/3.0)) + 6
+	if (width > 32):
+		width = 32 + int(level / 32.0)
+	if (height > 18):
+		height = 18 + int(level / 18.0)
 	
 	rng = RandomNumberGenerator.new()
 	rng.seed = rseed

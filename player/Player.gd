@@ -3,6 +3,7 @@ extends RigidBody2D
 enum FACING { NORTH, EAST, SOUTH, WEST}
 
 onready var animation = $AnimationPlayer
+onready var cameraFollow = $CameraFollow
 
 var facing = FACING.EAST
 var resetPosition:bool = false
@@ -36,7 +37,6 @@ func _physics_process(delta):
 	if impulse.length()>0:
 		apply_central_impulse(impulse.normalized()*4000*delta)
 		var a = wrapf(rad2deg(impulse.angle()), 0, 360)
-		print(a)
 		
 		"""
 		E: 0

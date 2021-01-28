@@ -5,16 +5,17 @@ class_name MazeGenerator
 var rseed:int
 var width:int
 var height:int
+var level:int
 
 var maze:Array
+var portals:Array
 
 var rng:RandomNumberGenerator
 
 func _init():
 	print_debug("MazeGenerator#_init")
-	width=16
-	height=16
 	rseed = 0
+	level=1
 	
 func dump()->void:
 	print_debug("MazeGenerator#dump")
@@ -44,33 +45,28 @@ func dump()->void:
 			var cell: =(maze[x][y] as MazeCell)
 			#w=1 s=2 e=4 n=8
 			var ix:int = 0
-			var xx:String = ""
 			if cell.wall.w:
 				ix|=1
-				xx+="w"
-			else:
-				xx+=" "
 			if cell.wall.s:
 				ix|=2
-				xx+="s"
-			else:
-				xx+=" "
 			if cell.wall.e:
 				ix|=4
-				xx+="e"
-			else:
-				xx+=" "
 			if cell.wall.n:
 				ix|=8
-				xx+="n"
-			else:
-				xx+=" "
 			line += chars[ix]
 			
 		print(line)
 	
 func generate()->void:
 	print_debug("MazeGenerator#generator")
+	
+	width = level / 3 + 7
+	height = level / 3 + 4
+	if (width > 16):
+		width = 16 + level / 16
+	if (height > 9):
+		height = 9 + level / 9
+	
 	rng = RandomNumberGenerator.new()
 	rng.seed = rseed
 	var totalCells:int = width * height
@@ -149,10 +145,27 @@ func generate()->void:
 				return
 			currentCell=(stack.pop_back() as Vector2)
 			
-				
+	for x in range(0, width):
+		for y in range(0, height):
+			var cell: = (maze[x][y] as MazeCell)
+			if cell.isPortal():
+				portals.append(Vector2(x, y))
+			
 class MazeCell:
 	var isSolid:bool = true
 	var wall:Walls
+	
+	func isPortal()->bool:
+		var ix:int=0
+		if wall.w:
+			ix+=1
+		if wall.s:
+			ix+=1
+		if wall.e:
+			ix+=1
+		if wall.n:
+			ix+=1
+		return ix==3
 	
 	func _init():
 		wall = Walls.new()

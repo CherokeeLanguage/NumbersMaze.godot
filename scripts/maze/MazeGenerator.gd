@@ -68,8 +68,7 @@ func dump()->void:
 			line += chars[ix]
 			
 		print(line)
-		
-		
+	
 func generate()->void:
 	print_debug("MazeGenerator#generator")
 	rng = RandomNumberGenerator.new()
@@ -110,13 +109,13 @@ func generate()->void:
 		if cx < width and (maze[cx][cy] as MazeCell).hasAllWalls():
 			neighbors.append(Vector2(cx, cy))
 			
-		#Check South
+		#Check North
 		cx = x
 		cy = y - 1
 		if cy >= 0 and (maze[cx][cy] as MazeCell).hasAllWalls():
 			neighbors.append(Vector2(cx, cy))
 	
-		#Check North
+		#Check South
 		cx = x
 		cy = y + 1
 		if cy < height and (maze[cx][cy] as MazeCell).hasAllWalls():
@@ -133,11 +132,11 @@ func generate()->void:
 				(maze[newCell.x][newCell.y] as MazeCell).wall.w = false
 				(maze[currentCell.x][currentCell.y] as MazeCell).wall.e = false
 			elif newCell.y < currentCell.y:
-				(maze[newCell.x][newCell.y] as MazeCell).wall.n = false
-				(maze[currentCell.x][currentCell.y] as MazeCell).wall.s = false
-			elif newCell.y > currentCell.y:
 				(maze[newCell.x][newCell.y] as MazeCell).wall.s = false
 				(maze[currentCell.x][currentCell.y] as MazeCell).wall.n = false
+			elif newCell.y > currentCell.y:
+				(maze[newCell.x][newCell.y] as MazeCell).wall.n = false
+				(maze[currentCell.x][currentCell.y] as MazeCell).wall.s = false
 					
 			stack.append(currentCell)
 			currentCell = newCell

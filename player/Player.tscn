@@ -3,11 +3,11 @@
 [ext_resource path="res://graphics/player/nn-02-ch003.png" type="Texture" id=1]
 [ext_resource path="res://player/Player.gd" type="Script" id=2]
 
-[sub_resource type="CapsuleShape2D" id=1]
+[sub_resource type="CapsuleShape2D" id=2]
 radius = 24.0
 height = 46.0
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=3]
 resource_name = "east"
 length = 0.25
 loop = true
@@ -25,7 +25,7 @@ tracks/0/keys = {
 "values": [ 12, 13, 14 ]
 }
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=4]
 resource_name = "idle-east"
 length = 0.1
 tracks/0/type = "value"
@@ -41,8 +41,7 @@ tracks/0/keys = {
 "values": [ 13 ]
 }
 
-[sub_resource type="Animation" id=4]
-resource_name = "idle-north"
+[sub_resource type="Animation" id=5]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -57,7 +56,7 @@ tracks/0/keys = {
 "values": [ 5 ]
 }
 
-[sub_resource type="Animation" id=12]
+[sub_resource type="Animation" id=6]
 resource_name = "idle-south"
 length = 0.1
 tracks/0/type = "value"
@@ -73,8 +72,7 @@ tracks/0/keys = {
 "values": [ 1 ]
 }
 
-[sub_resource type="Animation" id=6]
-resource_name = "idle-west"
+[sub_resource type="Animation" id=7]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -87,23 +85,6 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ 9 ]
-}
-
-[sub_resource type="Animation" id=7]
-length = 0.25
-loop = true
-step = 0.083
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.083, 0.166 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 1,
-"values": [ 4, 5, 6 ]
 }
 
 [sub_resource type="Animation" id=8]
@@ -120,10 +101,27 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.083, 0.166 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
-"values": [ 0, 1, 2 ]
+"values": [ 4, 5, 6 ]
 }
 
 [sub_resource type="Animation" id=9]
+length = 0.25
+loop = true
+step = 0.083
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.083, 0.166 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2 ]
+}
+
+[sub_resource type="Animation" id=10]
 length = 0.25
 loop = true
 step = 0.083
@@ -141,7 +139,7 @@ tracks/0/keys = {
 }
 
 [node name="Player" type="RigidBody2D"]
-z_index = 1
+collision_layer = 2
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -149,21 +147,71 @@ scale = Vector2( 0.375, 0.375 )
 texture = ExtResource( 1 )
 hframes = 4
 vframes = 4
-frame = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/east = SubResource( 10 )
-anims/idle-east = SubResource( 11 )
-anims/idle-north = SubResource( 4 )
-anims/idle-south = SubResource( 12 )
-anims/idle-west = SubResource( 6 )
-anims/north = SubResource( 7 )
-anims/south = SubResource( 8 )
-anims/west = SubResource( 9 )
+anims/east = SubResource( 3 )
+anims/idle-east = SubResource( 4 )
+anims/idle-north = SubResource( 5 )
+anims/idle-south = SubResource( 6 )
+anims/idle-west = SubResource( 7 )
+anims/north = SubResource( 8 )
+anims/south = SubResource( 9 )
+anims/west = SubResource( 10 )
 
 [node name="CameraFollow" type="RemoteTransform2D" parent="."]
 update_rotation = false
 update_scale = false
+
+[node name="Rays" type="Node2D" parent="."]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Down_1" type="RayCast2D" parent="Rays"]
+position = Vector2( -16, 0 )
+enabled = true
+collision_mask = 4
+
+[node name="Down_2" type="RayCast2D" parent="Rays"]
+position = Vector2( 16, 0 )
+enabled = true
+collision_mask = 4
+
+[node name="Up_1" type="RayCast2D" parent="Rays"]
+position = Vector2( -16, 0 )
+rotation = 3.14159
+enabled = true
+collision_mask = 4
+
+[node name="Up_2" type="RayCast2D" parent="Rays"]
+position = Vector2( 16, 0 )
+rotation = 3.14159
+enabled = true
+collision_mask = 4
+
+[node name="Right_1" type="RayCast2D" parent="Rays"]
+position = Vector2( 0, 16 )
+rotation = 4.71239
+enabled = true
+collision_mask = 4
+
+[node name="Right_2" type="RayCast2D" parent="Rays"]
+position = Vector2( 0, -16 )
+rotation = 4.71239
+enabled = true
+collision_mask = 4
+
+[node name="Left_1" type="RayCast2D" parent="Rays"]
+position = Vector2( 0, 16 )
+rotation = 1.5708
+enabled = true
+collision_mask = 4
+
+[node name="Left_2" type="RayCast2D" parent="Rays"]
+position = Vector2( 0, -16 )
+rotation = 1.5708
+enabled = true
+collision_mask = 4

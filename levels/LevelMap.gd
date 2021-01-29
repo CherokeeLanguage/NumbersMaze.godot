@@ -2,8 +2,8 @@ extends Node2D
 
 class_name LevelMap
 
-onready var map: = $TileMap
-onready var backdrop: = $TextureRect
+onready var map:TileMap = $TileMap
+onready var backdrop:TextureRect = $TextureRect
 
 var level:int = 1
 
@@ -70,7 +70,8 @@ func generate()->void:
 			portals.append(world_portal)
 			#print(str(portal)+" => "+str(map.map_to_world(portal)))
 			
-	backdrop.texture = load("res://graphics/floor-tiles/floor1.png")
+	var floorNumber:int = level % 5
+	backdrop.texture = load("res://graphics/floor-tiles/floor"+str(floorNumber)+".png")
 	backdrop.rect_global_position=Vector2.ZERO#(64,64)
 	backdrop.rect_size.x=map.cell_size.x*mg.width
 	backdrop.rect_size.y=map.cell_size.y*mg.height

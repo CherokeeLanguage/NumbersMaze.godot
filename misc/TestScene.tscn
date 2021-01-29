@@ -7,10 +7,10 @@
 [node name="TestScene" type="Node2D"]
 script = ExtResource( 3 )
 
-[node name="Markers" type="Node" parent="."]
-
 [node name="LevelMap" parent="." instance=ExtResource( 2 )]
 position = Vector2( 0, 0 )
+
+[node name="Markers" type="Node2D" parent="."]
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 879.787, 553.472 )
@@ -18,4 +18,11 @@ position = Vector2( 879.787, 553.472 )
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
 limit_smoothed = true
+drag_margin_h_enabled = true
+drag_margin_v_enabled = true
 smoothing_enabled = true
+drag_margin_left = 0.7
+drag_margin_top = 0.7
+drag_margin_right = 0.7
+drag_margin_bottom = 0.7
+editor_draw_drag_margin = true

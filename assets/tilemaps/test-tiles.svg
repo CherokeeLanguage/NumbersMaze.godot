@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="224"
+   height="32"
+   id="svg2"
+   version="1.1"
+   inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)"
+   sodipodi:docname="test-tiles.svg"
+   viewBox="0 0 224 32.000001"
+   inkscape:export-filename="test-tiles.png"
+   inkscape:export-xdpi="288"
+   inkscape:export-ydpi="288">
+  <defs
+     id="defs4" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="4.9796777"
+     inkscape:cx="191.40835"
+     inkscape:cy="37.649613"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     units="px"
+     inkscape:window-width="1920"
+     inkscape:window-height="1003"
+     inkscape:window-x="0"
+     inkscape:window-y="25"
+     inkscape:window-maximized="1"
+     objecttolerance="10.0"
+     gridtolerance="10.0"
+     guidetolerance="10.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-rotation="0" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-66.519659)">
+    <image
+       sodipodi:absref="/home/muksihs/git/NumbersMaze.godot/assets/wall.png"
+       xlink:href="../wall.png"
+       width="32"
+       height="32"
+       preserveAspectRatio="none"
+       style="image-rendering:optimizeQuality"
+       id="image31"
+       x="0"
+       y="66.519661" />
+    <image
+       sodipodi:absref="/home/muksihs/git/NumbersMaze.godot/assets/floor-portal.png"
+       xlink:href="../floor-portal.png"
+       width="32"
+       height="32"
+       preserveAspectRatio="none"
+       style="image-rendering:optimizeQuality"
+       id="image43"
+       x="192"
+       y="66.519661" />
+    <image
+       sodipodi:absref="/home/muksihs/git/NumbersMaze.godot/assets/floor0.png"
+       xlink:href="../floor0.png"
+       width="32"
+       height="32"
+       preserveAspectRatio="none"
+       style="image-rendering:optimizeQuality"
+       id="image55"
+       x="32"
+       y="66.519661" />
+    <image
+       sodipodi:absref="/home/muksihs/git/NumbersMaze.godot/assets/floor1.png"
+       xlink:href="../floor1.png"
+       width="32"
+       height="32"
+       preserveAspectRatio="none"
+       style="image-rendering:optimizeQuality"
+       id="image67"
+       x="64"
+       y="66.519661" />
+    <image
+       sodipodi:absref="/home/muksihs/git/NumbersMaze.godot/assets/floor2.png"
+       xlink:href="../floor2.png"
+       width="32"
+       height="32"
+       preserveAspectRatio="none"
+       style="image-rendering:optimizeQuality"
+       id="image79"
+       x="96"
+       y="66.519661" />
+    <image
+       sodipodi:absref="/home/muksihs/git/NumbersMaze.godot/assets/floor3.png"
+       xlink:href="../floor3.png"
+       width="32"
+       height="32"
+       preserveAspectRatio="none"
+       style="image-rendering:optimizeQuality"
+       id="image91"
+       x="128"
+       y="66.519661" />
+    <image
+       sodipodi:absref="/home/muksihs/git/NumbersMaze.godot/assets/floor4.png"
+       xlink:href="../floor4.png"
+       width="32"
+       height="32"
+       preserveAspectRatio="none"
+       style="image-rendering:optimizeQuality"
+       id="image103"
+       x="160"
+       y="66.519661" />
+  </g>
+</svg>

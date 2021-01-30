@@ -2,14 +2,16 @@ extends Node
 
 class_name Main
 
+onready var world = $World
+onready var ui = $UI
+onready var map = $World/LevelMap
+onready var player = $World/Player
+onready var camera = $Camera2D
+
 var startMenu:PackedScene = preload("res://ui/menus/StartMenu.tscn")
 var playMenu:PackedScene = preload("res://ui/menus/SelectGameSlot.tscn")
 var optionsMenu:PackedScene = preload("res://ui/menus/OptionsMenu.tscn")
 var aboutMenu:PackedScene = preload("res://ui/menus/AboutMenu.tscn")
-
-onready var world = $World
-onready var ui = $UI
-onready var camera = $Camera
 
 func _notification(what):
 	if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST:
@@ -30,11 +32,16 @@ func event_select():
 	Input.parse_input_event(ev)
 
 func _ready():
+	get_tree().paused=true
+	world.camera=camera
 	show(startMenu)
 
-func show(scene:PackedScene):
+func ui_clear()->void:
 	for child in ui.get_children():
 		child.queue_free()
+		
+func show(scene:PackedScene):
+	ui_clear()
 	var menu = scene.instance()
 	if menu is BaseMenu:
 		menu._connect("play_game", self, "play_game")
@@ -43,6 +50,8 @@ func show(scene:PackedScene):
 		menu._connect("quit", self, "quit")
 		if not (menu is StartMenu):
 			menu._connect("main_menu", self, "main_menu")
+	if menu is SelectGameSlotNode:
+		menu._connect("start_level", self, "start_level")
 	ui.add_child(menu)
 
 func play_game() -> void:
@@ -60,3 +69,13 @@ func quit() -> void:
 func main_menu()->void:
 	show(startMenu)
 	
+func start_level(slot, level, score)->void:
+	print("Start Level: "+str(slot)+", "+str(level)+", "+str(score))
+	ui_clear()
+	world.slot = slot
+	world.score = score
+	world.load_level(level)
+
+func _on_World_quit_level() -> void:
+	world.pause_mode=true
+	show(startMenu)

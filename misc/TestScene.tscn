@@ -8,7 +8,6 @@
 script = ExtResource( 3 )
 
 [node name="LevelMap" parent="." instance=ExtResource( 2 )]
-position = Vector2( 0, 0 )
 
 [node name="Markers" type="Node2D" parent="."]
 

@@ -1,8 +1,7 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://ui/menus/title-bar-style-box.tres" type="StyleBox" id=1]
 [ext_resource path="res://fonts/CherokeeHandone-128.tres" type="DynamicFont" id=3]
-[ext_resource path="res://audio/SoundFx.tscn" type="PackedScene" id=5]
 [ext_resource path="res://ui/menus/StartMenu.gd" type="Script" id=6]
 [ext_resource path="res://audio/Music.tscn" type="PackedScene" id=7]
 [ext_resource path="res://ui/menus/BaseMenu.tscn" type="PackedScene" id=8]
@@ -102,5 +101,3 @@ margin_bottom = 1003.0
 size_flags_vertical = 2
 
 [node name="Music" parent="." index="2" instance=ExtResource( 7 )]
-
-[node name="SoundFx" parent="." index="3" instance=ExtResource( 5 )]

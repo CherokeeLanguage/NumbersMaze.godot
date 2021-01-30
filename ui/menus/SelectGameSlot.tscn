@@ -1,6 +1,5 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://audio/SoundFx.tscn" type="PackedScene" id=1]
 [ext_resource path="res://ui/menus/SelectGameSlot.gd" type="Script" id=2]
 [ext_resource path="res://fonts/CherokeeHandone-64.tres" type="DynamicFont" id=3]
 [ext_resource path="res://ui/menus/BaseMenu.tscn" type="PackedScene" id=8]
@@ -174,5 +173,3 @@ size_flags_vertical = 6
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="SoundFx" parent="." index="2" instance=ExtResource( 1 )]

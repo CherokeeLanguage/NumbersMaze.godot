@@ -20,11 +20,16 @@ _global_script_classes=[ {
 "path": "res://ui/menus/BaseMenu.gd"
 }, {
 "base": "RigidBody2D",
+"class": "DieExplosionNode",
+"language": "GDScript",
+"path": "res://nodes/DieExplosion.gd"
+}, {
+"base": "RigidBody2D",
 "class": "DieNode",
 "language": "GDScript",
 "path": "res://nodes/DieNode.gd"
 }, {
-"base": "Reference",
+"base": "Object",
 "class": "GameSlot",
 "language": "GDScript",
 "path": "res://scripts/classes/GameSlot.gd"
@@ -50,9 +55,19 @@ _global_script_classes=[ {
 "path": "res://main/Music.gd"
 }, {
 "base": "RigidBody2D",
+"class": "PlayerFireballNode",
+"language": "GDScript",
+"path": "res://player/PlayerFireball.gd"
+}, {
+"base": "RigidBody2D",
 "class": "PlayerNode",
 "language": "GDScript",
 "path": "res://player/Player.gd"
+}, {
+"base": "BaseMenu",
+"class": "SelectGameSlotNode",
+"language": "GDScript",
+"path": "res://ui/menus/SelectGameSlot.gd"
 }, {
 "base": "Node",
 "class": "SoundFx",
@@ -63,19 +78,34 @@ _global_script_classes=[ {
 "class": "StartMenu",
 "language": "GDScript",
 "path": "res://ui/menus/StartMenu.gd"
+}, {
+"base": "Node",
+"class": "TestSceneNode",
+"language": "GDScript",
+"path": "res://misc/TestScene.gd"
+}, {
+"base": "Node",
+"class": "WorldNode",
+"language": "GDScript",
+"path": "res://main/World.gd"
 } ]
 _global_script_class_icons={
 "AboutMenu": "",
 "BaseMenu": "",
+"DieExplosionNode": "",
 "DieNode": "",
 "GameSlot": "",
 "LevelMap": "",
 "Main": "",
 "MazeGenerator": "",
 "Music": "",
+"PlayerFireballNode": "",
 "PlayerNode": "",
+"SelectGameSlotNode": "",
 "SoundFx": "",
-"StartMenu": ""
+"StartMenu": "",
+"TestSceneNode": "",
+"WorldNode": ""
 }
 
 [application]
@@ -89,6 +119,10 @@ boot_splash/bg_color=Color( 0, 0, 0, 1 )
 config/icon="res://icon.png"
 config/auto_accept_quit=false
 config/quit_on_go_back=false
+
+[autoload]
+
+sfx="*res://audio/SoundFx.tscn"
 
 [debug]
 

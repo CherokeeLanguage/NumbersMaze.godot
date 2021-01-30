@@ -9,6 +9,18 @@ export var max_channels:int = 32
 var channels:Array = []
 var effects:Dictionary = {}
 
+var sound:Dictionary = {
+	"box_moved": "box_moved",
+	"ding": "ding",
+	"drop": "drop_it",
+	"explode": "explode",
+	"explodemini": "explodemini",
+	"growl": "growl",
+	"level_finished": "level_finished",
+	"pick_up": "pick_up",
+	"plink": "plink"
+}
+
 onready var streams: = $Streams
 
 func _ready() -> void:

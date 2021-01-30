@@ -1,4 +1,4 @@
-#extends Object
+extends Object
 
 class_name GameSlot
 
@@ -10,17 +10,28 @@ var level:int = 0
 
 var keys:Array = ["slot", "score", "level"]
 
+func _init(_slot:int) -> void:
+	slot=_slot
+	self.load()
+
 func file()->String:
 	return folder+"/"+str(slot)+".json"
+	
+func erase()->void:
+	score=0
+	level=0
+	save()
 
-func saveJson()->void:
+func save()->void:
 	var f: = File.new()
 # warning-ignore:return_value_discarded
 	f.open(file(), File.WRITE)
 	f.store_line(to_json(self._dictionary()))
 	f.close()
 	
-func loadJson()->void:
+func load()->void:
+	level=0
+	score=0
 	var f: = File.new()	
 	if not f.file_exists(file()):
 		return

@@ -4,19 +4,29 @@ class_name PlayerNode
 
 enum FACING { NORTH, EAST, SOUTH, WEST}
 
+const FireballNode:PackedScene = preload("res://player/PlayerFireball.tscn")
+
 onready var animation:AnimationPlayer = $AnimationPlayer
 onready var cameraFollow:RemoteTransform2D = $CameraFollow
 onready var raysNode:Node2D = $Rays
+onready var fbTimer:Timer=$FireBallTimer
+onready var collider:CollisionShape2D = $CollisionShape2D
+onready var sprite:Sprite = $Sprite
 
 var facing = FACING.EAST
+var idle:bool = false
 var resetPosition:bool = false
 var globalPosition:Vector2 = Vector2.ZERO
 var rays:Array = []
 var items:Array = []
+var fireball_enabled:bool = true
 
 func setGlobalPosition(pos:Vector2)->void:
 	globalPosition=pos
 	resetPosition=true
+	
+func reset_stats()->void:
+	pass
 
 func _ready():
 	
@@ -47,7 +57,47 @@ func _physics_process(delta):
 	move_check(delta)
 	pickup_check()
 	drop_check()
+	fireball_check()
 
+func fireball_check():
+	if Input.is_action_just_pressed("btn_a") and fireball_enabled:
+		var fireball:PlayerFireballNode = FireballNode.instance()
+		add_child(fireball)
+		var impulse:Vector2 = Vector2.RIGHT
+		var myRotation:float = 0.0
+		match facing:
+			FACING.EAST:
+				impulse = Vector2.RIGHT
+				myRotation = 0
+			FACING.SOUTH:
+				impulse = Vector2.DOWN
+				myRotation = 90
+			FACING.WEST:
+				impulse = Vector2.LEFT
+				myRotation = 180
+			FACING.NORTH:
+				impulse = Vector2.UP
+				myRotation = 270
+			
+		fireball.apply_impulse(Vector2.ZERO, impulse*1000)
+		fireball.rotation_degrees=myRotation
+		fireball.global_position = global_position
+		match facing:
+			FACING.NORTH:
+				fireball.global_position.y -= 48
+			FACING.SOUTH:
+				fireball.global_position.y += 48
+			FACING.EAST:
+				fireball.global_position.x += 32
+				fireball.global_position.y += 8
+			FACING.WEST:
+				fireball.global_position.x -= 32
+				fireball.global_position.y += 8
+		
+		fireball_enabled=false
+		fbTimer.stop()
+		fbTimer.start(0.35)
+		
 func drop_check():
 	if Input.is_action_just_pressed("btn_y"):
 		for item in items:
@@ -57,7 +107,6 @@ func drop_check():
 		items.clear()
 
 func pickup_check()->void:
-	
 	if Input.is_action_just_pressed("btn_x"):
 		var theItem:DieNode=null
 		var distance:float=-1
@@ -75,7 +124,7 @@ func pickup_check()->void:
 		if theItem!=null:
 			var joint:DampedSpringJoint2D = DampedSpringJoint2D.new()
 			add_child(joint)
-			#joint.stiffness=20
+			joint.stiffness=10
 			joint.rest_length=64
 			joint.length=32
 			joint.node_a = get_path()
@@ -108,7 +157,8 @@ func move_check(delta:float)->void:
 		N: 270
 		NE: 315		
 		"""
-		
+		if idle:
+			facing = null
 		if a>=0 and a<=45 and facing!=FACING.EAST:
 			facing = FACING.EAST
 			animation.play("east")
@@ -124,8 +174,10 @@ func move_check(delta:float)->void:
 		if a>45 and a<135 and facing!=FACING.SOUTH:
 			facing = FACING.SOUTH
 			animation.play("south")
+		idle = false
 	else:
-		if facing != null:
+		if not idle:
+			idle = true
 			match facing:
 				FACING.EAST:
 					animation.play("idle-east")
@@ -135,6 +187,9 @@ func move_check(delta:float)->void:
 					animation.play("idle-north")
 				FACING.SOUTH:
 					animation.play("idle-south")
-			facing = null
 					
 					
+
+
+func _on_FireBallTimer_timeout() -> void:
+	fireball_enabled = true

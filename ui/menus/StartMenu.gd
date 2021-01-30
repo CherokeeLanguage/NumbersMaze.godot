@@ -3,7 +3,6 @@ extends BaseMenu
 class_name StartMenu
 
 onready var music: = $Music
-onready var sfx: = $SoundFx
 
 var buttons:Array = []
 var ix:int = 0
@@ -56,7 +55,7 @@ func _physics_process(_delta):
 				emit_signal("quit")
 	
 func update_buttons() -> void:
-	sfx.play(MOVE_SOUND)
+	sfx.play(sfx.sound.box_moved)
 	for button in buttons:
 		(button as Button).disabled=true
 	(buttons[ix] as Button).disabled=false

@@ -12,6 +12,8 @@ var mg:MazeGenerator
 var portals:Array
 var rng:RandomNumberGenerator
 
+var size:Vector2 = Vector2.ZERO
+
 func _ready():
 	pass
 	
@@ -75,4 +77,6 @@ func generate()->void:
 	backdrop.rect_global_position=Vector2.ZERO#(64,64)
 	backdrop.rect_size.x=map.cell_size.x*mg.width
 	backdrop.rect_size.y=map.cell_size.y*mg.height
+	
+	size=Vector2(backdrop.rect_size.x, backdrop.rect_size.y)
 

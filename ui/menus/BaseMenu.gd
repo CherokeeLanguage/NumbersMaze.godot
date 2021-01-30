@@ -2,8 +2,6 @@ extends Control
 
 class_name BaseMenu
 
-const MOVE_SOUND: = "box_moved"
-
 signal main_menu
 
 func _connect(sig:String, target:Object, method:String, binds: Array=[], flags: int =0) -> void:

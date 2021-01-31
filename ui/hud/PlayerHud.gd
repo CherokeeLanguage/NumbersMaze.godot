@@ -2,7 +2,7 @@ extends Control
 
 class_name PlayerHud
 
-onready var challenge:Label = $VBoxContainer/Header/Challenge
+onready var challenge:Label = $VBoxContainer/Footer/Challenge
 onready var score:Label = $VBoxContainer/Header/Score
 onready var misc:Label = $VBoxContainer/Header/Misc
 onready var pauseMenu:Control = $Paused

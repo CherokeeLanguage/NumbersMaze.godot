@@ -26,8 +26,6 @@ func _physics_process(_delta: float) -> void:
 	if not map.visible:
 		return
 	pause_check()
-	if dieTracker.chain_completed():
-		dieTracker.chained_explosions.clear()
 	
 func pause_check()->void:
 	if Input.is_action_just_pressed("btn_select"):

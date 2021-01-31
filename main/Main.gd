@@ -13,7 +13,7 @@ var playMenu:PackedScene = preload("res://ui/menus/SelectGameSlot.tscn")
 var optionsMenu:PackedScene = preload("res://ui/menus/OptionsMenu.tscn")
 var aboutMenu:PackedScene = preload("res://ui/menus/AboutMenu.tscn")
 var playerHud:PackedScene = preload("res://ui/hud/PlayerHud.tscn")
-
+var showNumber:bool = true
 var activeHud:PlayerHud
 
 func _notification(what):
@@ -110,6 +110,12 @@ func _on_World_pause_level() -> void:
 
 func _on_World_challenge_changed(number:int) -> void:
 	if is_instance_valid(activeHud):
-		activeHud.challenge.text=ChallengeAudioText.getCardinal(number)
-		print("Challenge: "+ChallengeAudioText.getCardinal(number))
+		var text:String = ChallengeAudioText.getCardinal(number)
+		if showNumber:
+			activeHud.challenge.text=text+" ["+str(number)+"]"
+			print("Challenge: "+text+" ["+str(number)+"]")
+		else:
+			activeHud.challenge.text=text
+			print("Challenge: "+text)
+			
 		

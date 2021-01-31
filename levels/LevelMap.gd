@@ -8,6 +8,7 @@ const die_ps:PackedScene = preload("res://nodes/DieNode.tscn")
 onready var map:TileMap = $TileMap
 onready var backdrop:TextureRect = $Backdrop
 onready var music:Music = $Music
+onready var repeatTimer:Timer = $AudioRepeatTimer
 
 var level:int = 1
 var mg:MazeGenerator
@@ -23,8 +24,15 @@ signal challenge_changed(number)
 
 func _ready():
 	load_level_tracks()
+	repeatTimer.wait_time=125
+	repeatTimer.one_shot=false
+	repeatTimer.autostart=true
+	repeatTimer.start(1)
 	
 func _physics_process(_delta: float) -> void:
+	if dieTracker.chain_completed():
+		dieTracker.chained_explosions.clear()
+
 	if dieTracker.isDieTime():
 		var portal: = randomPortal()
 		var die:DieNode = die_ps.instance()
@@ -48,8 +56,7 @@ func randomPortal()->Vector2:
 		randomPortals = Utils.shuffle(rng, portals)
 	return randomPortals.pop_back()
 
-func generate()->void:
-	
+func generate()->void:	
 	#for random portal selections
 	rng = RandomNumberGenerator.new()
 	rng.seed=level
@@ -130,4 +137,9 @@ func nextChallenge():
 func setCurrentChallenge(number:int):
 	currentChallenge=number
 	emit_signal("challenge_changed", currentChallenge)
+	numberAudio.stop()
+	repeatTimer.start()
 	
+func _on_AudioRepeatTimer_timeout() -> void:
+	numberAudio.play(currentChallenge)
+	repeatTimer.start(60)

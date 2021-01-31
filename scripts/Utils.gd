@@ -2,6 +2,10 @@ extends Node
 
 class_name Utils
 
+static func is_node_visible(node:Node2D)->bool:
+	var rect:Rect2=Rect2(0, 0, 1920, 1080)
+	return rect.has_point(node.get_global_transform_with_canvas().origin)
+
 static func spaceSep(value:int)->String:
 	var tmp = "%09d" % value
 	var mod = tmp.length() % 3

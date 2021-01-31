@@ -2,7 +2,7 @@ extends Node
 
 class_name DieTracker
 
-onready var timer=$Timer
+onready var timer:Timer=$Timer
 
 var remaining:int = 0 setget setRemaining, getRemaining
 var max_die:int = 1
@@ -18,6 +18,7 @@ func _ready() -> void:
 	timer.wait_time=0.25
 	timer.one_shot=true
 	timer.autostart=false
+# warning-ignore:return_value_discarded
 	timer.connect("timeout", self, "on_Timer_timeout")
 	timer.start(0.75)
 	
@@ -32,6 +33,9 @@ func isDieTime()->bool:
 	if remaining<1:
 		return false
 	if in_play() > max_die*2:
+		return false
+	if chained_explosion_count>0:
+		timer.start()
 		return false
 	return true
 

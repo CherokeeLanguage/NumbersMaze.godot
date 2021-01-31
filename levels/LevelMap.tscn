@@ -19,3 +19,7 @@ __meta__ = {
 collision_mask = 0
 
 [node name="Music" parent="." instance=ExtResource( 3 )]
+
+[node name="AudioRepeatTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="AudioRepeatTimer" to="." method="_on_AudioRepeatTimer_timeout"]

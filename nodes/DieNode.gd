@@ -10,12 +10,9 @@ onready var collider:CollisionShape2D = $CollisionShape2D
 var d_path: = "res://graphics/dice/d{n}.png"
 var value:int=1 setget setValue, getValue
 var joint:DampedSpringJoint2D = null
-var audio_enabled:bool = true
 
 func _ready() -> void:
 	set_die_face()
-	var rect:Rect2=Rect2(0, 0, 1920, 1080)
-	audio_enabled=rect.has_point(get_global_transform_with_canvas().origin)
 	
 func set_die_face()->void:
 	if not is_instance_valid(sprite):
@@ -44,12 +41,12 @@ func _on_DieNode_body_entered(body: Node) -> void:
 		explode(body.is_in_group(Consts.PLAYER_EXPLOSION))
 		
 	if body is TileMap or body.name=="DieNode" or body.name.begins_with("@DieNode@"):
-		if audio_enabled:
+		if Utils.is_node_visible(self):
 			sfx.play(sfx.sound.plink)
 		return
 
 func explode(player_fireball:bool = false)->void:
-	if (audio_enabled):
+	if Utils.is_node_visible(self):
 		sfx.play(sfx.sound.explode)
 	var rng:RandomNumberGenerator = RandomNumberGenerator.new()
 	rng.randomize()
@@ -71,8 +68,3 @@ func explode(player_fireball:bool = false)->void:
 	dieTracker.resetDieTime()
 	queue_free()
 
-func _on_VisibilityNotifier2D_screen_entered() -> void:
-	audio_enabled=true
-
-func _on_VisibilityNotifier2D_screen_exited() -> void:
-	audio_enabled=false

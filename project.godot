@@ -74,6 +74,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://main/Music.gd"
 }, {
+"base": "Node",
+"class": "NumberAudio",
+"language": "GDScript",
+"path": "res://audio/NumberAudio.gd"
+}, {
 "base": "RigidBody2D",
 "class": "PlayerFireballNode",
 "language": "GDScript",
@@ -138,6 +143,7 @@ _global_script_class_icons={
 "Main": "",
 "MazeGenerator": "",
 "Music": "",
+"NumberAudio": "",
 "PlayerFireballNode": "",
 "PlayerHud": "",
 "PlayerNode": "",
@@ -167,6 +173,7 @@ config/quit_on_go_back=false
 sfx="*res://audio/SoundFx.tscn"
 dieTracker="*res://scripts/dice/DieTracker.tscn"
 consts="*res://scripts/Consts.gd"
+numberAudio="*res://audio/NumberAudio.tscn"
 
 [debug]
 

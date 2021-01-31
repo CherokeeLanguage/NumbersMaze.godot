@@ -1,11 +1,12 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://ui/hud/PlayerHud.gd" type="Script" id=1]
 [ext_resource path="res://themes/menu-theme.tres" type="Theme" id=2]
 [ext_resource path="res://ui/menus/title-bar-style-box.tres" type="StyleBox" id=3]
 [ext_resource path="res://fonts/CherokeeHandone-128.tres" type="DynamicFont" id=4]
+[ext_resource path="res://fonts/CherokeeHandone-64.tres" type="DynamicFont" id=5]
 
-[sub_resource type="StyleBoxFlat" id=1]
+[sub_resource type="StyleBoxFlat" id=4]
 bg_color = Color( 0, 0, 0, 0.376471 )
 corner_radius_top_left = 16
 corner_radius_top_right = 16
@@ -46,13 +47,13 @@ __meta__ = {
 margin_right = 1920.0
 margin_bottom = 102.0
 
-[node name="Challenge" type="Label" parent="VBoxContainer/Header"]
-margin_right = 146.0
-margin_bottom = 102.0
+[node name="TL" type="Label" parent="VBoxContainer/Header"]
+margin_top = 17.0
+margin_bottom = 85.0
 size_flags_horizontal = 2
-custom_styles/normal = SubResource( 1 )
+custom_styles/normal = SubResource( 4 )
+custom_fonts/font = ExtResource( 5 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
-text = "ᏌᏊ"
 
 [node name="Score" type="Label" parent="VBoxContainer/Header"]
 margin_left = 730.0
@@ -70,10 +71,20 @@ size_flags_horizontal = 10
 custom_styles/normal = SubResource( 3 )
 
 [node name="Footer" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 1080.0
+margin_top = 1012.0
+margin_right = 1920.0
 margin_bottom = 1080.0
-size_flags_horizontal = 0
 size_flags_vertical = 10
+
+[node name="Challenge" type="Label" parent="VBoxContainer/Footer"]
+margin_left = 912.0
+margin_right = 1008.0
+margin_bottom = 68.0
+size_flags_horizontal = 6
+custom_styles/normal = SubResource( 4 )
+custom_fonts/font = ExtResource( 5 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+text = "ᏌᏊ"
 
 [node name="Paused" type="Control" parent="."]
 anchor_right = 1.0
@@ -94,7 +105,7 @@ margin_right = 1920.0
 margin_bottom = 1080.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-color = Color( 1, 1, 1, 0.25098 )
+color = Color( 1, 1, 1, 0.376471 )
 
 [node name="PausedMenu" type="VBoxContainer" parent="Paused"]
 anchor_right = 1.0

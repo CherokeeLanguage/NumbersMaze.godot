@@ -59,12 +59,17 @@ func dump()->void:
 func generate()->void:
 	
 # warning-ignore:integer_division
-	width = level / 3 + 7;
-	height = level / 3 + 4;
+	width = level + 7;
+	height = level + 3;
 	if (width > 16):
 		width = 16 + level / 16;
 	if (height > 9):
 		height = 9 + level / 9;
+	
+	width=min(width, 50)
+	height=min(height, 50)
+	
+	print("map size: "+str(width)+" x "+str(height))
 	
 	rng = RandomNumberGenerator.new()
 	rng.seed = rseed

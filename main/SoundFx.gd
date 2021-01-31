@@ -12,7 +12,7 @@ var effects:Dictionary = {}
 var sound:Dictionary = {
 	"box_moved": "box_moved",
 	"ding": "ding",
-	"drop": "drop_it",
+	"drop_it": "drop_it",
 	"explode": "explode",
 	"explodemini": "explodemini",
 	"growl": "growl",

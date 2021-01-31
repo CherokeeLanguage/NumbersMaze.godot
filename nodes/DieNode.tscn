@@ -6,7 +6,9 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 24, 24 )
 
-[node name="DieNode" type="RigidBody2D"]
+[node name="DieNode" type="RigidBody2D" groups=[
+"dice",
+]]
 collision_layer = 4
 collision_mask = 21
 continuous_cd = 2
@@ -22,4 +24,8 @@ texture = ExtResource( 2 )
 scale = Vector2( 0.75, 0.75 )
 shape = SubResource( 1 )
 
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+
 [connection signal="body_entered" from="." to="." method="_on_DieNode_body_entered"]
+[connection signal="screen_entered" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]
+[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

@@ -12,6 +12,9 @@ var startMenu:PackedScene = preload("res://ui/menus/StartMenu.tscn")
 var playMenu:PackedScene = preload("res://ui/menus/SelectGameSlot.tscn")
 var optionsMenu:PackedScene = preload("res://ui/menus/OptionsMenu.tscn")
 var aboutMenu:PackedScene = preload("res://ui/menus/AboutMenu.tscn")
+var playerHud:PackedScene = preload("res://ui/hud/PlayerHud.tscn")
+
+var activeHud:PlayerHud
 
 func _notification(what):
 	if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST:
@@ -43,16 +46,36 @@ func ui_clear()->void:
 func show(scene:PackedScene):
 	ui_clear()
 	var menu = scene.instance()
-	if menu is BaseMenu:
-		menu._connect("play_game", self, "play_game")
-		menu._connect("options", self, "options")
-		menu._connect("about", self, "about")
-		menu._connect("quit", self, "quit")
-		if not (menu is StartMenu):
-			menu._connect("main_menu", self, "main_menu")
+	print("UI Menu: "+menu.name)
+	
+	if menu.has_signal("main_menu") and not menu is StartMenu:
+		menu.connect("main_menu", self, "main_menu")
+		
+	if menu is StartMenu:
+		menu.connect("play_game", self, "play_game")
+		menu.connect("options", self, "options")
+		menu.connect("about", self, "about")
+		menu.connect("quit", self, "quit")
+		
 	if menu is SelectGameSlotNode:
-		menu._connect("start_level", self, "start_level")
+		menu.connect("start_level", self, "start_level")
+		
+	if menu is PlayerHud:
+		activeHud=menu
+		menu.connect("quit_level", self, "quit_level")
+		menu.connect("resume_level", self, "resume_level")
+		
 	ui.add_child(menu)
+
+func quit_level():
+	get_tree().paused=true
+	show(startMenu)
+	
+func resume_level():
+	for menu in ui.get_children():
+		if menu is PlayerHud:
+			menu.pauseMenu.visible=false
+	get_tree().paused=false
 
 func play_game() -> void:
 	show(playMenu)
@@ -71,11 +94,22 @@ func main_menu()->void:
 	
 func start_level(slot, level, score)->void:
 	print("Start Level: "+str(slot)+", "+str(level)+", "+str(score))
-	ui_clear()
+	show(playerHud)
+	if is_instance_valid(activeHud):
+		activeHud.score.text=Utils.spaceSep(score)
+		#activeHud.challenge.text=ChallengeAudioText.getCardinal(0)
 	world.slot = slot
 	world.score = score
 	world.load_level(level)
 
-func _on_World_quit_level() -> void:
-	world.pause_mode=true
-	show(startMenu)
+func _on_World_pause_level() -> void:
+	for menu in ui.get_children():
+		if menu is PlayerHud:
+			menu.pauseMenu.visible=true
+	get_tree().paused=true
+
+func _on_World_challenge_changed(number:int) -> void:
+	if is_instance_valid(activeHud):
+		activeHud.challenge.text=ChallengeAudioText.getCardinal(number)
+		print("Challenge: "+ChallengeAudioText.getCardinal(number))
+		

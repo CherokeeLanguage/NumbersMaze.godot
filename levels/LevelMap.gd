@@ -2,23 +2,51 @@ extends Node2D
 
 class_name LevelMap
 
+const path="res://audio/music"
+const die_ps:PackedScene = preload("res://nodes/DieNode.tscn")
+
 onready var map:TileMap = $TileMap
-onready var backdrop:TextureRect = $TextureRect
+onready var backdrop:TextureRect = $Backdrop
+onready var music:Music = $Music
 
 var level:int = 1
-
 var mg:MazeGenerator
-
 var portals:Array
+var randomPortals:Array=[]
 var rng:RandomNumberGenerator
-
 var size:Vector2 = Vector2.ZERO
+var availableTracks:Array=[]
+var challenges:Challenges
+var currentChallenge:int=0 setget setCurrentChallenge
+
+signal challenge_changed(number)
 
 func _ready():
-	pass
+	load_level_tracks()
+	
+func _physics_process(_delta: float) -> void:
+	if dieTracker.isDieTime():
+		var portal: = randomPortal()
+		var die:DieNode = die_ps.instance()
+		add_child(die)
+		die.add_to_group(Consts.GROUP_DICE)
+		die.setValue(dieTracker.nextDie())
+		die.global_position=portal
+	
+func load_level_tracks()->void:
+	var f: = File.new()
+	var _x = f.open(path+"/plist.txt", File.READ) #,"PLIST NOT FOUND: "+path+"/plist.txt")
+		
+	while not f.eof_reached():
+		var name = f.get_line()
+		if name.strip_edges().empty():
+			continue
+		availableTracks.append(path+"/"+name)
 	
 func randomPortal()->Vector2:
-	return portals[rng.randi_range(0, portals.size()-1)]
+	if randomPortals.empty():
+		randomPortals = Utils.shuffle(rng, portals)
+	return randomPortals.pop_back()
 
 func generate()->void:
 	
@@ -70,7 +98,6 @@ func generate()->void:
 			world_portal.x+=map.cell_size.x/2
 			world_portal.y+=map.cell_size.y/2
 			portals.append(world_portal)
-			#print(str(portal)+" => "+str(map.map_to_world(portal)))
 			
 	var floorNumber:int = level % 5
 	backdrop.texture = load("res://graphics/floor-tiles/floor"+str(floorNumber)+".png")
@@ -80,3 +107,27 @@ func generate()->void:
 	
 	size=Vector2(backdrop.rect_size.x, backdrop.rect_size.y)
 
+	music.list.clear()
+	music.list.append(availableTracks[level % availableTracks.size()])
+	music.play()
+
+	challenges=Challenges.new(level)
+		
+	dieTracker.reset(level)
+	dieTracker.remaining=challenges.challengeTotalValue
+	dieTracker.max_die=challenges.challengeMax
+	
+	print("Challenges: "+str(challenges.challengeList))
+	
+	nextChallenge()
+	
+func nextChallenge():
+	if challenges.challengeList.empty():
+		self.currentChallenge=0
+	else:
+		self.currentChallenge=challenges.challengeList.pop_front()
+
+func setCurrentChallenge(number:int):
+	currentChallenge=number
+	emit_signal("challenge_changed", currentChallenge)
+	

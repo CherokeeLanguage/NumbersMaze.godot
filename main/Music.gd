@@ -5,7 +5,7 @@ class_name Music
 var volume_db:float = 0.0
 var list: = Array()
 
-onready var channel: = $Channel_1
+onready var channel:AudioStreamPlayer = $Channel_1
 var ix: = 0
 var count:int
 
@@ -22,6 +22,7 @@ func play():
 	channel.stream=load(list[ix])
 	channel.volume_db=volume_db
 	channel.play()
+	print("Music: "+list[ix])
 	ix = (ix+1)%count
 
 func pause(pause:bool):

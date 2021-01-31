@@ -29,6 +29,9 @@ func reset_stats()->void:
 	pass
 
 func _ready():
+	fireball_enabled = not Input.is_action_pressed("btn_a")
+	if not fireball_enabled:
+		fbTimer.start()
 	
 	for ray in raysNode.get_children():
 		if ray is RayCast2D:
@@ -100,10 +103,12 @@ func fireball_check():
 		
 func drop_check():
 	if Input.is_action_just_pressed("btn_y"):
-		for item in items:
-			if item is DieNode:
-				item.joint.queue_free()
-				item.joint=null
+		if not items.empty():
+			sfx.play(sfx.sound.drop_it)
+			for item in items:
+				if item is DieNode:
+					item.joint.queue_free()
+					item.joint=null
 		items.clear()
 
 func pickup_check()->void:
@@ -112,7 +117,6 @@ func pickup_check()->void:
 		var distance:float=-1
 		for ray in rays:
 			if ray.is_colliding():
-				print("ray.is_colliding")
 				var item:DieNode = (ray.get_collider() as DieNode)
 				if item!=null:
 					if item.joint!=null:
@@ -130,7 +134,7 @@ func pickup_check()->void:
 			joint.node_a = get_path()
 			joint.node_b = theItem.get_path()
 			theItem.joint = joint
-			
+			sfx.play(sfx.sound.pick_up)
 			items.append(theItem)
 			
 func move_check(delta:float)->void:

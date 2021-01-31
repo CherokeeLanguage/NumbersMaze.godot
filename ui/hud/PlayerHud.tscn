@@ -1,0 +1,155 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://ui/hud/PlayerHud.gd" type="Script" id=1]
+[ext_resource path="res://themes/menu-theme.tres" type="Theme" id=2]
+[ext_resource path="res://ui/menus/title-bar-style-box.tres" type="StyleBox" id=3]
+[ext_resource path="res://fonts/CherokeeHandone-128.tres" type="DynamicFont" id=4]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0, 0, 0, 0.376471 )
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0, 0, 0, 0.376471 )
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0, 0, 0, 0.376471 )
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[node name="PlayerHud" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 2 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Header" type="HBoxContainer" parent="VBoxContainer"]
+margin_right = 1920.0
+margin_bottom = 102.0
+
+[node name="Challenge" type="Label" parent="VBoxContainer/Header"]
+margin_right = 146.0
+margin_bottom = 102.0
+size_flags_horizontal = 2
+custom_styles/normal = SubResource( 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+text = "ᏌᏊ"
+
+[node name="Score" type="Label" parent="VBoxContainer/Header"]
+margin_left = 730.0
+margin_right = 1189.0
+margin_bottom = 102.0
+size_flags_horizontal = 6
+custom_styles/normal = SubResource( 2 )
+text = "000000000"
+
+[node name="Misc" type="Label" parent="VBoxContainer/Header"]
+margin_left = 1920.0
+margin_right = 1920.0
+margin_bottom = 102.0
+size_flags_horizontal = 10
+custom_styles/normal = SubResource( 3 )
+
+[node name="Footer" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 1080.0
+margin_bottom = 1080.0
+size_flags_horizontal = 0
+size_flags_vertical = 10
+
+[node name="Paused" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PausedGlass" type="VBoxContainer" parent="Paused"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="Paused/PausedGlass"]
+margin_right = 1920.0
+margin_bottom = 1080.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color( 1, 1, 1, 0.25098 )
+
+[node name="PausedMenu" type="VBoxContainer" parent="Paused"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Spacer_1" type="Control" parent="Paused/PausedMenu"]
+margin_right = 1920.0
+size_flags_vertical = 2
+
+[node name="Paused" type="Label" parent="Paused/PausedMenu"]
+margin_left = 693.0
+margin_top = 150.0
+margin_right = 1227.0
+margin_bottom = 325.0
+size_flags_horizontal = 4
+size_flags_vertical = 6
+custom_styles/normal = ExtResource( 3 )
+custom_fonts/font = ExtResource( 4 )
+text = "PAUSED"
+
+[node name="Spacer_2" type="Control" parent="Paused/PausedMenu"]
+margin_top = 329.0
+margin_right = 1920.0
+margin_bottom = 329.0
+size_flags_vertical = 2
+
+[node name="Resume" type="Button" parent="Paused/PausedMenu"]
+margin_left = 767.0
+margin_top = 480.0
+margin_right = 1152.0
+margin_bottom = 622.0
+size_flags_horizontal = 4
+size_flags_vertical = 2
+text = "Resume"
+
+[node name="Quit" type="Button" parent="Paused/PausedMenu"]
+margin_left = 844.0
+margin_top = 631.0
+margin_right = 1075.0
+margin_bottom = 773.0
+size_flags_horizontal = 4
+size_flags_vertical = 2
+text = "Quit"
+
+[node name="Spacer_3" type="Control" parent="Paused/PausedMenu"]
+margin_top = 782.0
+margin_right = 1920.0
+margin_bottom = 782.0
+size_flags_vertical = 2
+
+[node name="Spacer_4" type="Control" parent="Paused/PausedMenu"]
+margin_top = 933.0
+margin_right = 1920.0
+margin_bottom = 933.0
+size_flags_vertical = 2

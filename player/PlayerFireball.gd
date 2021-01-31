@@ -25,7 +25,6 @@ func queue_free():
 	.queue_free()
 
 func _on_PlayerFireball_body_entered(body: Node) -> void:
-	print(body.name)
 	if body.name == "Player" or body.name.begins_with("@Player@"):
 		return
 	transition_to_explode()

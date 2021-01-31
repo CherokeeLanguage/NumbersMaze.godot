@@ -6,7 +6,7 @@ export var folder:String = "user://"
 
 var slot:int = 0
 var score:int = 0
-var level:int = 0
+var level:int = 1
 
 var keys:Array = ["slot", "score", "level"]
 
@@ -19,7 +19,7 @@ func file()->String:
 	
 func erase()->void:
 	score=0
-	level=0
+	level=1
 	save()
 
 func save()->void:
@@ -30,7 +30,8 @@ func save()->void:
 	f.close()
 	
 func load()->void:
-	level=0
+	var slotLoading = slot
+	level=1
 	score=0
 	var f: = File.new()	
 	if not f.file_exists(file()):
@@ -50,10 +51,15 @@ func load()->void:
 		if key in self:
 			self[key]=json[key]
 
+	if level<1:
+		level = 1
+	if score<0:
+		score = 0
+	slot = slotLoading
+	
 func _dictionary() -> Dictionary:
 	var d: = Dictionary()
 	for key in keys:
-		print(key)
 		d[key]=self.get(key)
 	return d
 

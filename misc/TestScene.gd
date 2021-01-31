@@ -29,3 +29,12 @@ func _ready():
 		markers.add_child(marker)
 		marker.setValue(rng.randi_range(1,6))
 		marker.global_position=portal
+
+	print("Dice in play: "+str(dieTracker.in_play()))
+	
+func _physics_process(delta: float) -> void:
+	if Input.is_action_just_pressed("btn_select"):
+		get_tree().quit()
+	if dieTracker.chain_completed():
+		print("Chain completed: "+str(dieTracker.in_chain()))
+		dieTracker.chained_explosions.clear()

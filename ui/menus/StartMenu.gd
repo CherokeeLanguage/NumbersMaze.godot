@@ -2,7 +2,7 @@ extends BaseMenu
 
 class_name StartMenu
 
-onready var music: = $Music
+onready var music:Music = $Music
 
 var buttons:Array = []
 var ix:int = 0

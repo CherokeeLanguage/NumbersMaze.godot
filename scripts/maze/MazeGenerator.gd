@@ -13,12 +13,10 @@ var portals:Array
 var rng:RandomNumberGenerator
 
 func _init():
-	print_debug("MazeGenerator#_init")
 	rseed = 0
 	level=1
 	
 func dump()->void:
-	print_debug("MazeGenerator#dump")
 	var chars:Array = []
 	for _x in range(0, 16):
 		chars.append("")
@@ -83,8 +81,6 @@ func generate()->void:
 	var currentCell: = Vector2(rng.randi_range(0, width-1), rng.randi_range(0, height-1))
 	var visitedCells:int = 1
 
-	print("Total cells: "+str(totalCells))
-	
 	while visitedCells<totalCells:
 		var cx:int
 		var cy:int

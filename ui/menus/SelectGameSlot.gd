@@ -21,10 +21,15 @@ func load_slots_into_buttons()->void:
 	for ix in range(1, 11):
 		var slot:GameSlot = GameSlot.new(ix)
 		slot.load()
-		if slot.level==0:
+		if slot.level<2 and slot.score==0:
 			button_is_new_game(ix)
-			continue
+		else:
+			button_is_active_game(ix, slot.level, slot.score)
 
+func button_is_active_game(slot:int, level:int, score:int)->void:
+	var btn:Button = get_button(slot)
+	btn.text="Level: "+str(level)+", Score: "+Utils.spaceSep(score)
+	
 func get_button(ix:int)->Button:
 	for btn in left.get_children():
 		if btn is Button:

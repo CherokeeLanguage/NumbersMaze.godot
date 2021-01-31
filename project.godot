@@ -19,6 +19,21 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://ui/menus/BaseMenu.gd"
 }, {
+"base": "Node",
+"class": "ChallengeAudioText",
+"language": "GDScript",
+"path": "res://scripts/ChallengeAudioText.gd"
+}, {
+"base": "Node",
+"class": "Challenges",
+"language": "GDScript",
+"path": "res://scripts/dice/Challenges.gd"
+}, {
+"base": "Node",
+"class": "Consts",
+"language": "GDScript",
+"path": "res://scripts/Consts.gd"
+}, {
 "base": "RigidBody2D",
 "class": "DieExplosionNode",
 "language": "GDScript",
@@ -28,6 +43,11 @@ _global_script_classes=[ {
 "class": "DieNode",
 "language": "GDScript",
 "path": "res://nodes/DieNode.gd"
+}, {
+"base": "Node",
+"class": "DieTracker",
+"language": "GDScript",
+"path": "res://scripts/dice/DieTracker.gd"
 }, {
 "base": "Object",
 "class": "GameSlot",
@@ -59,6 +79,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://player/PlayerFireball.gd"
 }, {
+"base": "Control",
+"class": "PlayerHud",
+"language": "GDScript",
+"path": "res://ui/hud/PlayerHud.gd"
+}, {
 "base": "RigidBody2D",
 "class": "PlayerNode",
 "language": "GDScript",
@@ -68,6 +93,11 @@ _global_script_classes=[ {
 "class": "SelectGameSlotNode",
 "language": "GDScript",
 "path": "res://ui/menus/SelectGameSlot.gd"
+}, {
+"base": "Button",
+"class": "SlotButtonNode",
+"language": "GDScript",
+"path": "res://nodes/SlotButtonNode.gd"
 }, {
 "base": "Node",
 "class": "SoundFx",
@@ -85,6 +115,11 @@ _global_script_classes=[ {
 "path": "res://misc/TestScene.gd"
 }, {
 "base": "Node",
+"class": "Utils",
+"language": "GDScript",
+"path": "res://scripts/Utils.gd"
+}, {
+"base": "Node",
 "class": "WorldNode",
 "language": "GDScript",
 "path": "res://main/World.gd"
@@ -92,19 +127,26 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "AboutMenu": "",
 "BaseMenu": "",
+"ChallengeAudioText": "",
+"Challenges": "",
+"Consts": "",
 "DieExplosionNode": "",
 "DieNode": "",
+"DieTracker": "",
 "GameSlot": "",
 "LevelMap": "",
 "Main": "",
 "MazeGenerator": "",
 "Music": "",
 "PlayerFireballNode": "",
+"PlayerHud": "",
 "PlayerNode": "",
 "SelectGameSlotNode": "",
+"SlotButtonNode": "",
 "SoundFx": "",
 "StartMenu": "",
 "TestSceneNode": "",
+"Utils": "",
 "WorldNode": ""
 }
 
@@ -123,6 +165,8 @@ config/quit_on_go_back=false
 [autoload]
 
 sfx="*res://audio/SoundFx.tscn"
+dieTracker="*res://scripts/dice/DieTracker.tscn"
+consts="*res://scripts/Consts.gd"
 
 [debug]
 

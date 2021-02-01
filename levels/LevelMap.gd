@@ -4,11 +4,13 @@ class_name LevelMap
 
 const path="res://audio/music"
 const die_ps:PackedScene = preload("res://nodes/DieNode.tscn")
+const portal_ps:PackedScene = preload("res://nodes/FloorPortal.tscn")
 
 onready var map:TileMap = $TileMap
 onready var backdrop:TextureRect = $Backdrop
 onready var music:Music = $Music
 onready var repeatTimer:Timer = $AudioRepeatTimer
+onready var itemsGroup = $ItemsGroup
 
 var level:int = 1
 var mg:MazeGenerator
@@ -21,25 +23,44 @@ var challenges:Challenges
 var currentChallenge:int=0 setget setCurrentChallenge
 
 signal challenge_changed(number)
+signal score_add(number)
+signal next_level(level)
 
 func _ready():
 	load_level_tracks()
 	repeatTimer.wait_time=125
 	repeatTimer.one_shot=false
 	repeatTimer.autostart=true
-	repeatTimer.start(1)
+	repeatTimer.start()
 	
 func _physics_process(_delta: float) -> void:
 	if dieTracker.chain_completed():
+		var inChain:int = dieTracker.in_chain()
+		var inChainCount:int = dieTracker.chained_explosions.size()
 		dieTracker.chained_explosions.clear()
+		if currentChallenge == inChain:
+			if dieTracker.endOfChallenges():
+				placeExitPortal()
+			nextChallenge()
+			emit_signal("score_add", inChainCount*inChain)
+		else:
+			dieTracker.remaining+=inChain
 
 	if dieTracker.isDieTime():
-		var portal: = randomPortal()
-		var die:DieNode = die_ps.instance()
-		add_child(die)
-		die.add_to_group(Consts.GROUP_DICE)
-		die.setValue(dieTracker.nextDie())
-		die.global_position=portal
+		print("= R1: "+str(dieTracker.getChallengeTotal()))
+		addDie()
+		print("- R2: "+str(dieTracker.getChallengeTotal()))
+
+func addDie(value:int=0)->void:
+	if value==0:
+		value=dieTracker.nextDie()
+	var portal: = randomPortal()
+	var die:DieNode = die_ps.instance()
+	itemsGroup.add_child(die)
+	die.add_to_group(Consts.GROUP_DICE)
+	die.value=value
+	die.global_position=portal
+	print("- added die: "+str(value))
 	
 func load_level_tracks()->void:
 	var f: = File.new()
@@ -56,7 +77,10 @@ func randomPortal()->Vector2:
 		randomPortals = Utils.shuffle(rng, portals)
 	return randomPortals.pop_back()
 
-func generate()->void:	
+func generate()->void:
+	for child in itemsGroup.get_children():
+		child.queue_free()
+
 	#for random portal selections
 	rng = RandomNumberGenerator.new()
 	rng.seed=level
@@ -119,27 +143,43 @@ func generate()->void:
 	music.play()
 
 	challenges=Challenges.new(level)
-		
+	
 	dieTracker.reset(level)
 	dieTracker.remaining=challenges.challengeTotalValue
 	dieTracker.max_die=challenges.challengeMax
 	
+	print("Challenge total: "+str(dieTracker.getChallengeTotal()))
 	print("Challenges: "+str(challenges.challengeList))
 	
 	nextChallenge()
+	
 	
 func nextChallenge():
 	if challenges.challengeList.empty():
 		self.currentChallenge=0
 	else:
 		self.currentChallenge=challenges.challengeList.pop_front()
-
+		
 func setCurrentChallenge(number:int):
 	currentChallenge=number
 	emit_signal("challenge_changed", currentChallenge)
+	if number<1:
+		repeatTimer.stop()
+	else:
+		repeatTimer.start(0.25)
 	numberAudio.stop()
-	repeatTimer.start()
 	
 func _on_AudioRepeatTimer_timeout() -> void:
 	numberAudio.play(currentChallenge)
 	repeatTimer.start(60)
+
+func placeExitPortal():
+	var random_position:=randomPortal()
+	var portal:FloorPortal=portal_ps.instance()
+	itemsGroup.add_child(portal)
+	portal.global_position=random_position
+# warning-ignore:return_value_discarded
+	portal.connect("player_in_portal", self, "next_level")
+
+func next_level():
+	emit_signal("next_level", level)

@@ -3,7 +3,6 @@ extends RigidBody2D
 class_name DieExplosionNode
 
 func _ready() -> void:
-	mode = RigidBody2D.MODE_CHARACTER
 	linear_damp=0.02
 	mass=0.1
 	

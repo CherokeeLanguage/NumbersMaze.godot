@@ -4,7 +4,7 @@ class_name DieTracker
 
 onready var timer:Timer=$Timer
 
-var remaining:int = 0 setget setRemaining, getRemaining
+var remaining:int = 0 setget setRemaining
 var max_die:int = 1
 var chained_explosions:Array = []
 var chained_explosion_count:int = 0 setget set_chained_explosion_count
@@ -14,29 +14,44 @@ var valid_die_faces:Array = [1,2,3,4,5,6]
 
 func _ready() -> void:
 	rng=RandomNumberGenerator.new()
-	rng.seed=0
-	timer.wait_time=0.25
+	rng.seed=1
+	timer.wait_time=0.125
 	timer.one_shot=true
 	timer.autostart=false
 # warning-ignore:return_value_discarded
 	timer.connect("timeout", self, "on_Timer_timeout")
-	timer.start(0.75)
+	timer.start()
 	
 func resetDieTime()->void:
 	timer.stop()
 	dieTime=false
 	timer.start()
 	
+func endOfChallenges()->bool:
+	if remaining>0:
+		return false
+	if chained_explosions.size()>0:
+		return false
+	if in_play()>0:
+		return false
+	return true
+	
 func isDieTime()->bool:
 	if not dieTime:
 		return false
 	if remaining<1:
 		return false
-	if in_play() > max_die*2:
+	var inplay:int = in_play()
+	if inplay < max_die:
+		return true
+	if inplay > max_die*2:
 		return false
 	if chained_explosion_count>0:
+		dieTime=false
 		timer.start()
 		return false
+	dieTime=false
+	timer.start()
 	return true
 
 func timer_start()->void:
@@ -50,7 +65,7 @@ Gets the next random die amount. Removes amount from remaining!!!
 """
 func nextDie():
 	var amount:int = 0
-	while (amount>max_die or amount==0):
+	while (amount>max_die or amount==0 or amount>remaining):
 		amount = Utils.shuffle(rng, valid_die_faces)[0]
 	remaining-=amount
 	dieTime=false
@@ -60,9 +75,8 @@ func nextDie():
 func setRemaining(value:int):
 	remaining = value
 	
-func getRemaining()->int:
-	var tmp:int = remaining + in_play() + in_chain()
-	return tmp
+func getChallengeTotal()->int:
+	return remaining + in_play() + in_chain()
 
 func set_chained_explosion_count(value:int):
 	chained_explosion_count=value

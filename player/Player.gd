@@ -37,7 +37,7 @@ func _ready():
 		if ray is RayCast2D:
 			rays.append(ray)
 	
-	self.mode=RigidBody2D.MODE_CHARACTER
+	set_deferred("mode", RigidBody2D.MODE_CHARACTER)
 	
 	self.gravity_scale=0
 	self.linear_damp=10
@@ -64,6 +64,7 @@ func _physics_process(delta):
 
 func fireball_check():
 	if Input.is_action_just_pressed("btn_a") and fireball_enabled:
+		print("Total remaining: "+str(dieTracker.getChallengeTotal()))
 		var fireball:PlayerFireballNode = FireballNode.instance()
 		add_child(fireball)
 		var impulse:Vector2 = Vector2.RIGHT
@@ -128,9 +129,9 @@ func pickup_check()->void:
 		if theItem!=null:
 			var joint:DampedSpringJoint2D = DampedSpringJoint2D.new()
 			add_child(joint)
-			joint.stiffness=10
-			joint.rest_length=64
-			joint.length=32
+			joint.stiffness=20
+			joint.rest_length=8
+			joint.length=16
 			joint.node_a = get_path()
 			joint.node_b = theItem.get_path()
 			theItem.joint = joint

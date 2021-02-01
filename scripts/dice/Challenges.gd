@@ -118,9 +118,14 @@ class IntervalQueue:
 		var basePower:int=2
 		
 		if briefList:
-			depth = 5
+			depth = 6
 			stagger = 1
 			basePower = 3
+			
+			#short list
+			depth = 2
+			stagger = 1
+			basePower = 2
 		
 		for ix in range(0, stagger):
 			for ip in range(0, depth):

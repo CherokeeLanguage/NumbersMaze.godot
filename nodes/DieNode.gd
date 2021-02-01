@@ -7,6 +7,8 @@ const ExplosionNode:PackedScene = preload("res://nodes/DieExplosion.tscn")
 onready var sprite:Sprite = $Sprite
 onready var collider:CollisionShape2D = $CollisionShape2D
 
+var mutex:Mutex=Mutex.new()
+
 var d_path: = "res://graphics/dice/d{n}.png"
 var value:int=1 setget setValue, getValue
 var joint:DampedSpringJoint2D = null
@@ -35,7 +37,7 @@ func getValue()->int:
 
 func _on_DieNode_body_entered(body: Node) -> void:
 	if body is PlayerFireballNode:
-		explode(true)		
+		explode(true)
 		
 	if body is DieExplosionNode:
 		explode(body.is_in_group(Consts.PLAYER_EXPLOSION))
@@ -46,6 +48,9 @@ func _on_DieNode_body_entered(body: Node) -> void:
 		return
 
 func explode(player_fireball:bool = false)->void:
+	mutex.lock()
+	if value==0:
+		return
 	if Utils.is_node_visible(self):
 		sfx.play(sfx.sound.explode)
 	var rng:RandomNumberGenerator = RandomNumberGenerator.new()
@@ -61,10 +66,21 @@ func explode(player_fireball:bool = false)->void:
 		if (player_fireball):
 			explosion.add_to_group(Consts.PLAYER_EXPLOSION)
 			dieTracker.chained_explosion_count+=1
+			
 	if player_fireball:
 		dieTracker.chained_explosions.append(value)
+		print("Chained explosions: "+str(dieTracker.chained_explosions))
 	else:
 		dieTracker.remaining+=value
+		
 	dieTracker.resetDieTime()
+	value=0
+	mutex.unlock()
 	queue_free()
 
+func _exit_tree() -> void:
+	if value>0:
+		dieTracker.remaining+=value
+		value=0
+	var parent: =get_parent()
+	print("die:_exit_tree: "+name+" of "+parent.name)

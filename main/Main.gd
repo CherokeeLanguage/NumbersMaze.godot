@@ -110,6 +110,8 @@ func _on_World_pause_level() -> void:
 
 func _on_World_challenge_changed(number:int) -> void:
 	if is_instance_valid(activeHud):
+		if number<1:
+			activeHud.challenge.text="ᏄᎳ! ᏄᎳ!"
 		var text:String = ChallengeAudioText.getCardinal(number)
 		if showNumber:
 			activeHud.challenge.text=text+" ["+str(number)+"]"
@@ -118,4 +120,13 @@ func _on_World_challenge_changed(number:int) -> void:
 			activeHud.challenge.text=text
 			print("Challenge: "+text)
 			
-		
+
+func _on_World_score_changed(number) -> void:
+	print("_on_World_score_changed")
+	if is_instance_valid(activeHud):
+		activeHud.score.text=Utils.spaceSep(number)
+
+
+func _on_World_start_level(slot, level, score) -> void:
+	print("main#start_level")
+	start_level(slot, level, score)

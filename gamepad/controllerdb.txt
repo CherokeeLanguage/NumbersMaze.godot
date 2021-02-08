@@ -1,0 +1,13 @@
+# Game Controller DB for Godot in SDL 2.0.10 format
+# These are additional mappings that aren't in Godot's DB
+
+# Windows
+
+# Android
+4e564944494120436f72706f72617469,NVIDIA Controller,a:b0,b:b1,back:b15,dpdown:h0.4,dpleft:h0.8,dpright:h0.2,dpup:h0.1,guide:b5,leftshoulder:b9,leftstick:b7,lefttrigger:a4,leftx:a0,lefty:a1,rightshoulder:b10,rightstick:b8,righttrigger:a5,rightx:a2,righty:a3,start:b6,x:b2,y:b3,platform:Android,
+4f5559412047616d6520436f6e74726f,OUYA Game Controller,a:b0,b:b1,dpdown:b12,dpleft:b13,dpright:b14,dpup:b11,leftshoulder:b9,leftstick:b7,lefttrigger:a4,leftx:a0,lefty:a1,rightshoulder:b10,rightstick:b8,righttrigger:a5,rightx:a2,righty:a3,start:b6,x:b2,y:b3,platform:Android,
+
+
+# Javascript
+
+# UWP

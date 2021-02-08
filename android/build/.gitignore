@@ -1,0 +1,6 @@
+/build/
+/.idea/
+/.vscode/
+/.gradle/
+/local.properties
+/assets/

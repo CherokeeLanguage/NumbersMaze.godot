@@ -1,14 +1,14 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://graphics/fireballs/explosion-column-4.png" type="Texture" id=1]
+[ext_resource path="res://graphics/explosions/explosion 1.png" type="Texture" id=1]
 [ext_resource path="res://nodes/DieExplosion.gd" type="Script" id=2]
 
-[sub_resource type="CircleShape2D" id=1]
-radius = 7.57266
+[sub_resource type="CircleShape2D" id=3]
+radius = 7.0
 
 [sub_resource type="Animation" id=2]
-length = 0.533333
-step = 0.0666667
+length = 1.072
+step = 0.067
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -16,10 +16,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.0666667, 0.133333, 0.2, 0.266667, 0.333333, 0.4, 0.466667 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.067, 0.134, 0.201, 0.268, 0.335, 0.402, 0.469, 0.536, 0.603, 0.67, 0.737, 0.804, 0.871, 0.938, 1.005 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 0, 1, 2, 3, 4, 5, 6, 7 ]
+"values": [ 2, 6, 10, 14, 18, 22, 26, 30, 34, 38, 42, 46, 50, 54, 58, 62 ]
 }
 tracks/1/type = "method"
 tracks/1/path = NodePath(".")
@@ -28,7 +28,33 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.536 ),
+"times": PoolRealArray( 0, 0.067, 0.134, 0.402, 0.804 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"values": [ {
+"args": [ 5.0 ],
+"method": "setColliderRadius"
+}, {
+"args": [ 6.0 ],
+"method": "setColliderRadius"
+}, {
+"args": [ 8.0 ],
+"method": "setColliderRadius"
+}, {
+"args": [ 7.0 ],
+"method": "setColliderRadius"
+}, {
+"args": [ 0.0 ],
+"method": "setColliderRadius"
+} ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 1.005 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
@@ -40,16 +66,22 @@ tracks/1/keys = {
 collision_layer = 16
 collision_mask = 47
 mode = 2
+mass = 0.1
+gravity_scale = 0.5
+linear_damp = 0.02
+angular_damp = 0.02
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 1, 0 )
 texture = ExtResource( 1 )
+hframes = 8
 vframes = 8
+frame = 62
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0.943871, 1.41581 )
-shape = SubResource( 1 )
+shape = SubResource( 3 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "explode"

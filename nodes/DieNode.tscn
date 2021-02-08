@@ -4,7 +4,7 @@
 [ext_resource path="res://graphics/dice/d1.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 24, 24 )
+extents = Vector2( 14, 14 )
 
 [node name="DieNode" type="RigidBody2D" groups=[
 "dice",
@@ -21,7 +21,28 @@ scale = Vector2( 0.75, 0.75 )
 texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-scale = Vector2( 0.75, 0.75 )
 shape = SubResource( 1 )
+
+[node name="detectors" type="Node2D" parent="."]
+visible = false
+
+[node name="RayCast2D_1" type="RayCast2D" parent="detectors"]
+cast_to = Vector2( 0, 16 )
+collision_mask = 48
+
+[node name="RayCast2D_2" type="RayCast2D" parent="detectors"]
+rotation = 1.57079
+cast_to = Vector2( 0, 16 )
+collision_mask = 48
+
+[node name="RayCast2D_3" type="RayCast2D" parent="detectors"]
+rotation = 3.14159
+cast_to = Vector2( 0, 16 )
+collision_mask = 48
+
+[node name="RayCast2D_4" type="RayCast2D" parent="detectors"]
+rotation = -1.57079
+cast_to = Vector2( 0, 16 )
+collision_mask = 48
 
 [connection signal="body_entered" from="." to="." method="_on_DieNode_body_entered"]

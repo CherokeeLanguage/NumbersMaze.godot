@@ -129,6 +129,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/Utils.gd"
 }, {
+"base": "Node2D",
+"class": "WarpInAreaDetect",
+"language": "GDScript",
+"path": "res://nodes/WarpInAreaDetect.gd"
+}, {
 "base": "Node",
 "class": "WorldNode",
 "language": "GDScript",
@@ -159,6 +164,7 @@ _global_script_class_icons={
 "StartMenu": "",
 "TestSceneNode": "",
 "Utils": "",
+"WarpInAreaDetect": "",
 "WorldNode": ""
 }
 

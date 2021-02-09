@@ -48,7 +48,7 @@ func isDieTime(portalCount:int=0)->bool:
 		return false
 	if in_play() < max_die:
 		return true
-	if in_play_count() >= portalCount:
+	if in_play_count() >= portalCount*4/5 and portalCount>1:
 		return false
 	dieTime=false
 	timer.start()
@@ -74,7 +74,8 @@ func nextDie(current_challenge:int):
 		if (is_valid_die
 			and not is_in_play
 			and amount != current_challenge
-			and amount<=remaining):
+			and remaining>=current_challenge
+			):
 			amount = 0
 	remaining-=amount
 	dieTime=false

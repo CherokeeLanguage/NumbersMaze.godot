@@ -108,8 +108,9 @@ func drop_check():
 			sfx.play(sfx.sound.drop_it)
 			for item in items:
 				if item is DieNode:
-					item.joint.queue_free()
-					item.joint=null
+					if is_instance_valid(item.joint):
+						item.joint.queue_free()
+						item.joint=null
 		items.clear()
 
 func pickup_check()->void:

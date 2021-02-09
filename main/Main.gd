@@ -31,13 +31,75 @@ func event_select():
 	ev.action="btn_select"
 	ev.pressed=false
 	Input.parse_input_event(ev)
+	yield(get_tree(),"idle_frame")
 	ev.pressed=true
 	Input.parse_input_event(ev)
 
-func _ready():
-	get_tree().paused=true
+func _ready():	
+	updateInputMap()
+	addControllerMappings()
 	world.camera=camera
 	show(startMenu)
+	# warning-ignore:return_value_discarded
+	Input.connect("joy_connection_changed", self, "joy_connection_changed")
+	
+func updateInputMap()->void:
+	var event: = InputEventKey.new()
+	event.scancode = KEY_PERIODCENTERED # TV Controller "enter"
+	InputMap.action_add_event("btn_a", event)
+
+func _physics_process(_delta: float) -> void:
+	pass
+		
+"""
+Load the most recent gamecontrollerdb.txt available at time of project build.
+
+See: https://github.com/gabomdq/SDL_GameControllerDB/blob/master/gamecontrollerdb.txt
+"""
+func addControllerMappings()->void:
+	var count:int = 0
+	var f:File = File.new()
+	if f.open("res://gamepad/controllerdb.txt", File.READ) != OK:
+		return
+	while not f.eof_reached():
+		var mapping:String=f.get_line().strip_edges()
+		if mapping.begins_with("#"):
+			continue
+		if mapping.empty():
+			continue
+		Input.add_joy_mapping(mapping, true)
+		count+=1		
+	f.close()
+	print("Added/updated %d joypad mappings."%count)
+	
+func removeControllerMappings()->void:	
+	var count:int = 0
+	var f:File = File.new()
+	if f.open("res://gamepad/controllerdb.txt", File.READ) != OK:
+		return
+	while not f.eof_reached():
+		var mapping:String=f.get_line().strip_edges()
+		if mapping.begins_with("#"):
+			continue
+		if mapping.empty():
+			continue
+		var guid: = ""
+		for ix in range(mapping.length()):
+			if mapping[ix]==",":
+				break
+			guid += mapping[ix]
+		Input.remove_joy_mapping(guid)
+		count+=1
+	f.close()
+	print("Removed %d joypad mappings."%count)
+	
+func joy_connection_changed(index:int, connected:bool)->void:
+	print("Joypad: joy_connection_changed("+str(index)+", "+str(connected)+")")
+	print("Joypad: "+Input.get_joy_guid(index)+", "+Input.get_joy_name(index))
+	for ix in range(8):
+		if Input.get_joy_guid(ix).empty():
+			continue
+		print("Joypad: "+str(ix)+", "+Input.get_joy_guid(ix)+", "+Input.get_joy_name(ix))
 
 func ui_clear()->void:
 	for child in ui.get_children():
@@ -78,6 +140,7 @@ func resume_level():
 	get_tree().paused=false
 
 func play_game() -> void:
+	world.clear_level() #clear out previous game
 	show(playMenu)
 
 func options() -> void:
@@ -93,6 +156,7 @@ func main_menu()->void:
 	show(startMenu)
 	
 func start_level(slot, level, score)->void:
+	world.clear_level() #clear out previous game
 	print("Start Level: "+str(slot)+", "+str(level)+", "+str(score))
 	show(playerHud)
 	if is_instance_valid(activeHud):
@@ -112,6 +176,7 @@ func _on_World_challenge_changed(number:int) -> void:
 	if is_instance_valid(activeHud):
 		if number<1:
 			activeHud.challenge.text="ᏄᎳ! ᏄᎳ!"
+			return
 		var text:String = ChallengeAudioText.getCardinal(number)
 		if showNumber:
 			activeHud.challenge.text=text+" ["+str(number)+"]"
@@ -122,11 +187,9 @@ func _on_World_challenge_changed(number:int) -> void:
 			
 
 func _on_World_score_changed(number) -> void:
-	print("_on_World_score_changed")
 	if is_instance_valid(activeHud):
 		activeHud.score.text=Utils.spaceSep(number)
 
 
 func _on_World_start_level(slot, level, score) -> void:
-	print("main#start_level")
 	start_level(slot, level, score)

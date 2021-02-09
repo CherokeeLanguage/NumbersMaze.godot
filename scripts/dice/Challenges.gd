@@ -67,7 +67,9 @@ class IntervalQueue:
 		var samples:Array=[]
 		
 		offsets = getOffsets()
-		samples.append_array(startingEntries)
+		for e in startingEntries:
+			samples.append(e)
+		#samples.append_array(startingEntries)
 		
 		# process samples creating non-random work queue
 		
@@ -106,8 +108,12 @@ class IntervalQueue:
 					vx2.append(current)
 					hasDupes=true
 			queue.clear()
-			queue.append_array(vx1)
-			queue.append_array(vx2)
+			for e in vx1:
+				queue.append(e)
+			#queue.append_array(vx1)
+			for e in vx2:
+				queue.append(e)
+			#queue.append_array(vx2)
 			if not hasDupes:
 				break
 		
@@ -123,9 +129,9 @@ class IntervalQueue:
 			basePower = 3
 			
 			#short list
-			depth = 2
-			stagger = 1
-			basePower = 2
+#			depth = 2
+#			stagger = 1
+#			basePower = 2
 		
 		for ix in range(0, stagger):
 			for ip in range(0, depth):

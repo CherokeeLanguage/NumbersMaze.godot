@@ -11,16 +11,17 @@ var chained_explosion_count:int = 0 setget set_chained_explosion_count
 var rng:RandomNumberGenerator
 var dieTime:bool = false
 var valid_die_faces:Array = [1,2,3,4,5,6]
+var pending_die_faces:Array = []
 
 func _ready() -> void:
 	rng=RandomNumberGenerator.new()
 	rng.seed=1
-	timer.wait_time=0.125
+	timer.wait_time=0.15
 	timer.one_shot=true
 	timer.autostart=false
 # warning-ignore:return_value_discarded
 	timer.connect("timeout", self, "on_Timer_timeout")
-	timer.start()
+	timer.start(0.5)
 	
 func resetDieTime()->void:
 	timer.stop()
@@ -36,19 +37,18 @@ func endOfChallenges()->bool:
 		return false
 	return true
 	
-func isDieTime()->bool:
+func isDieTime(portalCount:int=0)->bool:
 	if not dieTime:
 		return false
 	if remaining<1:
 		return false
-	var inplay:int = in_play()
-	if inplay < max_die:
-		return true
-	if inplay > max_die*2:
-		return false
 	if chained_explosion_count>0:
 		dieTime=false
 		timer.start()
+		return false
+	if in_play() < max_die:
+		return true
+	if in_play_count() >= portalCount:
 		return false
 	dieTime=false
 	timer.start()
@@ -63,10 +63,19 @@ func on_Timer_timeout()->void:
 """
 Gets the next random die amount. Removes amount from remaining!!!
 """
-func nextDie():
+func nextDie(current_challenge:int):
+	var is_in_play:bool = has_in_play(current_challenge)
+	var is_valid_die:bool = current_challenge in valid_die_faces
 	var amount:int = 0
 	while (amount>max_die or amount==0 or amount>remaining):
-		amount = Utils.shuffle(rng, valid_die_faces)[0]
+		if pending_die_faces.empty():
+			pending_die_faces=Utils.shuffle(rng, valid_die_faces)
+		amount = pending_die_faces.pop_back()
+		if (is_valid_die
+			and not is_in_play
+			and amount != current_challenge
+			and amount<=remaining):
+			amount = 0
 	remaining-=amount
 	dieTime=false
 	timer.start()
@@ -87,6 +96,27 @@ func in_play()->int:
 		if die.name == "DieNode" or die.name.begins_with("@DieNode@"):
 			sum += die.value
 	return sum
+	
+func in_play_count()->int:
+	var count:int = 0
+	for die in get_tree().get_nodes_in_group(Consts.GROUP_DICE):
+		if die.name == "DieNode" or die.name.begins_with("@DieNode@"):
+			count += 1
+	return count
+
+func has_in_play(value:int)->bool:
+	for die in get_tree().get_nodes_in_group(Consts.GROUP_DICE):
+		if die.name == "DieNode" or die.name.begins_with("@DieNode@"):
+			if die.value==value:
+				return true
+	return false
+	
+func in_play_set()->Dictionary:
+	var dict:Dictionary={}
+	for die in get_tree().get_nodes_in_group(Consts.GROUP_DICE):
+		if die.name == "DieNode" or die.name.begins_with("@DieNode@"):
+			dict[die.value]=die.value
+	return dict
 
 func in_chain()->int:
 	var sum:int = 0
@@ -107,3 +137,4 @@ func reset(level:int=0)->void:
 	remaining=0
 	max_die=1
 	chain_reset()
+	pending_die_faces.clear()

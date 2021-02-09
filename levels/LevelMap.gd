@@ -11,6 +11,7 @@ onready var backdrop:TextureRect = $Backdrop
 onready var music:Music = $Music
 onready var repeatTimer:Timer = $AudioRepeatTimer
 onready var itemsGroup = $ItemsGroup
+onready var levelDoneAudio:AudioStreamPlayer = $LevelDone
 
 var level:int = 1
 var mg:MazeGenerator
@@ -41,26 +42,26 @@ func _physics_process(_delta: float) -> void:
 		if currentChallenge == inChain:
 			if dieTracker.endOfChallenges():
 				placeExitPortal()
+				levelDoneAudio.play()
 			nextChallenge()
 			emit_signal("score_add", inChainCount*inChain)
 		else:
 			dieTracker.remaining+=inChain
 
-	if dieTracker.isDieTime():
-		print("= R1: "+str(dieTracker.getChallengeTotal()))
+	if dieTracker.isDieTime(portals.size()):
 		addDie()
-		print("- R2: "+str(dieTracker.getChallengeTotal()))
 
 func addDie(value:int=0)->void:
 	if value==0:
-		value=dieTracker.nextDie()
+		value=dieTracker.nextDie(currentChallenge)
+	if value<1:
+		return
 	var portal: = randomPortal()
 	var die:DieNode = die_ps.instance()
 	itemsGroup.add_child(die)
 	die.add_to_group(Consts.GROUP_DICE)
 	die.value=value
 	die.global_position=portal
-	print("- added die: "+str(value))
 	
 func load_level_tracks()->void:
 	var f: = File.new()
@@ -80,7 +81,7 @@ func randomPortal()->Vector2:
 func generate()->void:
 	for child in itemsGroup.get_children():
 		child.queue_free()
-
+		
 	#for random portal selections
 	rng = RandomNumberGenerator.new()
 	rng.seed=level
@@ -151,6 +152,9 @@ func generate()->void:
 	print("Challenge total: "+str(dieTracker.getChallengeTotal()))
 	print("Challenges: "+str(challenges.challengeList))
 	
+	for _ix in range(portals.size()):
+		addDie()
+		
 	nextChallenge()
 	
 	
@@ -183,3 +187,8 @@ func placeExitPortal():
 
 func next_level():
 	emit_signal("next_level", level)
+	levelDoneAudio.stop()
+
+
+func _on_LevelDone_finished() -> void:
+	levelDoneAudio.play()

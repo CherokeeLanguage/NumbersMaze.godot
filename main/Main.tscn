@@ -33,4 +33,3 @@ script = ExtResource( 4 )
 [connection signal="challenge_changed" from="World" to="." method="_on_World_challenge_changed"]
 [connection signal="pause_level" from="World" to="." method="_on_World_pause_level"]
 [connection signal="score_changed" from="World" to="." method="_on_World_score_changed"]
-[connection signal="start_level" from="World" to="." method="_on_World_start_level"]

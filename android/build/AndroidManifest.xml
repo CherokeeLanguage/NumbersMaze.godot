@@ -37,13 +37,7 @@
     <!-- Any tag in this line after android:icon will be erased when doing custom builds. -->
     <!-- If you want to add tags manually, do before it. -->
     <!-- WARNING: This should stay on a single line until the parsing code is improved. See GH-32414. -->
-    <application android:label="@string/godot_project_name_string"
-        android:allowBackup="false"
-        tools:ignore="GoogleAppIndexingWarning"
-        android:icon="@mipmap-anydpi-v26/ic_launcher"
-        android:banner="@mipmap-anydpi-v26/ic_banner"
-        android:roundIcon="@mipmap-anydpi-v26/ic_launcher_round"
-    >
+    <application android:allowBackup="false" android:banner="@mipmap/ic_banner" android:label="@string/godot_project_name_string" android:roundIcon="@mipmap/ic_launcher_round" tools:ignore="GoogleAppIndexingWarning" tools:targetApi="lollipop">
 
         <!-- The following metadata values are replaced when Godot exports, modifying them here has no effect. -->
         <!-- Do these changes in the export preset. Adding new ones is fine. -->
@@ -60,14 +54,15 @@
 
         <activity
             android:appCategory="game"
-            android:name="com.cherokeelessons.maze.GodotApp"
+            android:name=".GodotApp"
             android:label="@string/godot_project_name_string"
             android:theme="@style/GodotAppSplashTheme"
             android:launchMode="singleTask"
             android:screenOrientation="landscape"
             android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize|density|keyboard|navigation|screenLayout|uiMode"
             android:resizeableActivity="false"
-            tools:ignore="UnusedAttribute" >
+            tools:ignore="UnusedAttribute"
+            >
             <meta-data android:name="com.oculus.vr.focusaware" android:value="false" />
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

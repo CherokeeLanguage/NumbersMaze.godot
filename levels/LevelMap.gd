@@ -5,6 +5,7 @@ class_name LevelMap
 const path="res://audio/music"
 const die_ps:PackedScene = preload("res://nodes/DieNode.tscn")
 const portal_ps:PackedScene = preload("res://nodes/FloorPortal.tscn")
+const warpin_ps:PackedScene = preload("res://nodes/WarpInAreaDetect.tscn")
 
 onready var map:TileMap = $TileMap
 onready var backdrop:TextureRect = $Backdrop
@@ -51,17 +52,30 @@ func _physics_process(_delta: float) -> void:
 	if dieTracker.isDieTime(portals.size()):
 		addDie()
 
-func addDie(value:int=0)->void:
-	if value==0:
-		value=dieTracker.nextDie(currentChallenge)
-	if value<1:
-		return
+func addDie()->void:
 	var portal: = randomPortal()
+	
+	#make sure landing area is clear
+	var warpin:WarpInAreaDetect = warpin_ps.instance()
+	itemsGroup.add_child(warpin)
+	warpin.global_position=portal
+	if not warpin.is_empty():
+		dieTracker.resetDieTime()
+		return
+	
+	#auto calc value
+	var value:int=dieTracker.nextDie(currentChallenge)
+	#make sure is valid die request
+	if value<1:
+		dieTracker.resetDieTime()
+		return
+	#add die to board
 	var die:DieNode = die_ps.instance()
 	itemsGroup.add_child(die)
 	die.add_to_group(Consts.GROUP_DICE)
 	die.value=value
 	die.global_position=portal
+	return
 	
 func load_level_tracks()->void:
 	var f: = File.new()

@@ -19,12 +19,12 @@ var joint:DampedSpringJoint2D = null setget setJoint
 var colors:Array=[]
 var valid_die_faces:Array=[1, 2, 3, 4, 5, 6]
 
-func setJoint(value:DampedSpringJoint2D)->void:
-	if (value == null):
+func setJoint(_value:DampedSpringJoint2D)->void:
+	if (_value == null):
 		sprite.modulate.a=1
 	else:
 		sprite.modulate.a=0.5
-	joint=value
+	joint=_value
 	
 func _ready() -> void:
 	setupColorsArray()
@@ -126,6 +126,6 @@ func explode(player_fireball:bool = false)->void:
 func _exit_tree() -> void:
 	if value>0:
 		dieTracker.remaining+=value
+		var parent: = get_parent()
+		print("die:_exit_tree: "+name+" of "+parent.name)
 		value=0
-	var parent: = get_parent()
-	print("die:_exit_tree: "+name+" of "+parent.name)

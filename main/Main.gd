@@ -2,19 +2,20 @@ extends Node
 
 class_name Main
 
-onready var world = $World
+const FadeOutIn:PackedScene = preload("res://nodes/FadeOutIn.tscn")
+
+onready var world:WorldNode = $World
 onready var ui = $UI
-onready var map = $World/LevelMap
-onready var player = $World/Player
-onready var camera = $Camera2D
+onready var map:LevelMap = $World/LevelMap
+onready var player:PlayerNode = $World/Player
+onready var camera:Camera2D = $Camera2D
+onready var playerHud:PlayerHud = $PlayerHud
 
 var startMenu:PackedScene = preload("res://ui/menus/StartMenu.tscn")
 var playMenu:PackedScene = preload("res://ui/menus/SelectGameSlot.tscn")
 var optionsMenu:PackedScene = preload("res://ui/menus/OptionsMenu.tscn")
 var aboutMenu:PackedScene = preload("res://ui/menus/AboutMenu.tscn")
-var playerHud:PackedScene = preload("res://ui/hud/PlayerHud.tscn")
 var showNumber:bool = true
-var activeHud:PlayerHud
 
 func _notification(what):
 	if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST:
@@ -39,22 +40,24 @@ func _ready():
 	updateInputMap()
 	addControllerMappings()
 	world.camera=camera
-	show(startMenu)
-	# warning-ignore:return_value_discarded
+# warning-ignore:return_value_discarded
 	Input.connect("joy_connection_changed", self, "joy_connection_changed")
+	call_deferred("show", startMenu)
+	
+	playerHud.connect("quit_level", self, "quit_level")
+	playerHud.connect("resume_level", self, "resume_level")
+	
+	playerHud.visible=false
+	playerHud.pauseMenu.visible=false
 	
 func updateInputMap()->void:
 	var event: = InputEventKey.new()
 	event.scancode = KEY_PERIODCENTERED # TV Controller "enter"
 	InputMap.action_add_event("btn_a", event)
 
-func _physics_process(_delta: float) -> void:
-	pass
-		
 """
-Load the most recent gamecontrollerdb.txt available at time of project build.
-
-See: https://github.com/gabomdq/SDL_GameControllerDB/blob/master/gamecontrollerdb.txt
+Load additionals to the most recent gamecontrollerdb.txt available at time of project build.
+See also: https://github.com/gabomdq/SDL_GameControllerDB/blob/master/gamecontrollerdb.txt
 """
 func addControllerMappings()->void:
 	var count:int = 0
@@ -72,27 +75,6 @@ func addControllerMappings()->void:
 	f.close()
 	print("Added/updated %d joypad mappings."%count)
 	
-func removeControllerMappings()->void:	
-	var count:int = 0
-	var f:File = File.new()
-	if f.open("res://gamepad/controllerdb.txt", File.READ) != OK:
-		return
-	while not f.eof_reached():
-		var mapping:String=f.get_line().strip_edges()
-		if mapping.begins_with("#"):
-			continue
-		if mapping.empty():
-			continue
-		var guid: = ""
-		for ix in range(mapping.length()):
-			if mapping[ix]==",":
-				break
-			guid += mapping[ix]
-		Input.remove_joy_mapping(guid)
-		count+=1
-	f.close()
-	print("Removed %d joypad mappings."%count)
-	
 func joy_connection_changed(index:int, connected:bool)->void:
 	print("Joypad: joy_connection_changed("+str(index)+", "+str(connected)+")")
 	print("Joypad: "+Input.get_joy_guid(index)+", "+Input.get_joy_name(index))
@@ -106,9 +88,26 @@ func ui_clear()->void:
 		child.queue_free()
 		
 func show(scene:PackedScene):
-	ui_clear()
+#	if scene == null:
+#		var fader:FadeOutIn = FadeOutIn.instance()
+#		get_tree().root.add_child(fader)
+#		# warning-ignore:return_value_discarded
+#		fader.connect("transition_mid", self, "ui_clear")
+#		fader.fade()
+#		return
+
 	var menu = scene.instance()
 	print("UI Menu: "+menu.name)
+
+	var fader:FadeOutIn = FadeOutIn.instance()
+	get_tree().root.add_child(fader)
+# warning-ignore:return_value_discarded
+	fader.connect("transition_mid", self, "__show", [menu])
+	fader.fade()
+
+func __show(menu)->void:
+	ui_clear()
+	ui.add_child(menu)
 	
 	if menu.has_signal("main_menu") and not menu is StartMenu:
 		menu.connect("main_menu", self, "main_menu")
@@ -121,23 +120,18 @@ func show(scene:PackedScene):
 		
 	if menu is SelectGameSlotNode:
 		menu.connect("start_level", self, "start_level")
-		
-	if menu is PlayerHud:
-		activeHud=menu
-		menu.connect("quit_level", self, "quit_level")
-		menu.connect("resume_level", self, "resume_level")
-		
-	ui.add_child(menu)
 
 func quit_level():
+	numberAudio.stop()
+	world.clear_level()
+	playerHud.visible=false
+	playerHud.pauseMenu.visible=false
 	get_tree().paused=true
 	show(startMenu)
 	
 func resume_level():
-	for menu in ui.get_children():
-		if menu is PlayerHud:
-			menu.pauseMenu.visible=false
 	get_tree().paused=false
+	playerHud.pauseMenu.visible=false
 
 func play_game() -> void:
 	world.clear_level() #clear out previous game
@@ -155,41 +149,35 @@ func quit() -> void:
 func main_menu()->void:
 	show(startMenu)
 	
-func start_level(slot, level, score)->void:
+func start_level(slot:int, level:int, score:int)->void:	
+	get_tree().paused=false
+	ui_clear()
 	world.clear_level() #clear out previous game
 	print("Start Level: "+str(slot)+", "+str(level)+", "+str(score))
-	show(playerHud)
-	if is_instance_valid(activeHud):
-		activeHud.score.text=Utils.spaceSep(score)
-		#activeHud.challenge.text=ChallengeAudioText.getCardinal(0)
+	playerHud.visible=true
+	playerHud.score.text=Utils.spaceSep(score)
 	world.slot = slot
 	world.score = score
 	world.load_level(level)
 
 func _on_World_pause_level() -> void:
-	for menu in ui.get_children():
-		if menu is PlayerHud:
-			menu.pauseMenu.visible=true
 	get_tree().paused=true
+	playerHud.pauseMenu.visible=true
 
 func _on_World_challenge_changed(number:int) -> void:
-	if is_instance_valid(activeHud):
-		if number<1:
-			activeHud.challenge.text="ᏄᎳ! ᏄᎳ!"
-			return
-		var text:String = ChallengeAudioText.getCardinal(number)
-		if showNumber:
-			activeHud.challenge.text=text+" ["+str(number)+"]"
-			print("Challenge: "+text+" ["+str(number)+"]")
-		else:
-			activeHud.challenge.text=text
-			print("Challenge: "+text)
-			
+	if number<1:
+		playerHud.challenge.text="ᏄᎳ! ᏄᎳ!"
+		return
+	var text:String = ChallengeAudioText.getCardinal(number)
+	if showNumber:
+		playerHud.challenge.text=text+" ["+str(number)+"]"
+		print("Challenge: "+text+" ["+str(number)+"]")
+	else:
+		playerHud.challenge.text=text
+		print("Challenge: "+text)
 
 func _on_World_score_changed(number) -> void:
-	if is_instance_valid(activeHud):
-		activeHud.score.text=Utils.spaceSep(number)
-
+	playerHud.score.text=Utils.spaceSep(number)
 
 func _on_World_start_level(slot, level, score) -> void:
 	start_level(slot, level, score)

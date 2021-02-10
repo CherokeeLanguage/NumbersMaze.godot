@@ -2,7 +2,8 @@ extends Node
 
 class_name Challenges
 
-const challengeSplit:int = 6;
+const challengeSplit:int = 6
+const DEBUG:bool = false
 
 var challengeMax:int = 0
 var challengeMin:int = 0
@@ -127,11 +128,12 @@ class IntervalQueue:
 			depth = 6
 			stagger = 1
 			basePower = 3
-			
+		
+		if DEBUG:
 			#short list
-#			depth = 2
-#			stagger = 1
-#			basePower = 2
+			depth = 2
+			stagger = 1
+			basePower = 2
 		
 		for ix in range(0, stagger):
 			for ip in range(0, depth):

@@ -49,6 +49,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/dice/DieTracker.gd"
 }, {
+"base": "CanvasLayer",
+"class": "FadeOutIn",
+"language": "GDScript",
+"path": "res://nodes/FadeOutIn.gd"
+}, {
 "base": "Node2D",
 "class": "FloorPortal",
 "language": "GDScript",
@@ -89,7 +94,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://player/PlayerFireball.gd"
 }, {
-"base": "Control",
+"base": "CanvasLayer",
 "class": "PlayerHud",
 "language": "GDScript",
 "path": "res://ui/hud/PlayerHud.gd"
@@ -148,6 +153,7 @@ _global_script_class_icons={
 "DieExplosionNode": "",
 "DieNode": "",
 "DieTracker": "",
+"FadeOutIn": "",
 "FloorPortal": "",
 "GameSlot": "",
 "LevelMap": "",

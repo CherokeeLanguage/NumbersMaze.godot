@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://main/Main.gd" type="Script" id=1]
 [ext_resource path="res://player/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://levels/LevelMap.tscn" type="PackedScene" id=3]
 [ext_resource path="res://main/World.gd" type="Script" id=4]
+[ext_resource path="res://ui/hud/PlayerHud.tscn" type="PackedScene" id=5]
 
 [node name="Main" type="Node"]
 pause_mode = 2
@@ -29,6 +30,8 @@ script = ExtResource( 4 )
 [node name="Player" parent="World" instance=ExtResource( 2 )]
 
 [node name="UI" type="CanvasLayer" parent="."]
+
+[node name="PlayerHud" parent="." instance=ExtResource( 5 )]
 
 [connection signal="challenge_changed" from="World" to="." method="_on_World_challenge_changed"]
 [connection signal="pause_level" from="World" to="." method="_on_World_pause_level"]

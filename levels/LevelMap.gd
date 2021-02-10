@@ -34,7 +34,7 @@ func _ready():
 	repeatTimer.one_shot=false
 	repeatTimer.autostart=true
 	repeatTimer.start()
-	
+
 func _physics_process(_delta: float) -> void:
 	if dieTracker.chain_completed():
 		var inChain:int = dieTracker.in_chain()
@@ -166,11 +166,7 @@ func generate()->void:
 	print("Challenge total: "+str(dieTracker.getChallengeTotal()))
 	print("Challenges: "+str(challenges.challengeList))
 	
-	for _ix in range(portals.size()):
-		addDie()
-		
 	nextChallenge()
-	
 	
 func nextChallenge():
 	if challenges.challengeList.empty():

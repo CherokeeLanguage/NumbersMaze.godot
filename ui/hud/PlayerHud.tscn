@@ -6,7 +6,7 @@
 [ext_resource path="res://fonts/CherokeeHandone-128.tres" type="DynamicFont" id=4]
 [ext_resource path="res://fonts/CherokeeHandone-64.tres" type="DynamicFont" id=5]
 
-[sub_resource type="StyleBoxFlat" id=4]
+[sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0, 0, 0, 0.376471 )
 corner_radius_top_left = 16
 corner_radius_top_right = 16
@@ -27,35 +27,37 @@ corner_radius_top_right = 16
 corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
 
-[node name="PlayerHud" type="Control"]
+[node name="PlayerHud" type="CanvasLayer"]
+script = ExtResource( 1 )
+
+[node name="Control" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 2 )
-script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Header" type="HBoxContainer" parent="VBoxContainer"]
+[node name="Header" type="HBoxContainer" parent="Control/VBoxContainer"]
 margin_right = 1920.0
 margin_bottom = 102.0
 
-[node name="TL" type="Label" parent="VBoxContainer/Header"]
+[node name="TL" type="Label" parent="Control/VBoxContainer/Header"]
 margin_top = 17.0
 margin_bottom = 85.0
 size_flags_horizontal = 2
-custom_styles/normal = SubResource( 4 )
+custom_styles/normal = SubResource( 1 )
 custom_fonts/font = ExtResource( 5 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 
-[node name="Score" type="Label" parent="VBoxContainer/Header"]
+[node name="Score" type="Label" parent="Control/VBoxContainer/Header"]
 margin_left = 730.0
 margin_right = 1189.0
 margin_bottom = 102.0
@@ -63,62 +65,63 @@ size_flags_horizontal = 6
 custom_styles/normal = SubResource( 2 )
 text = "000000000"
 
-[node name="Misc" type="Label" parent="VBoxContainer/Header"]
+[node name="Misc" type="Label" parent="Control/VBoxContainer/Header"]
 margin_left = 1920.0
 margin_right = 1920.0
 margin_bottom = 102.0
 size_flags_horizontal = 10
 custom_styles/normal = SubResource( 3 )
 
-[node name="Footer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="Footer" type="HBoxContainer" parent="Control/VBoxContainer"]
 margin_top = 1012.0
 margin_right = 1920.0
 margin_bottom = 1080.0
 size_flags_vertical = 10
 
-[node name="Challenge" type="Label" parent="VBoxContainer/Footer"]
+[node name="Challenge" type="Label" parent="Control/VBoxContainer/Footer"]
 margin_left = 912.0
 margin_right = 1008.0
 margin_bottom = 68.0
 size_flags_horizontal = 6
-custom_styles/normal = SubResource( 4 )
+custom_styles/normal = SubResource( 1 )
 custom_fonts/font = ExtResource( 5 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 text = "ᏌᏊ"
 
-[node name="Paused" type="Control" parent="."]
+[node name="Paused" type="Control" parent="Control"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PausedGlass" type="VBoxContainer" parent="Paused"]
+[node name="PausedGlass" type="VBoxContainer" parent="Control/Paused"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ColorRect" type="ColorRect" parent="Paused/PausedGlass"]
+[node name="ColorRect" type="ColorRect" parent="Control/Paused/PausedGlass"]
 margin_right = 1920.0
 margin_bottom = 1080.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 color = Color( 1, 1, 1, 0.376471 )
 
-[node name="PausedMenu" type="VBoxContainer" parent="Paused"]
+[node name="PausedMenu" type="VBoxContainer" parent="Control/Paused"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Spacer_1" type="Control" parent="Paused/PausedMenu"]
+[node name="Spacer_1" type="Control" parent="Control/Paused/PausedMenu"]
 margin_right = 1920.0
 size_flags_vertical = 2
 
-[node name="Paused" type="Label" parent="Paused/PausedMenu"]
+[node name="Paused" type="Label" parent="Control/Paused/PausedMenu"]
 margin_left = 693.0
 margin_top = 150.0
 margin_right = 1227.0
@@ -129,38 +132,38 @@ custom_styles/normal = ExtResource( 3 )
 custom_fonts/font = ExtResource( 4 )
 text = "PAUSED"
 
-[node name="Spacer_2" type="Control" parent="Paused/PausedMenu"]
-margin_top = 329.0
+[node name="Spacer_2" type="Control" parent="Control/Paused/PausedMenu"]
+margin_top = 333.0
 margin_right = 1920.0
-margin_bottom = 329.0
+margin_bottom = 333.0
 size_flags_vertical = 2
 
-[node name="Resume" type="Button" parent="Paused/PausedMenu"]
-margin_left = 767.0
-margin_top = 480.0
-margin_right = 1152.0
-margin_bottom = 622.0
+[node name="Resume" type="Button" parent="Control/Paused/PausedMenu"]
+margin_left = 904.0
+margin_top = 484.0
+margin_right = 1015.0
+margin_bottom = 521.0
 size_flags_horizontal = 4
 size_flags_vertical = 2
 text = "Resume"
 
-[node name="Quit" type="Button" parent="Paused/PausedMenu"]
-margin_left = 844.0
-margin_top = 631.0
-margin_right = 1075.0
-margin_bottom = 773.0
+[node name="Quit" type="Button" parent="Control/Paused/PausedMenu"]
+margin_left = 925.0
+margin_top = 635.0
+margin_right = 995.0
+margin_bottom = 672.0
 size_flags_horizontal = 4
 size_flags_vertical = 2
 text = "Quit"
 
-[node name="Spacer_3" type="Control" parent="Paused/PausedMenu"]
-margin_top = 782.0
+[node name="Spacer_3" type="Control" parent="Control/Paused/PausedMenu"]
+margin_top = 786.0
 margin_right = 1920.0
-margin_bottom = 782.0
+margin_bottom = 786.0
 size_flags_vertical = 2
 
-[node name="Spacer_4" type="Control" parent="Paused/PausedMenu"]
-margin_top = 933.0
+[node name="Spacer_4" type="Control" parent="Control/Paused/PausedMenu"]
+margin_top = 937.0
 margin_right = 1920.0
-margin_bottom = 933.0
+margin_bottom = 937.0
 size_flags_vertical = 2

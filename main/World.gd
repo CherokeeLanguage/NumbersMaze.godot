@@ -7,6 +7,7 @@ class_name WorldNode
 const die_ps:PackedScene = preload("res://nodes/DieNode.tscn")
 const levelMap_ps:PackedScene = preload("res://levels/LevelMap.tscn")
 const player_ps:PackedScene = preload("res://player/Player.tscn")
+const FadeOutIn:PackedScene = preload("res://nodes/FadeOutIn.tscn")
 
 onready var map:LevelMap = $LevelMap
 onready var player:PlayerNode = $Player
@@ -16,6 +17,7 @@ onready var music:Music = $LevelMap/Music
 var camera:Camera2D
 var score:int=0
 var slot:int=0
+var level:int=1
 
 signal pause_level
 signal challenge_changed(number)
@@ -44,7 +46,17 @@ func pause_check()->void:
 func challenge_update(number:int):
 	emit_signal("challenge_changed", number)
 
-func load_level(level:int)->void:
+func load_level(_level:int)->void:
+	self.level=_level
+
+	var fader:FadeOutIn = FadeOutIn.instance()
+	get_tree().root.add_child(fader)
+	fader.connect("transition_mid", self, "__load_level1")
+	fader.connect("transition_end", self, "__load_level2")
+	fader.fade()
+	
+func __load_level1()->void:
+	
 	print("Load level: "+str(level))
 	if is_instance_valid(map):
 		map.queue_free()
@@ -70,14 +82,14 @@ func load_level(level:int)->void:
 	camera.smoothing_enabled=false
 	camera.position=map.size/2
 	camera.align()
-	camera.smoothing_enabled=true
 	
-	var p:Vector2=map.randomPortal()
-	player.reset_stats()
-	player.setGlobalPosition(p)
+	player.reset_stats()	
+	var p:Vector2=map.randomPortal()	
+	player.setGlobalPosition(p)	
+	
+func __load_level2()->void:
+	camera.smoothing_enabled=true
 	player.cameraFollow.remote_path = camera.get_path()
-
-	get_tree().paused=false
 	
 func _on_LevelMap_challenge_changed(number) -> void:
 	emit_signal("challenge_changed", number)
@@ -86,15 +98,9 @@ func _on_LevelMap_score_add(number:int) -> void:
 	score += number
 	emit_signal("score_changed", score)
 
-func next_level(level:int):
-	if is_instance_valid(map):
-		map.queue_free()
-	map = null
-	if is_instance_valid(player):
-		player.queue_free()
-	player = null
+func next_level(_level:int):
 	var gslot:GameSlot = GameSlot.new(slot)
-	gslot.level=level+1
+	gslot.level=_level+1
 	gslot.score=score
 	gslot.save()
-	load_level(level+1)
+	load_level(gslot.level)

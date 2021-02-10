@@ -12,6 +12,7 @@ var rng:RandomNumberGenerator
 var dieTime:bool = false
 var valid_die_faces:Array = [1,2,3,4,5,6]
 var pending_die_faces:Array = []
+var total_dice_in_play:int = 0
 
 func _ready() -> void:
 	rng=RandomNumberGenerator.new()
@@ -80,6 +81,7 @@ func nextDie(current_challenge:int):
 	remaining-=amount
 	dieTime=false
 	timer.start()
+	total_dice_in_play+=1
 	return amount
 
 func setRemaining(value:int):
@@ -139,3 +141,4 @@ func reset(level:int=0)->void:
 	max_die=1
 	chain_reset()
 	pending_die_faces.clear()
+	total_dice_in_play=0

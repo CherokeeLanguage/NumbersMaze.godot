@@ -7,6 +7,8 @@ const die_ps:PackedScene = preload("res://nodes/DieNode.tscn")
 const portal_ps:PackedScene = preload("res://nodes/FloorPortal.tscn")
 const warpin_ps:PackedScene = preload("res://nodes/WarpInAreaDetect.tscn")
 
+const EnemySparklingFireball:PackedScene = preload("res://enemies/EnemySparklingFireball.tscn")
+
 onready var map:TileMap = $TileMap
 onready var backdrop:TextureRect = $Backdrop
 onready var music:Music = $Music
@@ -23,6 +25,7 @@ var size:Vector2 = Vector2.ZERO
 var availableTracks:Array=[]
 var challenges:Challenges
 var currentChallenge:int=0 setget setCurrentChallenge
+var pathFinder:PathFinder
 
 signal challenge_changed(number)
 signal score_add(number)
@@ -48,6 +51,12 @@ func _physics_process(_delta: float) -> void:
 			emit_signal("score_add", inChainCount*inChain)
 		else:
 			dieTracker.remaining+=inChain
+			var node:EnemySparklingFireball = EnemySparklingFireball.instance()
+			var p = randomPortal() #mg.portals[randi()%mg.portals.size()]# randomPortal()
+			node.global_position=p #map.map_to_world(p)
+			itemsGroup.add_child(node)
+			var d = randomPortal() #mg.portals[randi()%mg.portals.size()]# randomPortal()
+			node.world_path=pathFinder.get_world_path(map, p, d)
 
 	if dieTracker.isDieTime(portals.size()):
 		addDie()
@@ -110,13 +119,17 @@ func generate()->void:
 	map.set_cell(mg.width, -1, 21)
 	map.set_cell(-1, mg.height, 22)
 	map.set_cell(mg.width, mg.height, 23)
+	
+	pathFinder = PathFinder.new(mg.width, mg.height)
 
 	for y in range(0, mg.height):
 		for x in range(0, mg.width):
 			var cell: = mg.maze[x][y] as MazeGenerator.MazeCell
 			var wall: = cell.wall
-			var ix:int = 0
 			
+			pathFinder.add_position(Vector2(x, y), not wall.s, not wall.w, not wall.n, not wall.e)
+			
+			var ix:int = 0			
 			if wall.n:
 				ix|=1
 			if wall.e:

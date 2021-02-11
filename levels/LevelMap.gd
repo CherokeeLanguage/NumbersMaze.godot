@@ -120,7 +120,7 @@ func generate()->void:
 	map.set_cell(-1, mg.height, 22)
 	map.set_cell(mg.width, mg.height, 23)
 	
-	pathFinder = PathFinder.new(mg.width, mg.height)
+	pathFinder = PathFinder.new(mg.width, mg.height, map.cell_size)
 
 	for y in range(0, mg.height):
 		for x in range(0, mg.width):

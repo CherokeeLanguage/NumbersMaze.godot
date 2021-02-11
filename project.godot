@@ -107,7 +107,7 @@ _global_script_classes=[ {
 "base": "AStar2D",
 "class": "PathFinder",
 "language": "GDScript",
-"path": "res://PathFinder.gd"
+"path": "res://scripts/maze/PathFinder.gd"
 }, {
 "base": "RigidBody2D",
 "class": "PlayerFireballNode",

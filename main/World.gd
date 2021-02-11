@@ -55,8 +55,7 @@ func load_level(_level:int)->void:
 	fader.connect("transition_end", self, "__load_level2")
 	fader.fade()
 	
-func __load_level1()->void:
-	
+func __load_level1()->void:	
 	print("Load level: "+str(level))
 	if is_instance_valid(map):
 		map.queue_free()
@@ -64,10 +63,12 @@ func __load_level1()->void:
 		player.queue_free()
 	
 	map = levelMap_ps.instance()
-	add_child(map)
+	call_deferred("add_child", map)
+	yield(map, "ready")
 	
 	player = player_ps.instance()
-	add_child(player)
+	call_deferred("add_child", player)
+	yield(player, "ready")
 	
 	music=map.music
 	tm=map.map

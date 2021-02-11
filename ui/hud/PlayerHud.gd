@@ -53,13 +53,16 @@ func set_visible(value:bool)->void:
 	visible=value
 	if not visible:
 		pauseMenu.visible=false
+		
+		#reset selected button
+		ix=0
+		update_buttons()
 
 func update_buttons() -> void:
 	sfx.play(sfx.sound.box_moved)
 	for button in buttons:
 		(button as Button).disabled=true
 	(buttons[ix] as Button).disabled=false
-
 
 func setScore(value:int):
 	score.text=Utils.spaceSep(value)

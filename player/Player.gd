@@ -102,8 +102,7 @@ func fireball_check():
 		fireball_enabled=false
 		fbTimer.stop()
 		fbTimer.start(0.35)	
-		
-		
+
 func drop_check():
 	if Input.is_action_just_pressed("btn_y"):
 		if not items.empty():
@@ -195,9 +194,6 @@ func move_check(delta:float)->void:
 					animation.play("idle-north")
 				FACING.SOUTH:
 					animation.play("idle-south")
-					
-					
-
 
 func _on_FireBallTimer_timeout() -> void:
 	fireball_enabled = true

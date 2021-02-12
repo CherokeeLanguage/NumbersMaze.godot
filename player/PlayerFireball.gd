@@ -34,21 +34,11 @@ func queue_free():
 func _on_PlayerFireball_body_entered(body: Node) -> void:
 	if Utils.is_type(body, "Player"):
 		return
-	transition_to_explode()
 	if body is DieNode:
 		body.explode(true)
-
-func explode_for_die()->void:
-	audioPoof.play()
-	var rng:RandomNumberGenerator = RandomNumberGenerator.new()
-	rng.randomize()
-	var angle:int = rng.randi()%360
-	var direction:Vector2 = Vector2.DOWN.rotated(deg2rad(angle))
-	var explosion:DieExplosionNode = DieExplosion.instance()
-	explosion.global_position=global_position
-	explosion.apply_central_impulse(direction*rng.randf_range(100, 150))
-	get_tree().root.call_deferred("add_child", explosion)
-	queue_free()
+		queue_free()
+		return
+	transition_to_explode()
 
 func _playWoosh()->void:
 	audioSwoosh.play()

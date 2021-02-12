@@ -135,3 +135,7 @@ func _exit_tree() -> void:
 
 func _on_Area2D_body_entered(body: Node) -> void:
 	_on_body_entered(body)
+
+
+func _on_DieNode_body_entered(body: Node) -> void:
+	_on_body_entered(body)

@@ -44,3 +44,5 @@ collision_mask = 48
 rotation = -1.57079
 cast_to = Vector2( 0, 16 )
 collision_mask = 48
+
+[connection signal="body_entered" from="." to="." method="_on_DieNode_body_entered"]

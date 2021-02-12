@@ -4,7 +4,9 @@
     package="com.cherokeelessons.maze"
     android:versionCode="200"
     android:versionName="2.00"
-    android:installLocation="auto" >
+    android:installLocation="auto"
+    android:appCategory="game"
+     >
 
      <uses-feature
         android:name="android.hardware.gamepad"
@@ -52,8 +54,7 @@
             android:name="plugins"
             android:value="plugins_value"/>
 
-        <activity
-            android:appCategory="game"
+        <activity            
             android:name=".GodotApp"
             android:label="@string/godot_project_name_string"
             android:theme="@style/GodotAppSplashTheme"

@@ -1,12 +1,10 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=2 format=2]
 
 [ext_resource path="res://enemies/EnemyBase.gd" type="Script" id=1]
-[ext_resource path="res://enemies/EnemyBase_RayCast2D.gd" type="Script" id=2]
 
 [node name="EnemyBase" type="RigidBody2D"]
 collision_layer = 8
 collision_mask = 23
-contact_monitor = true
 script = ExtResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -14,6 +12,7 @@ script = ExtResource( 1 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+playback_process_mode = 0
 
 [node name="Timer" type="Timer" parent="."]
 
@@ -26,7 +25,6 @@ __meta__ = {
 enabled = true
 cast_to = Vector2( 0, 64 )
 collision_mask = 31
-script = ExtResource( 2 )
 
 [node name="RayCast2D_2" type="RayCast2D" parent="Rays"]
 rotation = 0.785398

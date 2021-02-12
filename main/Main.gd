@@ -2,19 +2,19 @@ extends Node
 
 class_name Main
 
-const FadeOutIn:PackedScene = preload("res://nodes/FadeOutIn.tscn")
+onready var FadeOutIn:PackedScene = PackedScenes.FadeOutIn
+onready var startMenu:PackedScene = PackedScenes.StartMenu
+onready var playMenu:PackedScene = PackedScenes.SelectGameSlot
+onready var optionsMenu:PackedScene = PackedScenes.OptionsMenu
+onready var aboutMenu:PackedScene = PackedScenes.AboutMenu
 
-onready var world:WorldNode = $World
+onready var world: = $World
 onready var ui = $UI
-onready var map:LevelMap = $World/LevelMap
+#onready var map:LevelMap = $World/LevelMap
 onready var player:PlayerNode = $World/Player
 onready var camera:Camera2D = $Camera2D
 onready var playerHud:PlayerHud = $PlayerHud
 
-var startMenu:PackedScene = preload("res://ui/menus/StartMenu.tscn")
-var playMenu:PackedScene = preload("res://ui/menus/SelectGameSlot.tscn")
-var optionsMenu:PackedScene = preload("res://ui/menus/OptionsMenu.tscn")
-var aboutMenu:PackedScene = preload("res://ui/menus/AboutMenu.tscn")
 var showNumber:bool = true
 
 func _notification(what):
@@ -44,7 +44,9 @@ func _ready():
 	Input.connect("joy_connection_changed", self, "joy_connection_changed")
 	call_deferred("show", startMenu)
 	
+# warning-ignore:return_value_discarded
 	playerHud.connect("quit_level", self, "quit_level")
+# warning-ignore:return_value_discarded
 	playerHud.connect("resume_level", self, "resume_level")
 	
 	playerHud.visible=false
@@ -123,6 +125,7 @@ func __show(menu)->void:
 
 func quit_level():
 	numberAudio.stop()
+# warning-ignore:unsafe_method_access
 	world.clear_level()
 	playerHud.visible=false
 	playerHud.pauseMenu.visible=false
@@ -134,6 +137,7 @@ func resume_level():
 	playerHud.pauseMenu.visible=false
 
 func play_game() -> void:
+# warning-ignore:unsafe_method_access
 	world.clear_level() #clear out previous game
 	show(playMenu)
 

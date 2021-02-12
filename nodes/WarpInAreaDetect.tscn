@@ -14,7 +14,6 @@ collision_mask = 62
 
 [node name="RayCast2D_2" type="RayCast2D" parent="Rays"]
 rotation = 0.785398
-scale = Vector2( 1, 1 )
 enabled = true
 cast_to = Vector2( 0, 90 )
 collision_mask = 62
@@ -27,7 +26,6 @@ collision_mask = 62
 
 [node name="RayCast2D_4" type="RayCast2D" parent="Rays"]
 rotation = 2.35619
-scale = Vector2( 1, 1 )
 enabled = true
 cast_to = Vector2( 0, 90 )
 collision_mask = 62

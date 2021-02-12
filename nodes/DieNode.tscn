@@ -4,14 +4,14 @@
 [ext_resource path="res://graphics/dice/d1.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 14, 14 )
+extents = Vector2( 18, 18 )
 
 [node name="DieNode" type="RigidBody2D" groups=[
 "dice",
 ]]
 collision_layer = 4
-collision_mask = 21
-continuous_cd = 1
+collision_mask = 53
+continuous_cd = 2
 contacts_reported = 16
 contact_monitor = true
 script = ExtResource( 1 )
@@ -44,5 +44,3 @@ collision_mask = 48
 rotation = -1.57079
 cast_to = Vector2( 0, 16 )
 collision_mask = 48
-
-[connection signal="body_entered" from="." to="." method="_on_DieNode_body_entered"]

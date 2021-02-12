@@ -11,6 +11,7 @@ onready var timer = $Timer
 
 var rays:Array = []
 var world_path:PoolVector2Array = PoolVector2Array() setget set_world_path
+var mutex:Mutex=Mutex.new()
 
 func _ready() -> void:
 	setRayRotations()
@@ -27,36 +28,33 @@ func setRayRotations()->void:
 			angle+=45
 			rays.append(ray)
 
-func ray_colliders()->Array:
-	var colliders:Array=[]
-	for ray in rays:
-		if ray is RayCast2D:
-			if ray.is_colliding():
-				var collider = ray.get_collider()
-				if collider is RigidBody2D:
-					colliders.append(collider)
-	return colliders
+#func ray_colliders()->Array:
+#	var colliders:Array=[]
+#	for ray in rays:
+#		if ray is RayCast2D:
+#			if ray.is_colliding():
+#				var collider = ray.get_collider()
+#				if collider is RigidBody2D:
+#					colliders.append(collider)
+#	return colliders
 
-func ray_down()->Array:
-	return ray_ix(0)
+#func ray_down()->Array:
+#	return ray_ix(0)
+#
+#func ray_left()->Array:
+#	return ray_ix(2)
+#
+#func ray_up()->Array:
+#	return ray_ix(4)
+#
+#func ray_right()->Array:
+#	return ray_ix(6)
 
-func ray_left()->Array:
-	return ray_ix(2)
-
-func ray_up()->Array:
-	return ray_ix(4)
-
-func ray_right()->Array:
-	return ray_ix(6)
-
-func ray_ix(ix:int)->Array:
-	var colliders:Array=[]
-	var ray: = rays[ix] as RayCast2D
-	if ray.is_colliding():
-		for collider in ray.ray_colliders():
-			if collider is RigidBody2D:
-					colliders.append(collider)
-	return colliders
+#func ray_ix(ix:int)->Object:
+#	var ray: = rays[ix] as RayCast2D
+#	if ray.is_colliding():
+#		return ray.get_collider()
+#	return null
 
 func set_world_path(value:PoolVector2Array):
 	world_path=value
@@ -64,16 +62,5 @@ func set_world_path(value:PoolVector2Array):
 	for way_point in world_path:
 		print(" - "+str(way_point))
 
-func _physics_process(_delta: float) -> void:
-	pass
-
-func _animation_finished(anim_name: String) -> void:
+func _animation_finished(_anim_name: String) -> void:
 	queue_free()
-
-func _body_entered(body: Node) -> void:
-	print(name+"#_body_entered: "+body.name)
-	pass # Replace with function body.
-
-func _body_shape_entered(body_id: int, body: Node, body_shape: int, local_shape: int) -> void:
-	print(name+"#_body_shape_entered: "+body.name)
-	pass # Replace with function body.

@@ -148,11 +148,13 @@ scale = Vector2( 0.375, 0.375 )
 texture = ExtResource( 1 )
 hframes = 4
 vframes = 4
+frame = 12
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+playback_process_mode = 0
 anims/east = SubResource( 2 )
 anims/idle-east = SubResource( 3 )
 anims/idle-north = SubResource( 4 )

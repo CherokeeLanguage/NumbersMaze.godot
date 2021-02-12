@@ -2,6 +2,10 @@ extends Node
 
 class_name Utils
 
+#class names for "is" checks can cause stupid circular loop errors
+static func is_type(object:Node, type:String)->bool:
+	return object.name == type or object.name.begins_with("@"+type+"@")
+
 static func is_node_visible(node:Node2D)->bool:
 	var rect:Rect2=Rect2(0, 0, 1920, 1080)
 	return rect.has_point(node.get_global_transform_with_canvas().origin)

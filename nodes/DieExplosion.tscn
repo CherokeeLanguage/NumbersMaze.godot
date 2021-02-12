@@ -4,7 +4,7 @@
 [ext_resource path="res://nodes/DieExplosion.gd" type="Script" id=2]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 7.0
+radius = 0.01
 
 [sub_resource type="Animation" id=2]
 length = 1.072
@@ -28,38 +28,48 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.067, 0.134, 0.402, 0.804 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
-"values": [ {
-"args": [ 5.0 ],
-"method": "setColliderRadius"
-}, {
-"args": [ 6.0 ],
-"method": "setColliderRadius"
-}, {
-"args": [ 8.0 ],
-"method": "setColliderRadius"
-}, {
-"args": [ 7.0 ],
-"method": "setColliderRadius"
-}, {
-"args": [ 0.0 ],
-"method": "setColliderRadius"
-} ]
-}
-tracks/2/type = "method"
-tracks/2/path = NodePath(".")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
 "times": PoolRealArray( 1.005 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
 "method": "finished"
 } ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("CollisionShape2D:shape:radius")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.067, 0.134, 0.201, 0.268, 0.335, 0.402, 0.469, 0.603, 0.67, 0.737, 0.871 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 4.38601, 5.34071, 6.86508, 8.42664, 9.81122, 8.16786, 6.40835, 5.74396, 4.50394, 4.50394, 3.33539, 0.01 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("CollisionShape2D:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.134, 0.402, 0.603, 0.67, 0.804 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.589921, 0.825886 ), Vector2( 1.06186, 0.707905 ), Vector2( 1.06186, 0.707905 ), Vector2( 1.41581, 0.82589 ), Vector2( 1.29783, 0.707905 ), Vector2( 1.29783, 0.707905 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("CollisionShape2D:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.871 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
 }
 
 [node name="DieExplosion" type="RigidBody2D"]
@@ -77,12 +87,16 @@ position = Vector2( 1, 0 )
 texture = ExtResource( 1 )
 hframes = 8
 vframes = 8
-frame = 62
+frame = 54
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0.943871, 1.41581 )
+position = Vector2( 1.29783, 0.707905 )
 shape = SubResource( 1 )
+disabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "explode"
+playback_process_mode = 0
 anims/explode = SubResource( 2 )
+
+[connection signal="body_entered" from="." to="." method="_on_DieExplosion_body_entered"]

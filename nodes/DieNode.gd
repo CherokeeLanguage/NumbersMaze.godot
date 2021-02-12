@@ -2,7 +2,7 @@ extends RigidBody2D
 
 class_name DieNode
 
-const ExplosionNode:PackedScene = preload("res://nodes/DieExplosion.tscn")
+var ExplosionNode:PackedScene = PackedScenes.DieExplosion
 
 onready var sprite:Sprite = $Sprite
 onready var collider:CollisionShape2D = $CollisionShape2D
@@ -47,16 +47,19 @@ func setupColorsArray()->void:
 	return
 			
 func _physics_process(_delta: float) -> void:
-	for dectector in dectectors:
-		if dectector is RayCast2D:
-			if dectector.is_colliding():
-				var body = dectector.get_collider()
-				if body is PlayerFireballNode:
-					explode(true)
-					break
-				if body is DieExplosionNode:
-					explode(body.is_in_group(Consts.PLAYER_EXPLOSION))
-					break
+#	for dectector in dectectors:
+#		if dectector is RayCast2D:
+#			if dectector.is_colliding():
+#				var body = dectector.get_collider()
+#				if body is PlayerFireballNode:
+#					explode(true)
+#					break
+#				if body is DieExplosionNode:
+#					explode(body.is_in_group(Consts.PLAYER_EXPLOSION))
+#					break
+#				if body is EnemyBase:
+#					explode(false)
+	pass
 	
 func set_die_face()->void:
 	if not is_instance_valid(sprite):
@@ -81,14 +84,14 @@ func setValue(_value:int)->void:
 func getValue()->int:
 	return value
 
-func _on_DieNode_body_entered(body: Node) -> void:
-	if body is PlayerFireballNode:
+func _on_body_entered(body: Node) -> void:
+	if Utils.is_type(body, "PlayerFireballNode"):
 		explode(true)
 		
 	if body is DieExplosionNode:
 		explode(body.is_in_group(Consts.PLAYER_EXPLOSION))
 		
-	if body is TileMap or body.name=="DieNode" or body.name.begins_with("@DieNode@"):
+	if body is TileMap or Utils.is_type(body, "DieNode"):
 		if Utils.is_node_visible(self):
 			sfx.play(sfx.sound.plink)
 		return
@@ -106,12 +109,12 @@ func explode(player_fireball:bool = false)->void:
 		var y:int = rng.randi_range(-1, 1)
 		var direction:Vector2 = Vector2(x, y).normalized()
 		var explosion:DieExplosionNode = ExplosionNode.instance()
-		get_tree().root.add_child(explosion)
 		explosion.global_position=global_position
-		explosion.apply_central_impulse(direction*rng.randf_range(100, 300))
+		explosion.apply_central_impulse(direction*rng.randf_range(100, 150))
 		if (player_fireball):
 			explosion.add_to_group(Consts.PLAYER_EXPLOSION)
 			dieTracker.chained_explosion_count+=1
+		get_tree().root.call_deferred("add_child", explosion)
 			
 	if player_fireball:
 		dieTracker.chained_explosions.append(value)
@@ -129,3 +132,6 @@ func _exit_tree() -> void:
 		var parent: = get_parent()
 		print("die:_exit_tree: "+name+" of "+parent.name)
 		value=0
+
+func _on_Area2D_body_entered(body: Node) -> void:
+	_on_body_entered(body)

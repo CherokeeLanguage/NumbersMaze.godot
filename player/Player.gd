@@ -4,7 +4,7 @@ class_name PlayerNode
 
 enum FACING { NORTH, EAST, SOUTH, WEST}
 
-const FireballNode:PackedScene = preload("res://player/PlayerFireball.tscn")
+const FireballNode:PackedScene = PackedScenes.PlayerFireball
 
 onready var animation:AnimationPlayer = $AnimationPlayer
 onready var cameraFollow:RemoteTransform2D = $CameraFollow
@@ -67,6 +67,7 @@ func fireball_check():
 		print("Total remaining: "+str(dieTracker.getChallengeTotal()))
 		var fireball:PlayerFireballNode = FireballNode.instance()
 		add_child(fireball)
+		
 		var impulse:Vector2 = Vector2.RIGHT
 		var myRotation:float = 0.0
 		match facing:
@@ -88,19 +89,20 @@ func fireball_check():
 		fireball.global_position = global_position
 		match facing:
 			FACING.NORTH:
-				fireball.global_position.y -= 48
+				fireball.global_position.y -= 32
 			FACING.SOUTH:
-				fireball.global_position.y += 48
+				fireball.global_position.y += 32
 			FACING.EAST:
-				fireball.global_position.x += 32
+				fireball.global_position.x += 8
 				fireball.global_position.y += 8
 			FACING.WEST:
-				fireball.global_position.x -= 32
+				fireball.global_position.x -= 8
 				fireball.global_position.y += 8
 		
 		fireball_enabled=false
 		fbTimer.stop()
-		fbTimer.start(0.35)
+		fbTimer.start(0.35)	
+		
 		
 func drop_check():
 	if Input.is_action_just_pressed("btn_y"):

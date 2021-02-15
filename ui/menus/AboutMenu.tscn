@@ -18,7 +18,7 @@ __meta__ = {
 [node name="Label" type="Label" parent="VBoxContainer" index="0"]
 margin_left = 807.0
 margin_right = 1113.0
-margin_bottom = 142.0
+margin_bottom = 114.0
 size_flags_horizontal = 4
 custom_styles/normal = ExtResource( 2 )
 text = "About"

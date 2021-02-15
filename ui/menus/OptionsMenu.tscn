@@ -1,7 +1,377 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://ui/menus/BaseMenu.tscn" type="PackedScene" id=1]
 [ext_resource path="res://ui/menus/OptionsMenu.gd" type="Script" id=2]
+[ext_resource path="res://ui/menus/title-bar-style-box.tres" type="StyleBox" id=3]
+[ext_resource path="res://fonts/CherokeeHandone-128.tres" type="DynamicFont" id=4]
+[ext_resource path="res://fonts/CherokeeHandone-64.tres" type="DynamicFont" id=5]
+[ext_resource path="res://graphics/on-screen-controls/shadedDark/shadedDark24.png" type="Texture" id=6]
+[ext_resource path="res://graphics/on-screen-controls/shadedDark/shadedDark25.png" type="Texture" id=7]
+[ext_resource path="res://graphics/on-screen-controls/shadedDark/shadedDark27.png" type="Texture" id=8]
+[ext_resource path="res://graphics/on-screen-controls/shadedDark/shadedDark26.png" type="Texture" id=9]
+[ext_resource path="res://graphics/on-screen-controls/shadedDark/shadedDark45.png" type="Texture" id=10]
+[ext_resource path="res://audio/Music.tscn" type="PackedScene" id=11]
+
+[sub_resource type="StyleBoxEmpty" id=1]
+
+[sub_resource type="StyleBoxEmpty" id=2]
+
+[sub_resource type="StyleBoxEmpty" id=3]
+
+[sub_resource type="StyleBoxEmpty" id=4]
 
 [node name="OptionsMenu" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
+
+[node name="VBox" type="VBoxContainer" parent="." index="1"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VSeparator_1" type="VSeparator" parent="VBox" index="0"]
+margin_right = 1920.0
+margin_bottom = 67.0
+size_flags_vertical = 3
+
+[node name="Settings" type="Label" parent="VBox" index="1"]
+margin_left = 711.0
+margin_top = 71.0
+margin_right = 1209.0
+margin_bottom = 246.0
+size_flags_horizontal = 6
+custom_styles/normal = ExtResource( 3 )
+custom_fonts/font = ExtResource( 4 )
+text = "Settings"
+
+[node name="VSeparator_2" type="VSeparator" parent="VBox" index="2"]
+margin_top = 250.0
+margin_right = 1920.0
+margin_bottom = 318.0
+size_flags_vertical = 3
+
+[node name="HBox_2" type="HBoxContainer" parent="VBox" index="3"]
+margin_top = 322.0
+margin_right = 1920.0
+margin_bottom = 436.0
+
+[node name="HSeparator_1" type="HSeparator" parent="VBox/HBox_2" index="0"]
+margin_right = 35.0
+margin_bottom = 114.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.05
+
+[node name="MasterVolume" type="Button" parent="VBox/HBox_2" index="1"]
+margin_left = 39.0
+margin_right = 758.0
+margin_bottom = 114.0
+size_flags_horizontal = 3
+text = "Master Volume:"
+
+[node name="HSeparator_2" type="HSeparator" parent="VBox/HBox_2" index="2"]
+margin_left = 762.0
+margin_right = 798.0
+margin_bottom = 114.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.05
+
+[node name="ProgressBar" type="ProgressBar" parent="VBox/HBox_2" index="3"]
+margin_left = 802.0
+margin_right = 1880.0
+margin_bottom = 114.0
+size_flags_horizontal = 3
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.5
+custom_styles/fg = ExtResource( 3 )
+custom_styles/bg = SubResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 0 )
+step = 5.0
+value = 100.0
+
+[node name="HSeparator_3" type="HSeparator" parent="VBox/HBox_2" index="4"]
+margin_left = 1884.0
+margin_right = 1920.0
+margin_bottom = 114.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.05
+
+[node name="VSeparator_5" type="VSeparator" parent="VBox" index="4"]
+margin_top = 440.0
+margin_right = 1920.0
+margin_bottom = 457.0
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.25
+
+[node name="HBox_3" type="HBoxContainer" parent="VBox" index="5"]
+margin_top = 461.0
+margin_right = 1920.0
+margin_bottom = 575.0
+
+[node name="HSeparator_1" type="HSeparator" parent="VBox/HBox_3" index="0"]
+margin_right = 35.0
+margin_bottom = 114.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.05
+
+[node name="FxVolume" type="Button" parent="VBox/HBox_3" index="1"]
+margin_left = 39.0
+margin_right = 758.0
+margin_bottom = 114.0
+size_flags_horizontal = 3
+text = "Effects Volume:"
+
+[node name="HSeparator_2" type="HSeparator" parent="VBox/HBox_3" index="2"]
+margin_left = 762.0
+margin_right = 798.0
+margin_bottom = 114.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.05
+
+[node name="ProgressBar" type="ProgressBar" parent="VBox/HBox_3" index="3"]
+margin_left = 802.0
+margin_right = 1880.0
+margin_bottom = 114.0
+size_flags_horizontal = 3
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.5
+custom_styles/fg = ExtResource( 3 )
+custom_styles/bg = SubResource( 2 )
+custom_colors/font_color = Color( 0, 0, 0, 0 )
+max_value = 100.0
+step = 5.0
+value = 100.0
+
+[node name="HSeparator_3" type="HSeparator" parent="VBox/HBox_3" index="4"]
+margin_left = 1884.0
+margin_right = 1920.0
+margin_bottom = 114.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.05
+
+[node name="VSeparator_6" type="VSeparator" parent="VBox" index="6"]
+margin_top = 579.0
+margin_right = 1920.0
+margin_bottom = 595.0
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.25
+
+[node name="HBox_4" type="HBoxContainer" parent="VBox" index="7"]
+margin_top = 599.0
+margin_right = 1920.0
+margin_bottom = 713.0
+
+[node name="HSeparator_1" type="HSeparator" parent="VBox/HBox_4" index="0"]
+margin_right = 35.0
+margin_bottom = 114.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.05
+
+[node name="MusicVolume" type="Button" parent="VBox/HBox_4" index="1"]
+margin_left = 39.0
+margin_right = 758.0
+margin_bottom = 114.0
+size_flags_horizontal = 3
+text = "Music Volume:"
+
+[node name="HSeparator_2" type="HSeparator" parent="VBox/HBox_4" index="2"]
+margin_left = 762.0
+margin_right = 798.0
+margin_bottom = 114.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.05
+
+[node name="ProgressBar" type="ProgressBar" parent="VBox/HBox_4" index="3"]
+margin_left = 802.0
+margin_right = 1880.0
+margin_bottom = 114.0
+size_flags_horizontal = 3
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.5
+custom_styles/fg = ExtResource( 3 )
+custom_styles/bg = SubResource( 3 )
+custom_colors/font_color = Color( 0, 0, 0, 0 )
+step = 5.0
+value = 100.0
+
+[node name="HSeparator_3" type="HSeparator" parent="VBox/HBox_4" index="4"]
+margin_left = 1884.0
+margin_right = 1920.0
+margin_bottom = 114.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.05
+
+[node name="VSeparator_7" type="VSeparator" parent="VBox" index="8"]
+margin_top = 717.0
+margin_right = 1920.0
+margin_bottom = 734.0
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.25
+
+[node name="HBox_1" type="HBoxContainer" parent="VBox" index="9"]
+margin_top = 738.0
+margin_right = 1920.0
+margin_bottom = 852.0
+alignment = 1
+
+[node name="HSeparator_1" type="HSeparator" parent="VBox/HBox_1" index="0"]
+margin_right = 35.0
+margin_bottom = 114.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.05
+
+[node name="TvZoom" type="Button" parent="VBox/HBox_1" index="1"]
+margin_left = 39.0
+margin_right = 758.0
+margin_bottom = 114.0
+size_flags_horizontal = 3
+text = "TV Zoom:"
+
+[node name="HSeparator_2" type="HSeparator" parent="VBox/HBox_1" index="2"]
+margin_left = 762.0
+margin_right = 798.0
+margin_bottom = 114.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.05
+
+[node name="ProgressBar" type="ProgressBar" parent="VBox/HBox_1" index="3"]
+margin_left = 802.0
+margin_right = 1880.0
+margin_bottom = 114.0
+size_flags_horizontal = 3
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.5
+custom_styles/fg = ExtResource( 3 )
+custom_styles/bg = SubResource( 4 )
+custom_colors/font_color = Color( 0, 0, 0, 0 )
+min_value = -15.0
+max_value = 0.0
+step = 1.0
+
+[node name="HSeparator_3" type="HSeparator" parent="VBox/HBox_1" index="4"]
+margin_left = 1884.0
+margin_right = 1920.0
+margin_bottom = 114.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.05
+
+[node name="VSeparator_3" type="VSeparator" parent="VBox" index="10"]
+margin_top = 856.0
+margin_right = 1920.0
+margin_bottom = 924.0
+size_flags_vertical = 3
+
+[node name="HBox" type="HBoxContainer" parent="VBox" index="11"]
+margin_top = 928.0
+margin_right = 1920.0
+margin_bottom = 1008.0
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="HSeparator_1" type="HSeparator" parent="VBox/HBox" index="0"]
+margin_right = 246.0
+margin_bottom = 80.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.05
+
+[node name="Back Button" type="TextureRect" parent="VBox/HBox" index="1"]
+margin_left = 250.0
+margin_right = 330.0
+margin_bottom = 80.0
+size_flags_horizontal = 0
+texture = ExtResource( 10 )
+flip_h = true
+flip_v = true
+
+[node name="Instructions_1" type="Label" parent="VBox/HBox" index="2"]
+margin_left = 334.0
+margin_top = 5.0
+margin_right = 454.0
+margin_bottom = 74.0
+size_flags_horizontal = 0
+custom_fonts/font = ExtResource( 5 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Exit"
+valign = 1
+
+[node name="HSeparator_3" type="HSeparator" parent="VBox/HBox" index="3"]
+margin_left = 458.0
+margin_right = 704.0
+margin_bottom = 80.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.05
+
+[node name="Up Button" type="TextureRect" parent="VBox/HBox" index="4"]
+margin_left = 708.0
+margin_right = 788.0
+margin_bottom = 80.0
+size_flags_horizontal = 4
+texture = ExtResource( 9 )
+
+[node name="Down Button" type="TextureRect" parent="VBox/HBox" index="5"]
+margin_left = 792.0
+margin_right = 872.0
+margin_bottom = 80.0
+size_flags_horizontal = 4
+texture = ExtResource( 8 )
+
+[node name="Instructions_2" type="Label" parent="VBox/HBox" index="6"]
+margin_left = 876.0
+margin_top = 5.0
+margin_right = 1058.0
+margin_bottom = 74.0
+size_flags_horizontal = 4
+custom_fonts/font = ExtResource( 5 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Select"
+align = 1
+valign = 1
+
+[node name="HSeparator_5" type="HSeparator" parent="VBox/HBox" index="7"]
+margin_left = 1062.0
+margin_right = 1308.0
+margin_bottom = 80.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.05
+
+[node name="Left Button" type="TextureRect" parent="VBox/HBox" index="8"]
+margin_left = 1312.0
+margin_right = 1392.0
+margin_bottom = 80.0
+texture = ExtResource( 6 )
+flip_v = true
+
+[node name="Right Button" type="TextureRect" parent="VBox/HBox" index="9"]
+margin_left = 1396.0
+margin_right = 1476.0
+margin_bottom = 80.0
+texture = ExtResource( 7 )
+
+[node name="Instructions_3" type="Label" parent="VBox/HBox" index="10"]
+margin_left = 1480.0
+margin_top = 5.0
+margin_right = 1669.0
+margin_bottom = 74.0
+size_flags_horizontal = 8
+custom_fonts/font = ExtResource( 5 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Adjust"
+align = 2
+valign = 1
+
+[node name="HSeparator_7" type="HSeparator" parent="VBox/HBox" index="11"]
+margin_left = 1673.0
+margin_right = 1920.0
+margin_bottom = 80.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.05
+
+[node name="VSeparator_4" type="VSeparator" parent="VBox" index="12"]
+margin_top = 1012.0
+margin_right = 1920.0
+margin_bottom = 1080.0
+size_flags_vertical = 3
+
+[node name="Music" parent="." index="3" instance=ExtResource( 11 )]

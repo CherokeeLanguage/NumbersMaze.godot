@@ -16,15 +16,15 @@ __meta__ = {
 }
 
 [node name="Spacer_1" type="Control" parent="VBoxContainer" index="0"]
-margin_top = 49.0
+margin_top = 53.0
 margin_right = 1920.0
-margin_bottom = 49.0
+margin_bottom = 53.0
 size_flags_vertical = 6
 
 [node name="HBoxContainer_1" type="HBoxContainer" parent="VBoxContainer" index="1"]
-margin_top = 103.0
+margin_top = 111.0
 margin_right = 1920.0
-margin_bottom = 771.0
+margin_bottom = 744.0
 size_flags_horizontal = 3
 size_flags_vertical = 6
 __meta__ = {
@@ -34,7 +34,7 @@ __meta__ = {
 [node name="VBoxContainer_left" type="VBoxContainer" parent="VBoxContainer/HBoxContainer_1" index="0"]
 margin_left = 212.0
 margin_right = 745.0
-margin_bottom = 668.0
+margin_bottom = 633.0
 size_flags_horizontal = 6
 size_flags_vertical = 6
 custom_constants/separation = 32
@@ -45,35 +45,36 @@ __meta__ = {
 [node name="slot_1" parent="VBoxContainer/HBoxContainer_1/VBoxContainer_left" index="0" instance=ExtResource( 1 )]
 margin_left = 0.0
 margin_right = 533.0
+margin_bottom = 101.0
 
 [node name="slot_2" parent="VBoxContainer/HBoxContainer_1/VBoxContainer_left" index="1" instance=ExtResource( 1 )]
 margin_left = 0.0
-margin_top = 140.0
+margin_top = 133.0
 margin_right = 533.0
-margin_bottom = 248.0
+margin_bottom = 234.0
 
 [node name="slot_3" parent="VBoxContainer/HBoxContainer_1/VBoxContainer_left" index="2" instance=ExtResource( 1 )]
 margin_left = 0.0
-margin_top = 280.0
+margin_top = 266.0
 margin_right = 533.0
-margin_bottom = 388.0
+margin_bottom = 367.0
 
 [node name="slot_4" parent="VBoxContainer/HBoxContainer_1/VBoxContainer_left" index="3" instance=ExtResource( 1 )]
 margin_left = 0.0
-margin_top = 420.0
+margin_top = 399.0
 margin_right = 533.0
-margin_bottom = 528.0
+margin_bottom = 500.0
 
 [node name="slot_5" parent="VBoxContainer/HBoxContainer_1/VBoxContainer_left" index="4" instance=ExtResource( 1 )]
 margin_left = 0.0
-margin_top = 560.0
+margin_top = 532.0
 margin_right = 533.0
-margin_bottom = 668.0
+margin_bottom = 633.0
 
 [node name="VBoxContainer_right" type="VBoxContainer" parent="VBoxContainer/HBoxContainer_1" index="1"]
 margin_left = 1174.0
 margin_right = 1707.0
-margin_bottom = 668.0
+margin_bottom = 633.0
 size_flags_horizontal = 6
 size_flags_vertical = 6
 custom_constants/separation = 32
@@ -84,50 +85,51 @@ __meta__ = {
 [node name="slot_6" parent="VBoxContainer/HBoxContainer_1/VBoxContainer_right" index="0" instance=ExtResource( 1 )]
 margin_left = 0.0
 margin_right = 533.0
+margin_bottom = 101.0
 
 [node name="slot_7" parent="VBoxContainer/HBoxContainer_1/VBoxContainer_right" index="1" instance=ExtResource( 1 )]
 margin_left = 0.0
-margin_top = 140.0
+margin_top = 133.0
 margin_right = 533.0
-margin_bottom = 248.0
+margin_bottom = 234.0
 
 [node name="slot_8" parent="VBoxContainer/HBoxContainer_1/VBoxContainer_right" index="2" instance=ExtResource( 1 )]
 margin_left = 0.0
-margin_top = 280.0
+margin_top = 266.0
 margin_right = 533.0
-margin_bottom = 388.0
+margin_bottom = 367.0
 
 [node name="slot_9" parent="VBoxContainer/HBoxContainer_1/VBoxContainer_right" index="3" instance=ExtResource( 1 )]
 margin_left = 0.0
-margin_top = 420.0
+margin_top = 399.0
 margin_right = 533.0
-margin_bottom = 528.0
+margin_bottom = 500.0
 
 [node name="slot_10" parent="VBoxContainer/HBoxContainer_1/VBoxContainer_right" index="4" instance=ExtResource( 1 )]
 margin_left = 0.0
-margin_top = 560.0
+margin_top = 532.0
 margin_right = 533.0
-margin_bottom = 668.0
+margin_bottom = 633.0
 
 [node name="Spacer_2" type="Control" parent="VBoxContainer" index="2"]
-margin_top = 824.0
+margin_top = 802.0
 margin_right = 1920.0
-margin_bottom = 824.0
+margin_bottom = 802.0
 size_flags_vertical = 6
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="HBoxContainer_2" type="HBoxContainer" parent="VBoxContainer" index="3"]
-margin_top = 889.0
+margin_top = 879.0
 margin_right = 1920.0
-margin_bottom = 965.0
+margin_bottom = 948.0
 size_flags_horizontal = 3
 size_flags_vertical = 6
 
 [node name="Select" type="Label" parent="VBoxContainer/HBoxContainer_2" index="0"]
 margin_right = 958.0
-margin_bottom = 76.0
+margin_bottom = 69.0
 size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 3 )
 custom_colors/font_color = Color( 0.247059, 0.247059, 0.247059, 1 )
@@ -137,7 +139,7 @@ align = 1
 [node name="Erase" type="Label" parent="VBoxContainer/HBoxContainer_2" index="1"]
 margin_left = 962.0
 margin_right = 1920.0
-margin_bottom = 76.0
+margin_bottom = 69.0
 size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 3 )
 custom_colors/font_color = Color( 0.247059, 0.247059, 0.247059, 1 )
@@ -145,9 +147,9 @@ text = "[Y] Erase Slot"
 align = 1
 
 [node name="Spacer_3" type="Control" parent="VBoxContainer" index="4"]
-margin_top = 1030.0
+margin_top = 1026.0
 margin_right = 1920.0
-margin_bottom = 1030.0
+margin_bottom = 1026.0
 size_flags_vertical = 6
 __meta__ = {
 "_edit_use_anchors_": false

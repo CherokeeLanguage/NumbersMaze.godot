@@ -18,33 +18,34 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Spacer_0" type="Control" parent="VBoxContainer" index="0"]
+[node name="Spacer_0" type="VSeparator" parent="VBoxContainer" index="0"]
 margin_right = 1920.0
-margin_bottom = 76.0
+margin_bottom = 93.0
 size_flags_vertical = 3
 
 [node name="GameTitle" type="Label" parent="VBoxContainer" index="1"]
 margin_left = 226.0
-margin_top = 80.0
+margin_top = 97.0
 margin_right = 1694.0
-margin_bottom = 255.0
+margin_bottom = 272.0
 size_flags_horizontal = 4
 custom_styles/normal = ExtResource( 1 )
 custom_fonts/font = ExtResource( 3 )
 text = "Cherokee Numbers Maze"
 align = 1
 
-[node name="Spacer_1" type="Control" parent="VBoxContainer" index="2"]
-margin_top = 259.0
+[node name="Spacer_1" type="VSeparator" parent="VBoxContainer" index="2"]
+margin_top = 276.0
 margin_right = 1920.0
-margin_bottom = 259.0
+margin_bottom = 279.0
 size_flags_vertical = 2
+size_flags_stretch_ratio = 1.5
 
 [node name="PlayGame" type="Button" parent="VBoxContainer" index="3"]
 margin_left = 721.0
-margin_top = 339.0
+margin_top = 420.0
 margin_right = 1199.0
-margin_bottom = 481.0
+margin_bottom = 534.0
 size_flags_horizontal = 4
 text = "Play Game"
 __meta__ = {
@@ -53,9 +54,9 @@ __meta__ = {
 
 [node name="Options" type="Button" parent="VBoxContainer" index="4"]
 margin_left = 784.0
-margin_top = 485.0
+margin_top = 538.0
 margin_right = 1135.0
-margin_bottom = 627.0
+margin_bottom = 652.0
 size_flags_horizontal = 4
 disabled = true
 text = "Options"
@@ -65,9 +66,9 @@ __meta__ = {
 
 [node name="About" type="Button" parent="VBoxContainer" index="5"]
 margin_left = 807.0
-margin_top = 631.0
+margin_top = 656.0
 margin_right = 1113.0
-margin_bottom = 773.0
+margin_bottom = 770.0
 size_flags_horizontal = 4
 disabled = true
 text = "About"
@@ -77,9 +78,9 @@ __meta__ = {
 
 [node name="Quit" type="Button" parent="VBoxContainer" index="6"]
 margin_left = 844.0
-margin_top = 777.0
+margin_top = 774.0
 margin_right = 1075.0
-margin_bottom = 919.0
+margin_bottom = 888.0
 size_flags_horizontal = 4
 size_flags_vertical = 0
 disabled = true
@@ -88,16 +89,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Spacer_2" type="Control" parent="VBoxContainer" index="7"]
-margin_top = 923.0
+[node name="Spacer_2" type="VSeparator" parent="VBoxContainer" index="7"]
+margin_top = 892.0
 margin_right = 1920.0
-margin_bottom = 923.0
-size_flags_vertical = 2
-
-[node name="Spacer_3" type="Control" parent="VBoxContainer" index="8"]
-margin_top = 1003.0
-margin_right = 1920.0
-margin_bottom = 1003.0
-size_flags_vertical = 2
+margin_bottom = 1080.0
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
 
 [node name="Music" parent="." index="2" instance=ExtResource( 7 )]

@@ -7,11 +7,13 @@ onready var score:Label = $Control/VBoxContainer/Header/Score
 onready var misc:Label = $Control/VBoxContainer/Header/Misc
 onready var pauseMenu:Control = $Control/Paused
 onready var control:Control = $Control
+onready var sfx: = $SoundFx
 
 var buttons:Array = []
 var ix:int = 0
 var count:int = 0
 var visible:bool = true setget set_visible
+var size:Vector2
 
 signal quit_level
 signal resume_level
@@ -24,6 +26,7 @@ func _ready() -> void:
 	update_buttons()
 	setScore(0)
 	visible=false
+	size = OS.get_screen_size()
 
 func _physics_process(_delta: float) -> void:
 	if not pauseMenu.visible or not visible:
@@ -59,7 +62,7 @@ func set_visible(value:bool)->void:
 		update_buttons()
 
 func update_buttons() -> void:
-	sfx.play(sfx.sound.box_moved)
+	sfx.effect(Consts.fx.box_moved)
 	for button in buttons:
 		(button as Button).disabled=true
 	(buttons[ix] as Button).disabled=false
@@ -70,4 +73,17 @@ func setScore(value:int):
 func setChallenge(value:String):
 	challenge.text=value
 
-
+"""
+Adjusts MARGIN to account for some TVs with cropping issues.
+"""
+func tv_zoom(value:float):
+	print("tv_zoom: "+str(value))
+	value = 1 - value
+	if control == null or not is_instance_valid(control):
+		return
+	var x: = size.x*value/2
+	var y: = size.y*value/2
+	control.margin_bottom=-y
+	control.margin_left=x
+	control.margin_right=-x
+	control.margin_top=y

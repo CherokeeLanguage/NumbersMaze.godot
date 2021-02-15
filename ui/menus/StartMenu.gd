@@ -23,6 +23,8 @@ func _ready():
 	buttons.append($VBoxContainer/Quit)
 
 	count = buttons.size()
+	
+	container = $VBoxContainer
 
 func _physics_process(_delta):
 	if Input.is_action_just_pressed("up"):
@@ -55,7 +57,7 @@ func _physics_process(_delta):
 				emit_signal("quit")
 	
 func update_buttons() -> void:
-	sfx.play(sfx.sound.box_moved)
+	sfx()
 	for button in buttons:
 		(button as Button).disabled=true
 	(buttons[ix] as Button).disabled=false

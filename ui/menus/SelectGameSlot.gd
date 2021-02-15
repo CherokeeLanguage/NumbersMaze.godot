@@ -13,6 +13,7 @@ signal start_level(slot, level, score)
 func _ready():
 	load_slots_into_buttons()
 	update_buttons()
+	container = $VBoxContainer
 	
 func slot_number()->int:
 	return col*5 + row + 1
@@ -46,7 +47,7 @@ func button_is_new_game(ix:int):
 	btn.text="Empty Game Slot"
 	
 func update_buttons()->void:
-	sfx.play(sfx.sound.box_moved)
+	sfx()
 	var ix=col*5+row+1
 	for btn in left.get_children():
 		if btn is Button:

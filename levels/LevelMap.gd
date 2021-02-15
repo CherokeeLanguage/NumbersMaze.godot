@@ -230,6 +230,5 @@ func next_level():
 	emit_signal("next_level", level)
 	levelDoneAudio.stop()
 
-
 func _on_LevelDone_finished() -> void:
 	levelDoneAudio.play()

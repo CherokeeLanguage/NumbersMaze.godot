@@ -27,6 +27,7 @@ collision_mask = 0
 
 [node name="LevelDone" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
+bus = "Fx"
 
 [connection signal="timeout" from="AudioRepeatTimer" to="." method="_on_AudioRepeatTimer_timeout"]
 [connection signal="finished" from="LevelDone" to="." method="_on_LevelDone_finished"]

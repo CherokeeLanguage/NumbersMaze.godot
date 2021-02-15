@@ -1,4 +1,6 @@
-#!/bin/bash
+#!/bin/bash -i
 
-~/android-sdks/platform-tools/adb connect 192.168.1.176:5555
-
+adb disconnect
+sleep 1
+adb connect 192.168.1.176:5555
+sleep 1

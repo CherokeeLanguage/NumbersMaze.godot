@@ -2,10 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.cherokeelessons.maze"
-    android:versionCode="200"
-    android:versionName="2.00"
+    android:versionCode="202"
+    android:versionName="2.02"
     android:installLocation="auto"
-    android:appCategory="game"
      >
 
      <uses-feature
@@ -39,7 +38,7 @@
     <!-- Any tag in this line after android:icon will be erased when doing custom builds. -->
     <!-- If you want to add tags manually, do before it. -->
     <!-- WARNING: This should stay on a single line until the parsing code is improved. See GH-32414. -->
-    <application android:allowBackup="false" android:banner="@mipmap/ic_banner" android:label="@string/godot_project_name_string" android:roundIcon="@mipmap/ic_launcher_round" tools:ignore="GoogleAppIndexingWarning" tools:targetApi="lollipop">
+    <application android:appCategory="game" android:allowBackup="false" android:banner="@mipmap/ic_banner" android:label="@string/godot_project_name_string" android:roundIcon="@mipmap/ic_launcher_round" tools:ignore="GoogleAppIndexingWarning" tools:targetApi="lollipop">
 
         <!-- The following metadata values are replaced when Godot exports, modifying them here has no effect. -->
         <!-- Do these changes in the export preset. Adding new ones is fine. -->
@@ -68,9 +67,6 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
             </intent-filter>
         </activity>

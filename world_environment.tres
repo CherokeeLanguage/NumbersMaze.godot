@@ -1,0 +1,5 @@
+[gd_resource type="Environment" format=2]
+
+[resource]
+background_canvas_max_layer = 10
+glow_bicubic_upscale = true

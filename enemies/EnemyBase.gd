@@ -8,6 +8,7 @@ onready var sprite = $Sprite
 onready var collisionShape = $CollisionShape2D
 onready var animationPlayer = $AnimationPlayer
 onready var timer = $Timer
+onready var sfx = $SoundFx
 
 var rays:Array = []
 var world_path:PoolVector2Array = PoolVector2Array() setget set_world_path
@@ -58,9 +59,7 @@ func setRayRotations()->void:
 
 func set_world_path(value:PoolVector2Array):
 	world_path=value
-	print("New path: ")
-	for way_point in world_path:
-		print(" - "+str(way_point))
+	print(self.name + " new path received "+str(value.size()))
 
 func _animation_finished(_anim_name: String) -> void:
 	queue_free()

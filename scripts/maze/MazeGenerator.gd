@@ -59,12 +59,10 @@ func dump()->void:
 func generate()->void:
 	
 # warning-ignore:integer_division
-	width = level + 7;
-	height = level + 3;
+	width = level + 7
 	if (width > 16):
-		width = 16 + level / 16;
-	if (height > 9):
-		height = 9 + level / 9;
+		width = 16 + level / 9
+	height = width * 9 / 16
 	
 	width=min(width, 50)
 	height=min(height, 50)

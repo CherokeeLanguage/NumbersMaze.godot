@@ -9,6 +9,9 @@ onready var channel:AudioStreamPlayer = $Channel_1
 var ix: = 0
 var count:int
 
+func _ready() -> void:
+	channel.bus="Music"
+
 func play():
 	count = list.size()
 	if (count<1):

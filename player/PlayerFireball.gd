@@ -5,8 +5,8 @@ class_name PlayerFireballNode
 var DieExplosion:PackedScene = PackedScenes.DieExplosion
 
 onready var animationPlayer:AnimationPlayer = $AnimationPlayer
-onready var audioSwoosh:AudioStreamPlayer = $Audio_1
-onready var audioPoof:AudioStreamPlayer = $Audio_2
+onready var audioSwoosh:AudioStreamPlayer2D = $Audio_1
+onready var audioPoof:AudioStreamPlayer2D = $Audio_2
 
 signal finished
 
@@ -35,7 +35,7 @@ func _on_PlayerFireball_body_entered(body: Node) -> void:
 	if Utils.is_type(body, "Player"):
 		return
 	if body is DieNode:
-		body.explode(true)
+		(body as DieNode).explode(true)
 		queue_free()
 		return
 	transition_to_explode()

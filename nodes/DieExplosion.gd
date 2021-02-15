@@ -12,7 +12,7 @@ func _ready() -> void:
 	pm.friction=0
 	pm.rough=false
 	
-	self.physics_material_override = pm
+	physics_material_override = pm
 	
 func finished()->void:
 	if is_in_group(Consts.PLAYER_EXPLOSION):
@@ -25,4 +25,4 @@ func setCollisionDisable(value:bool) -> void:
 
 func _on_DieExplosion_body_entered(body: Node) -> void:
 	if Utils.is_type(body, "DieNode"):
-		body.explode()
+		body.call("explode")

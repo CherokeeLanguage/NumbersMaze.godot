@@ -16,3 +16,13 @@ const AboutMenu:PackedScene = preload("res://ui/menus/AboutMenu.tscn")
 const PlayerFireball:PackedScene = preload("res://player/PlayerFireball.tscn")
 const DieExplosion:PackedScene = preload("res://nodes/DieExplosion.tscn")
 
+const DieNode:PackedScene =  preload("res://nodes/DieNode.tscn")
+
+const LevelMap:PackedScene = preload("res://levels/LevelMap.tscn")
+const Player:PackedScene = preload("res://player/Player.tscn")
+
+const FloorPortal:PackedScene = preload("res://nodes/FloorPortal.tscn")
+const WarpInAreaDetect:PackedScene = preload("res://nodes/WarpInAreaDetect.tscn")
+const EnemySparklingFireball:PackedScene = preload("res://enemies/EnemySparklingFireball.tscn")
+
+const SoundFx:PackedScene = preload("res://audio/SoundFx.tscn")

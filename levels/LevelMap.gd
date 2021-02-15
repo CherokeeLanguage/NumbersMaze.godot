@@ -3,11 +3,11 @@ extends Node2D
 class_name LevelMap
 
 const path="res://audio/music"
-const die_ps:PackedScene = preload("res://nodes/DieNode.tscn")
-const portal_ps:PackedScene = preload("res://nodes/FloorPortal.tscn")
-const warpin_ps:PackedScene = preload("res://nodes/WarpInAreaDetect.tscn")
 
-const EnemySparklingFireball:PackedScene = preload("res://enemies/EnemySparklingFireball.tscn")
+onready var die_ps:PackedScene = PackedScenes.DieNode
+onready var portal_ps:PackedScene = PackedScenes.FloorPortal
+onready var warpin_ps:PackedScene = PackedScenes.WarpInAreaDetect
+onready var EnemySparklingFireball:PackedScene = PackedScenes.EnemySparklingFireball
 
 onready var map:TileMap = $TileMap
 onready var backdrop:TextureRect = $Backdrop
@@ -52,14 +52,32 @@ func _physics_process(_delta: float) -> void:
 		else:
 			dieTracker.remaining+=inChain
 			var node:EnemySparklingFireball = EnemySparklingFireball.instance()
+			node.hit_points=level/2+1
 			var p = randomPortal() #mg.portals[randi()%mg.portals.size()]# randomPortal()
 			node.global_position=p #map.map_to_world(p)
 			itemsGroup.add_child(node)
-			var d = randomPortal() #mg.portals[randi()%mg.portals.size()]# randomPortal()
-			node.world_path=pathFinder.get_world_path(map, p, d)
+			#var d = randomPortal() #mg.portals[randi()%mg.portals.size()]# randomPortal()
+			#node.world_path=pathFinder.get_world_path(map, p, d)
+# warning-ignore:return_value_discarded
+			node.connect("need_new_path", self, "portal_path_set")
+			portal_path_set(node)
 
 	if dieTracker.isDieTime(portals.size()):
 		addDie()
+		
+func portal_path_set(node:Node2D)->void:
+	if node == null:
+		print("World path for node: NULL")
+		return
+	if not "world_path" in node:
+		return
+	var d = randomPortal()
+	while d == node.global_position:
+		d = randomPortal()
+	var path: = pathFinder.get_world_path(map, node.global_position, d)
+	print("Path: "+str(path[0])+" ... "+str(path[-1]))
+	node.call("set_world_path", path)
+	return
 
 func addDie()->void:
 	var portal: = randomPortal()
@@ -202,7 +220,7 @@ func _on_AudioRepeatTimer_timeout() -> void:
 
 func placeExitPortal():
 	var random_position:=randomPortal()
-	var portal:FloorPortal=portal_ps.instance()
+	var portal:Node2D=portal_ps.instance()
 	itemsGroup.add_child(portal)
 	portal.global_position=random_position
 # warning-ignore:return_value_discarded

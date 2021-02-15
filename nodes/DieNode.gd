@@ -7,6 +7,7 @@ var ExplosionNode:PackedScene = PackedScenes.DieExplosion
 onready var sprite:Sprite = $Sprite
 onready var collider:CollisionShape2D = $CollisionShape2D
 onready var dectectorsNode:Node2D = $detectors
+onready var sfx: = $SoundFx
 
 var dectectors:Array = []
 
@@ -23,7 +24,7 @@ func setJoint(_value:DampedSpringJoint2D)->void:
 	if (_value == null):
 		sprite.modulate.a=1
 	else:
-		sprite.modulate.a=0.5
+		sprite.modulate.a=0.4
 	joint=_value
 	
 func _ready() -> void:
@@ -80,6 +81,19 @@ func set_die_face()->void:
 func setValue(_value:int)->void:
 	value = _value
 	set_die_face()
+	set_physics_attributes()
+	
+func set_physics_attributes()->void:
+	var pm: = PhysicsMaterial.new()
+	pm.friction = 1
+	pm.rough = false
+	pm.bounce = 0.0001
+	pm.absorbent = false
+	physics_material_override=pm
+
+	linear_damp = 1
+	mass = 0.5
+	gravity_scale = 1
 	
 func getValue()->int:
 	return value
@@ -87,21 +101,21 @@ func getValue()->int:
 func _on_body_entered(body: Node) -> void:
 	if Utils.is_type(body, "PlayerFireballNode"):
 		explode(true)
+		return
 		
 	if body is DieExplosionNode:
 		explode(body.is_in_group(Consts.PLAYER_EXPLOSION))
+		return
 		
 	if body is TileMap or Utils.is_type(body, "DieNode"):
-		if Utils.is_node_visible(self):
-			sfx.play(sfx.sound.plink)
+		sfx.effect(Consts.fx.plink)
 		return
 
 func explode(player_fireball:bool = false)->void:
 	mutex.lock()
 	if value==0:
 		return
-	if Utils.is_node_visible(self):
-		sfx.play(sfx.sound.explode)
+	sfx.effect(Consts.fx.explode, true)
 	var rng:RandomNumberGenerator = RandomNumberGenerator.new()
 	rng.randomize()
 	for _ix in range(value+1):
@@ -110,7 +124,7 @@ func explode(player_fireball:bool = false)->void:
 		var direction:Vector2 = Vector2(x, y).normalized()
 		var explosion:DieExplosionNode = ExplosionNode.instance()
 		explosion.global_position=global_position
-		explosion.apply_central_impulse(direction*rng.randf_range(100, 150))
+		explosion.apply_central_impulse(direction*rng.randf_range(100, 200))
 		if (player_fireball):
 			explosion.add_to_group(Consts.PLAYER_EXPLOSION)
 			dieTracker.chained_explosion_count+=1

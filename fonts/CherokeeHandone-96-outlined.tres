@@ -3,8 +3,11 @@
 [ext_resource path="res://fonts/data/CherokeeHandone-data.tres" type="DynamicFontData" id=1]
 
 [resource]
-size = 128
+size = 96
+outline_size = 4
 outline_color = Color( 0, 0, 0, 1 )
 use_mipmaps = true
 use_filter = true
+extra_spacing_top = -10
+extra_spacing_bottom = -18
 font_data = ExtResource( 1 )

@@ -30,3 +30,22 @@ static func shuffle(rng:RandomNumberGenerator, list:Array)->Array:
 		newList.append(list[ix])
 		list.remove(ix)
 	return newList
+	
+static func getAudioBusId(name:String)->int:
+	return AudioServer.get_bus_index(name)
+	
+static func setAudioBusVolume(busId:int, volume:int)->void:
+	var volume_db:float = linear2db(float(clamp(volume, 0, 100))/100.0)
+	AudioServer.set_bus_volume_db(busId, volume_db)
+
+static func setAudioBusMute(busId:int, mute:bool)->void:
+	AudioServer.set_bus_mute(busId, mute)
+
+static func setMusicVolume(volume:int)->void:
+	setAudioBusVolume(getAudioBusId("Music"), volume)
+
+static func setFxVolume(volume:int)->void:
+	setAudioBusVolume(getAudioBusId("Fx"), volume)
+
+static func setMasterVolume(volume:int)->void:
+	setAudioBusVolume(getAudioBusId("Master"), volume)

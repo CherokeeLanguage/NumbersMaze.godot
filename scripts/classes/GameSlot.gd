@@ -7,8 +7,9 @@ export var folder:String = "user://"
 var slot:int = 0
 var score:int = 0
 var level:int = 1
+var lives:int = 5
 
-var keys:Array = ["slot", "score", "level"]
+var keys:Array = ["slot", "score", "level", "lives"]
 
 func _init(_slot:int) -> void:
 	slot=_slot
@@ -31,10 +32,12 @@ func save()->void:
 	
 func load()->void:
 	var slotLoading = slot
-	level=1
 	score=0
+	level=1
+	lives=5
 	var f: = File.new()	
 	if not f.file_exists(file()):
+		save()
 		return
 # warning-ignore:return_value_discarded
 	f.open(file(), File.READ)
@@ -65,6 +68,7 @@ func _dictionary() -> Dictionary:
 
 func dump()->void:
 	print("slot: "+str(slot))
-	print("level: "+str(level))
 	print("score: "+str(score))
+	print("level: "+str(level))
+	print("lives: "+str(lives))
 

@@ -4,10 +4,10 @@ extends Node
 
 class_name WorldNode
 
-const die_ps:PackedScene = preload("res://nodes/DieNode.tscn")
-const levelMap_ps:PackedScene = preload("res://levels/LevelMap.tscn")
-const player_ps:PackedScene = preload("res://player/Player.tscn")
-const FadeOutIn:PackedScene = preload("res://nodes/FadeOutIn.tscn")
+onready var die_ps:PackedScene = PackedScenes.DieNode
+onready var levelMap_ps:PackedScene = PackedScenes.LevelMap
+onready var player_ps:PackedScene = PackedScenes.Player
+onready var FadeOutIn:PackedScene = PackedScenes.FadeOutIn
 
 onready var map:LevelMap = $LevelMap
 onready var player:PlayerNode = $Player

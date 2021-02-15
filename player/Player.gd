@@ -4,7 +4,7 @@ class_name PlayerNode
 
 enum FACING { NORTH, EAST, SOUTH, WEST}
 
-const FireballNode:PackedScene = PackedScenes.PlayerFireball
+onready var FireballNode:PackedScene = PackedScenes.PlayerFireball
 
 onready var animation:AnimationPlayer = $AnimationPlayer
 onready var cameraFollow:RemoteTransform2D = $CameraFollow
@@ -12,6 +12,7 @@ onready var raysNode:Node2D = $Rays
 onready var fbTimer:Timer=$FireBallTimer
 onready var collider:CollisionShape2D = $CollisionShape2D
 onready var sprite:Sprite = $Sprite
+onready var sfx: = $SoundFx
 
 var facing = FACING.EAST
 var idle:bool = false
@@ -94,19 +95,19 @@ func fireball_check():
 				fireball.global_position.y += 32
 			FACING.EAST:
 				fireball.global_position.x += 8
-				fireball.global_position.y += 8
+				fireball.global_position.y += 16
 			FACING.WEST:
 				fireball.global_position.x -= 8
-				fireball.global_position.y += 8
+				fireball.global_position.y += 16
 		
 		fireball_enabled=false
 		fbTimer.stop()
-		fbTimer.start(0.35)	
+		fbTimer.start(0.3)	
 
 func drop_check():
 	if Input.is_action_just_pressed("btn_y"):
 		if not items.empty():
-			sfx.play(sfx.sound.drop_it)
+			sfx.effect(Consts.fx.drop_it)
 			for item in items:
 				if item is DieNode:
 					if is_instance_valid(item.joint):
@@ -127,17 +128,21 @@ func pickup_check()->void:
 					var item_distance:float = item.global_position.distance_to(self.global_position)
 					if item_distance < distance or distance<0:
 						theItem = item
+						distance = item_distance
 
 		if theItem!=null:
+			if items.size()>=4:
+				sfx.effect(Consts.fx.growl)
+				return
 			var joint:DampedSpringJoint2D = DampedSpringJoint2D.new()
 			add_child(joint)
 			joint.stiffness=20
-			joint.rest_length=8
-			joint.length=16
+			joint.rest_length= float(items.size())/2.0
+			joint.length=1.0 + float(items.size())/2.0
 			joint.node_a = get_path()
 			joint.node_b = theItem.get_path()
 			theItem.joint = joint
-			sfx.play(sfx.sound.pick_up)
+			sfx.effect(Consts.fx.pick_up)
 			items.append(theItem)
 			
 func move_check(delta:float)->void:
@@ -151,7 +156,7 @@ func move_check(delta:float)->void:
 	if Input.is_action_pressed("down"):
 		impulse.y=1
 	if impulse.length()>0:
-		apply_central_impulse(impulse.normalized()*4000*delta)
+		apply_central_impulse(impulse.normalized()*6000*delta)
 		var a = wrapf(rad2deg(impulse.angle()), 0, 360)
 		
 		"""

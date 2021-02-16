@@ -1,5 +1,6 @@
-=== CHANGELOG ===
+--- CHANGELOG ---
 
+ec2b689 (Functioning about scroller with actual info, 2021-02-16)
 071c0f9 (add changelog for display by app, 2021-02-16)
 a9e5375 (tv zoom. initial work on scrolling about screen., 2021-02-16)
 f6b9cb1 (Knock extra holes into maze walls for larger mazes., 2021-02-16)

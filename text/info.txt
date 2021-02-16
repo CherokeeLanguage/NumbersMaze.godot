@@ -1,6 +1,6 @@
 --- CHEROKEE NUMBERS MAZE ---
 
-This project was first started in 2012.
+This project was first started in 2013.
 
 It has languished in obscurity.
 

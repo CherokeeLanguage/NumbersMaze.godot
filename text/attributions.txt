@@ -2,12 +2,13 @@
 
 Avatar by @dbhvk [https://twitter.com/dbhvk]
 Onscreen Controls by Kenney Vleugels (www.kenney.nl)
-Godot Engine Logo - ©2017 Andrea Calabró
-Dice - ©2021 Michael Conrad
+Godot Engine Logo - (c)2017 Andrea Calabró
+Dice - (c)2021 Michael Conrad
+All other graphics CC0
 
 --- Fonts ---
 
-Cherokee Handone - ©2012 Joseph Erb
+Cherokee Handone - (c)2012 Joseph Erb
 
 --- MUSIC ---
 
@@ -27,8 +28,9 @@ Spatial Cafeine Dub (ft. Volfoniq VS Perlss Dj) - volfoniq
 
 --- NUMBERS AUDIO ---
 
-Spoken numbers - ©2013 Michael Conrad 
+Spoken numbers - (c)2013 Michael Conrad 
 
 --- SOUND FX ---
 
 Fireball - Julien Matthey
+All other sound fx audio CC0

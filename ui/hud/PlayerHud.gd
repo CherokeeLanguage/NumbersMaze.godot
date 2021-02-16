@@ -8,6 +8,7 @@ onready var misc:Label = $Control/VBoxContainer/Header/Misc
 onready var pauseMenu:Control = $Control/Paused
 onready var control:Control = $Control
 onready var sfx: = $SoundFx
+onready var colorRect:ColorRect = $ColorRect
 
 var buttons:Array = []
 var ix:int = 0
@@ -19,6 +20,7 @@ signal quit_level
 signal resume_level
 
 func _ready() -> void:
+	colorRect.visible=false
 	pauseMenu.visible=false
 	buttons.append($Control/Paused/PausedMenu/Resume)
 	buttons.append($Control/Paused/PausedMenu/Quit)

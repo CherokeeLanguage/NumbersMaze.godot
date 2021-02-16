@@ -18,7 +18,7 @@ func _physics_process(delta: float) -> void:
 		if global_position.distance_to(world_path[0])>32:
 			var way_point:Vector2 = Vector2(world_path[0].x, world_path[0].y)
 			var rad: = way_point.angle_to_point(global_position)
-			var impulse: = Vector2.RIGHT.rotated(rad).normalized() * 1000
+			var impulse: = Vector2.RIGHT.rotated(rad).normalized() * 1000 * impulse_scale
 			apply_central_impulse(impulse*delta)
 		else:
 			world_path.remove(0)

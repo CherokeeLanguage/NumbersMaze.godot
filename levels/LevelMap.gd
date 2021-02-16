@@ -16,6 +16,8 @@ onready var repeatTimer:Timer = $AudioRepeatTimer
 onready var itemsGroup = $ItemsGroup
 onready var levelDoneAudio:AudioStreamPlayer = $LevelDone
 
+onready var enemyTimer:Timer = $EnemyTimer
+
 var level:int = 1
 var mg:MazeGenerator
 var portals:Array
@@ -26,6 +28,7 @@ var availableTracks:Array=[]
 var challenges:Challenges
 var currentChallenge:int=0 setget setCurrentChallenge
 var pathFinder:PathFinder
+var player:PlayerNode
 
 signal challenge_changed(number)
 signal score_add(number)
@@ -51,27 +54,22 @@ func _physics_process(_delta: float) -> void:
 			emit_signal("score_add", inChainCount*inChain)
 		else:
 			dieTracker.remaining+=inChain
-			var node:EnemySparklingFireball = EnemySparklingFireball.instance()
-			node.hit_points=level/2+1
-			var p = randomPortal() #mg.portals[randi()%mg.portals.size()]# randomPortal()
-			node.global_position=p #map.map_to_world(p)
-			itemsGroup.add_child(node)
-			#var d = randomPortal() #mg.portals[randi()%mg.portals.size()]# randomPortal()
-			#node.world_path=pathFinder.get_world_path(map, p, d)
-# warning-ignore:return_value_discarded
-			node.connect("need_new_path", self, "portal_path_set")
-			portal_path_set(node)
+			add_enemy(true)
 
 	if dieTracker.isDieTime(portals.size()):
 		addDie()
 		
-func portal_path_set(node:Node2D)->void:
+func portal_path_set(node:Node2D, chase_player:bool=false)->void:
 	if node == null:
 		print("World path for node: NULL")
 		return
 	if not "world_path" in node:
 		return
-	var d = randomPortal()
+	var d:Vector2
+	if chase_player:
+		d = player.globalPosition
+	else:
+		d = randomPortal()
 	while d == node.global_position:
 		d = randomPortal()
 	var path: = pathFinder.get_world_path(map, node.global_position, d)
@@ -232,3 +230,19 @@ func next_level():
 
 func _on_LevelDone_finished() -> void:
 	levelDoneAudio.play()
+
+func add_enemy(chase_player:bool=false)->void:
+	var node:EnemySparklingFireball = EnemySparklingFireball.instance()
+	node.hit_points=level/2+1
+	node.impulse_scale=level/(level+10.0)*5+(1.0-1.0/(1.0+10.0))*5-4
+	var p:Vector2 = randomPortal()
+	node.global_position=p
+	itemsGroup.add_child(node)
+	# warning-ignore:return_value_discarded
+	node.connect("need_new_path", self, "portal_path_set")
+	portal_path_set(node, chase_player)
+
+func _on_EnemyTimer_timeout() -> void:
+	if rng.randi()%9999 < min(level, 2000):
+		add_enemy()
+	enemyTimer.start(4)

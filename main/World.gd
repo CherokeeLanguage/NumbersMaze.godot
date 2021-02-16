@@ -86,7 +86,9 @@ func __load_level1()->void:
 	
 	player.reset_stats()	
 	var p:Vector2=map.randomPortal()	
-	player.setGlobalPosition(p)	
+	player.setGlobalPosition(p)
+	
+	map.player=player
 	
 func __load_level2()->void:
 	camera.smoothing_enabled=true

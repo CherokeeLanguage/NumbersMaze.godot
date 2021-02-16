@@ -2,7 +2,7 @@
 
 [ext_resource path="res://player/PlayerFireball.gd" type="Script" id=1]
 [ext_resource path="res://graphics/fireballs/fireball sheet.png" type="Texture" id=2]
-[ext_resource path="res://audio/effects/fireball2.wav" type="AudioStream" id=3]
+[ext_resource path="res://audio/effects/fireball2.mp3" type="AudioStream" id=3]
 [ext_resource path="res://audio/effects/fireball-ended.ogg" type="AudioStream" id=4]
 [ext_resource path="res://audio/SoundFx.gd" type="Script" id=5]
 
@@ -124,7 +124,7 @@ tracks/0/enabled = true
 tracks/0/keys = {
 "times": PoolRealArray( 0, 0.0666667, 0.133333, 0.2, 0.266667, 0.333333, 0.4, 0.466667, 0.533334, 0.6 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 1,
+"update": 0,
 "values": [ 7, 6, 5, 4, 3, 7, 6, 5, 4, 3 ]
 }
 tracks/1/type = "method"
@@ -134,12 +134,9 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.666667 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0.666667 ),
+"transitions": PoolRealArray( 1 ),
 "values": [ {
-"args": [  ],
-"method": "_playWoosh"
-}, {
 "args": [  ],
 "method": "transition_to_explode"
 } ]

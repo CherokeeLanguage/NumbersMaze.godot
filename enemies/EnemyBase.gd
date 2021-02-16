@@ -14,6 +14,8 @@ var rays:Array = []
 var world_path:PoolVector2Array = PoolVector2Array() setget set_world_path
 var mutex:Mutex=Mutex.new()
 
+export var impulse_scale:float=1.0
+
 func _ready() -> void:
 	setRayRotations()
 

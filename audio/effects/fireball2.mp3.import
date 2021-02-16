@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/fireball2.mp3-46c6142401f8fc94e24f72bbe7ad099a.mp3str"
+
+[deps]
+
+source_file="res://audio/effects/fireball2.mp3"
+dest_files=[ "res://.import/fireball2.mp3-46c6142401f8fc94e24f72bbe7ad099a.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

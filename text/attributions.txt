@@ -1,0 +1,34 @@
+--- GRAPHICS ---
+
+Avatar by @dbhvk [https://twitter.com/dbhvk]
+Onscreen Controls by Kenney Vleugels (www.kenney.nl)
+Godot Engine Logo - ©2017 Andrea Calabró
+Dice - ©2021 Michael Conrad
+
+--- Fonts ---
+
+Cherokee Handone - ©2012 Joseph Erb
+
+--- MUSIC ---
+
+Pulse (George Ellinas remix) - George Ellinas [Start Menu]
+tokyoStreet - airtone
+No MÃ¡s Secretos (ft. Mana Junkie) - Alex Beroza
+No MÃ¡s Secretos (ft. Mana Junkie) 2 - Alex Beroza
+ditto, ditto! (ft. ditt ditto, BT) - DoKashiteru
+Yiourgh (ft. Coblat) - DoKashiteru
+duncan_beattie_-_sevenhundredbeats.ogg
+Blank Rainbow (ft. ERH, acclivity) - Pitx
+Over Here - Psykick
+Never Heard a Rhyme Like This Before - scottaltham
+Intergalactic Journal - spinmeister
+Techo Twange - spinmeister
+Spatial Cafeine Dub (ft. Volfoniq VS Perlss Dj) - volfoniq
+
+--- NUMBERS AUDIO ---
+
+Spoken numbers - ©2013 Michael Conrad 
+
+--- SOUND FX ---
+
+Fireball - Julien Matthey

@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://fonts/CherokeeHandone-64.tres" type="DynamicFont" id=1]
+[ext_resource path="res://fonts/CherokeeHandone-48.tres" type="DynamicFont" id=2]
 [ext_resource path="res://ui/menus/AboutMenu.gd" type="Script" id=3]
 [ext_resource path="res://graphics/on-screen-controls/shadedDark/shadedDark26.png" type="Texture" id=4]
 [ext_resource path="res://graphics/on-screen-controls/shadedDark/shadedDark45.png" type="Texture" id=5]
@@ -37,8 +38,8 @@ __meta__ = {
 }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer" index="0"]
-margin_right = 1872.0
-margin_bottom = 1545.0
+margin_right = 1920.0
+margin_bottom = 975.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 __meta__ = {
@@ -46,15 +47,12 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="VBoxContainer/ScrollContainer/VBoxContainer" index="0"]
-margin_right = 1872.0
-margin_bottom = 1545.0
+margin_right = 1920.0
+margin_bottom = 59.0
 size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = " sdfsfsl fj lsdfj l sdjfs ljfls jflsjlj sdlfjs lf jsdl sdf sfslf jlsdfj l sdjfs ljfls jflsjlj sdlfj slf jsdl sljflsjflsjljsdlfjslfjsdl  sljflsjflsjljsdlfjslfjsdl sljflsjflsjljsdlfjslfjsdl sljflsjflsjljsdlfjslfjsdl sljflsjflsjljsdlfjslfjsdl sljflsjflsjljsdlfjslfjsdl
-sljflsjflsjljsdlfjslfjsdl sdfsfslfjlsdfjlsdjf sljflsjflsjljsdlfjslfjsdl  sljflsjflsjljsdlfjslfjsdl  sljflsjflsjljsdlfjslfjsdl sljflsjflsjljsdlfjslfjsdl sljflsjflsjljsdlfjslfjsdl sljflsjflsjljsdlfjslfjsdl
-sljflsjflsjljsdlfjslfjsdl  sdfsfsl fj lsdfj l sdjfs ljfls jflsjlj sdlfjs lf jsdl sdf sfslf jlsdfj l sdjfs ljfls jflsjlj sdlfj slf jsdl sljflsjflsjljsdlfjslfjsdl  sljflsjflsjljsdlfjslfjsdl sljflsjflsjljsdlfjslfjsdl sljflsjflsjljsdlfjslfjsdl sljflsjflsjljsdlfjslfjsdl sljflsjflsjljsdlfjslfjsdl
-sljflsjflsjljsdlfjslfjsdl sdfsfslfjlsdfjlsdjf sljflsjflsjljsdlfjslfjsdl  sljflsjflsjljsdlfjslfjsdl  sljflsjflsjljsdlfjslfjsdl sljflsjflsjljsdlfjslfjsdl sljflsjflsjljsdlfjslfjsdl sljflsjflsjljsdlfjslfjsdl
-sljflsjflsjljsdlfjslfjsdl "
+align = 1
 autowrap = true
 __meta__ = {
 "_edit_use_anchors_": false

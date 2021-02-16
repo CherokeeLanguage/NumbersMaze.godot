@@ -17,4 +17,8 @@ echo
 echo "--- Previous Repo: CherokeeNumbersMaze ---"
 echo
 cat text/changelog.prev1.txt
+echo
+echo "--- Previous Repo: CherokeeNumbersMaze.OLD ---"
+echo
+cat text/changelog.prev0.txt
 ) > text/changelog.txt

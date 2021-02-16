@@ -4,6 +4,7 @@ class_name AboutMenu
 
 onready var scroller:ScrollContainer = $VBoxContainer/ScrollContainer
 onready var text_box:Label = $VBoxContainer/ScrollContainer/VBoxContainer/Label
+onready var music:Music = $Music
 
 var position:float = 0
 
@@ -11,6 +12,9 @@ func _ready() -> void:
 	container = $VBoxContainer
 	var text: = AboutTextClass.new()
 	text_box.text=text.text
+	
+	music.list=["res://audio/music/DoKashiteru_-_Yiourgh.ogg"]
+	music.play()
 
 func _physics_process(delta):
 	if Input.is_action_pressed("up"):

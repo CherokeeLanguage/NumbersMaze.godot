@@ -13,6 +13,7 @@ onready var master_volume:ProgressBar = $VBox/HBox_2/ProgressBar
 onready var fx_volume:ProgressBar = $VBox/HBox_3/ProgressBar
 onready var music_volume:ProgressBar = $VBox/HBox_4/ProgressBar
 onready var tv_zoom:ProgressBar = $VBox/HBox_1/ProgressBar
+onready var tv_box:HBoxContainer = $VBox/HBox_1
 
 var ix:int = 0
 var count:int = 0
@@ -28,6 +29,8 @@ func _ready() -> void:
 	update_buttons()
 	music.list=["res://audio/music/DoKashiteru_-_Yiourgh.ogg"]
 	music.play()
+	
+	tv_box.visible = OS.get_name().begins_with("Android")
 	
 func _physics_process(delta):
 	if Input.is_action_just_pressed("left"):

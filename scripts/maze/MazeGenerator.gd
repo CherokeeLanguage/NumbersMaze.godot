@@ -2,6 +2,8 @@ extends Object
 
 class_name MazeGenerator
 
+const MAZE_HOLE_MODULO:int = 40
+
 var rseed:int
 var width:int
 var height:int
@@ -165,6 +167,24 @@ func generate()->void:
 			var cell: = (maze[x][y] as MazeCell)
 			if cell.isPortal():
 				portals.append(Vector2(x, y))
+				
+	for x in range(1, width-1):
+		for y in range(1, height-1):
+			var cell: = (maze[x][y] as MazeCell)
+			if not cell.isPortal():
+				if cell.wall.n and rng.randi() % MAZE_HOLE_MODULO == 0:
+					cell.wall.n=false
+					(maze[x][y-1] as MazeCell).wall.s=false
+				if cell.wall.s and rng.randi() % MAZE_HOLE_MODULO == 0:
+					cell.wall.s=false
+					(maze[x][y+1] as MazeCell).wall.n=false
+				if cell.wall.e and rng.randi() % MAZE_HOLE_MODULO == 0:
+					cell.wall.e=false
+					(maze[x+1][y] as MazeCell).wall.w=false
+				if cell.wall.w and rng.randi() % MAZE_HOLE_MODULO == 0:
+					cell.wall.w=false
+					(maze[x-1][y] as MazeCell).wall.e=false
+
 			
 class MazeCell:
 	var isSolid:bool = true

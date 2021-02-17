@@ -43,7 +43,6 @@ func _ready():
 	
 	print()
 	print("=== PLATFORM: "+OS.get_model_name()+" ["+OS.get_name()+"]")
-	var arguments = {}
 	for argument in OS.get_cmdline_args():
 		if argument.begins_with("--tv="):
 			if argument == "--tv=true":

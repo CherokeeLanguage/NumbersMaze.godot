@@ -30,11 +30,20 @@
 
 package com.godot.game;
 
+import android.app.UiModeManager;
+import android.content.Context;
+import android.content.res.Configuration;
 import android.os.Bundle;
+import android.util.Log;
+
+import androidx.annotation.NonNull;
 
 import com.cherokeelessons.maze.R;
 
 import org.godotengine.godot.FullScreenGodotApp;
+import org.godotengine.godot.Godot;
+
+import java.util.Arrays;
 
 /**
  * Template activity for Godot Android custom builds.
@@ -42,9 +51,44 @@ import org.godotengine.godot.FullScreenGodotApp;
  */
 public class GodotApp extends FullScreenGodotApp {
 
+	protected static final String TAG = GodotApp.class.getSimpleName();
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		setTheme(R.style.GodotAppMainTheme);
 		super.onCreate(savedInstanceState);
+	}
+
+	@NonNull
+	@Override
+	protected Godot initGodotInstance() {
+		final Godot godot = new MyGodot();
+		return godot;
+	}
+
+	public static class MyGodot extends Godot {
+		@Override
+		protected String[] getCommandLine() {
+			String[] args = super.getCommandLine();
+			args = Arrays.copyOf(args, args.length+1);
+			args[args.length-1] = "--tv="+ isTv();
+			return args;
+		}
+
+		protected boolean isTv() {
+			if (uiMode() == Configuration.UI_MODE_TYPE_TELEVISION) {
+				Log.i(TAG, "Running on a TV Device: true");
+				return true;
+			} else {
+				Log.i(TAG, "Running on a TV Device: false");
+				return false;
+			}
+		}
+
+		protected int uiMode() {
+			Context context = this.getContext();// getApplicationContext();
+			UiModeManager uiModeManager = (UiModeManager) context.getSystemService(Context.UI_MODE_SERVICE);
+			return uiModeManager.getCurrentModeType();
+		}
 	}
 }

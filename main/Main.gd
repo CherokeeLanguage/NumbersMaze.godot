@@ -18,6 +18,8 @@ onready var playerHud:PlayerHud = $PlayerHud
 
 var game_settings:GameSettings
 
+var is_tv:bool = false
+
 func _notification(what):
 	if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST:
 		event_select()
@@ -38,6 +40,19 @@ func event_select():
 	Input.parse_input_event(ev)
 
 func _ready():
+	
+	print()
+	print("=== PLATFORM: "+OS.get_model_name()+" ["+OS.get_name()+"]")
+	var arguments = {}
+	for argument in OS.get_cmdline_args():
+		if argument.begins_with("--tv="):
+			if argument == "--tv=true":
+				is_tv = true
+			else:
+				is_tv = false
+	print("--- TV: "+str(is_tv))	
+	print()
+	
 	game_settings = GameSettings.new()
 	
 	Utils.setFxVolume(game_settings.volume_fx)

@@ -49,6 +49,7 @@ func _ready():
 				is_tv = true
 			else:
 				is_tv = false
+			break
 	print("--- TV: "+str(is_tv))	
 	print()
 	

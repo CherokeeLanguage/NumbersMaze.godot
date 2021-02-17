@@ -28,11 +28,6 @@ func play():
 	print("Music: "+list[ix])
 	ix = (ix+1)%count
 
-func pause(pause:bool):
-	if not channel.playing:
-		return
-	channel.pause_mode=pause
-	
 func stop():
 	channel.stop()
 

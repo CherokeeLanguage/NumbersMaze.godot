@@ -3,7 +3,7 @@ extends BaseMenu
 class_name HowToPlayScene
 
 func _ready() -> void:
-	pass
+	menu_music()
 
 func _physics_process(delta: float) -> void:
 	

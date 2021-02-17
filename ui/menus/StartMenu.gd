@@ -13,18 +13,17 @@ signal about
 signal quit
 
 func _ready():
-	_music.list = ["res://audio/music-startmenu/George_Ellinas_-_Pulse_(George_Ellinas_remix).ogg"]
-	_music.play()
-
+	container = $VBoxContainer
+	
 	buttons.append($VBoxContainer/PlayGame)
 	buttons.append($VBoxContainer/Options)
 	buttons.append($VBoxContainer/HowToPlay)
 	buttons.append($VBoxContainer/About)
 	buttons.append($VBoxContainer/Quit)
-
 	count = buttons.size()
 	
-	container = $VBoxContainer
+	_music.list = ["res://audio/music-startmenu/George_Ellinas_-_Pulse_(George_Ellinas_remix).ogg"]
+	_music.play()
 
 func _physics_process(_delta):
 	if Input.is_action_just_pressed("up"):

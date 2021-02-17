@@ -14,6 +14,7 @@ func _ready():
 	load_slots_into_buttons()
 	update_buttons()
 	container = $VBoxContainer
+	menu_music()
 	
 func slot_number()->int:
 	return col*5 + row + 1

@@ -7,8 +7,6 @@ signal fx_volume(percent)
 signal music_volume(percent)
 signal tv_zoom(percent)
 
-onready var music:Music = $Music
-
 onready var master_volume:ProgressBar = $VBox/HBox_2/ProgressBar
 onready var fx_volume:ProgressBar = $VBox/HBox_3/ProgressBar
 onready var music_volume:ProgressBar = $VBox/HBox_4/ProgressBar
@@ -26,9 +24,9 @@ func _ready() -> void:
 	buttons.append($VBox/HBox_4/MusicVolume)
 	buttons.append($VBox/HBox_1/TvZoom)
 	count = buttons.size()
-	update_buttons()
-	
+	update_buttons()	
 	tv_box.visible = OS.get_name().begins_with("Android")
+	menu_music()
 	
 func _physics_process(delta):
 	if Input.is_action_just_pressed("left"):

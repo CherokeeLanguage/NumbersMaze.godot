@@ -11,6 +11,7 @@ func _ready() -> void:
 	container = $VBoxContainer
 	var text: = AboutTextClass.new()
 	text_box.text=text.text
+	menu_music()
 
 func _physics_process(delta):
 	if Input.is_action_pressed("up"):

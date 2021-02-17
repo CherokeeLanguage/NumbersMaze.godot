@@ -4,6 +4,7 @@ class_name BaseMenu
 
 onready var _sfx:SoundFx = $_SoundFx
 onready var _music:Music = $_Music
+onready var _timer:Timer = $_Timer
 
 var size:Vector2
 var container:Node
@@ -12,6 +13,9 @@ signal main_menu
 
 func _ready() -> void:
 	size = OS.get_screen_size()
+	
+func menu_music()->void:
+	_music.stop()
 	_music.list=["res://audio/music/DoKashiteru_-_Yiourgh.ogg"]
 	_music.play()
 
@@ -46,6 +50,5 @@ func tv_zoom(value:float):
 	control.margin_top=y
 
 func _exit_tree() -> void:
-	_music.pause(true)
 	_music.list=[]
 	_music.stop()

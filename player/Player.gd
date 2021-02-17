@@ -12,7 +12,7 @@ onready var raysNode:Node2D = $Rays
 onready var fbTimer:Timer=$FireBallTimer
 onready var collider:CollisionShape2D = $CollisionShape2D
 onready var sprite:Sprite = $Sprite
-onready var sfx: = $SoundFx
+onready var sfx:SoundFx = $SoundFx
 
 var facing = FACING.EAST
 var idle:bool = false

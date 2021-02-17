@@ -10,7 +10,7 @@ var chained_explosions:Array = []
 var chained_explosion_count:int = 0 setget set_chained_explosion_count
 var rng:RandomNumberGenerator
 var dieTime:bool = false
-var valid_die_faces:Array = [1,2,3,4,5,6]
+var valid_die_faces:Array = [1,2,3,4,5,6,20,80,300]
 var pending_die_faces:Array = []
 var total_dice_in_play:int = 0
 

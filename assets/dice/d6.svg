@@ -7,16 +7,16 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="48"
-   height="48"
+   width="30"
+   height="29.999996"
    id="svg2"
    version="1.1"
    inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)"
    sodipodi:docname="d6.svg"
-   viewBox="0 0 48 48"
+   viewBox="0 0 30 29.999996"
    inkscape:export-filename="d6.png"
-   inkscape:export-xdpi="60"
-   inkscape:export-ydpi="60">
+   inkscape:export-xdpi="96.000015"
+   inkscape:export-ydpi="96.000015">
   <defs
      id="defs4" />
   <sodipodi:namedview
@@ -26,9 +26,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="23.126948"
-     inkscape:cx="24"
-     inkscape:cy="24"
+     inkscape:zoom="30.017386"
+     inkscape:cx="23.999993"
+     inkscape:cy="24.00007"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -42,7 +42,11 @@
      gridtolerance="10.0"
      guidetolerance="10.0"
      inkscape:pagecheckerboard="0"
-     inkscape:document-rotation="0" />
+     inkscape:document-rotation="0"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0" />
   <metadata
      id="metadata7">
     <rdf:RDF>
@@ -51,7 +55,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -59,11 +63,13 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(0,-66.519659)">
+     transform="translate(-7.1150449e-6,-66.519589)">
     <g
-       id="g66">
+       id="g66"
+       style="stroke:none"
+       transform="matrix(0.62499947,0,0,0.62499947,2.6681456e-6,24.944881)">
       <rect
-         style="fill:#ffffff;fill-rule:evenodd;stroke:#ffffff;stroke-width:1.14575;stroke-linecap:square;paint-order:markers stroke fill"
+         style="fill:#ffffff;fill-rule:evenodd;stroke:none;stroke-width:1.14575;stroke-linecap:square;paint-order:markers stroke fill"
          id="rect44"
          width="46.854256"
          height="46.854252"

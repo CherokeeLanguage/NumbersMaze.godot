@@ -7,7 +7,7 @@ var ExplosionNode:PackedScene = PackedScenes.DieExplosion
 onready var sprite:Sprite = $Sprite
 onready var collider:CollisionShape2D = $CollisionShape2D
 onready var dectectorsNode:Node2D = $detectors
-onready var sfx: = $SoundFx
+onready var sfx:SoundFx = $SoundFx
 
 var dectectors:Array = []
 
@@ -18,7 +18,10 @@ var value:int=1 setget setValue, getValue
 var joint:DampedSpringJoint2D = null setget setJoint
 
 var colors:Array=[]
-var valid_die_faces:Array=[1, 2, 3, 4, 5, 6]
+var valid_die_faces:Array=[1, 2, 3, 4, 5, 6, 20, 80, 300]
+var die_face_masses:Array=[0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 1, 4, 16]
+
+var pm:PhysicsMaterial=PhysicsMaterial.new()
 
 func setJoint(_value:DampedSpringJoint2D)->void:
 	if (_value == null):
@@ -28,6 +31,8 @@ func setJoint(_value:DampedSpringJoint2D)->void:
 	joint=_value
 	
 func _ready() -> void:
+	physics_material_override=pm
+	
 	setupColorsArray()
 	for child in dectectorsNode.get_children():
 		if child is RayCast2D:
@@ -84,15 +89,14 @@ func setValue(_value:int)->void:
 	set_physics_attributes()
 	
 func set_physics_attributes()->void:
-	var pm: = PhysicsMaterial.new()
+	var mass_scale = die_face_masses[valid_die_faces.find(value)]
 	pm.friction = 1
 	pm.rough = false
 	pm.bounce = 0.0001
 	pm.absorbent = false
-	physics_material_override=pm
-
+	
 	linear_damp = 1
-	mass = 0.5
+	mass = 0.5 * mass_scale
 	gravity_scale = 1
 	
 func getValue()->int:

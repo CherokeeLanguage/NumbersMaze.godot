@@ -197,6 +197,9 @@ func generate()->void:
 	
 	nextChallenge()
 	
+	for _ix in range(portals.size()/4):
+		addDie()
+	
 func nextChallenge():
 	if challenges.challengeList.empty():
 		self.currentChallenge=0

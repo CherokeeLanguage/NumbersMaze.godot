@@ -54,7 +54,7 @@
             android:value="plugins_value"/>
 
         <activity            
-            android:name=".GodotApp"
+            android:name="com.godot.game.GodotApp"
             android:label="@string/godot_project_name_string"
             android:theme="@style/GodotAppSplashTheme"
             android:launchMode="singleTask"

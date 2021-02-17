@@ -28,11 +28,13 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
 /*************************************************************************/
 
-package com.cherokeelessons.maze;
-
-import org.godotengine.godot.FullScreenGodotApp;
+package com.godot.game;
 
 import android.os.Bundle;
+
+import com.cherokeelessons.maze.R;
+
+import org.godotengine.godot.FullScreenGodotApp;
 
 /**
  * Template activity for Godot Android custom builds.

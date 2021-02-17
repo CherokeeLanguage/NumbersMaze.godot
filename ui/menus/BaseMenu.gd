@@ -2,7 +2,7 @@ extends Control
 
 class_name BaseMenu
 
-onready var _sfx: = $SoundFx
+onready var _sfx:SoundFx = $SoundFx
 
 var size:Vector2
 var container:Node

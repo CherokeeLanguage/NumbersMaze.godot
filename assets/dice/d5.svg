@@ -7,16 +7,16 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="48"
-   height="48"
+   width="30"
+   height="30"
    id="svg2"
    version="1.1"
    inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)"
    sodipodi:docname="d5.svg"
-   viewBox="0 0 48 48"
+   viewBox="0 0 30 30"
    inkscape:export-filename="d5.png"
-   inkscape:export-xdpi="60"
-   inkscape:export-ydpi="60">
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96">
   <defs
      id="defs4" />
   <sodipodi:namedview
@@ -26,9 +26,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="13.980179"
-     inkscape:cx="14.618611"
-     inkscape:cy="32.697248"
+     inkscape:zoom="18.14543"
+     inkscape:cx="14.618604"
+     inkscape:cy="32.697319"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -60,11 +60,13 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(0,-66.519659)">
+     transform="translate(-7.1150449e-6,-66.519588)">
     <g
-       id="g77">
+       id="g77"
+       style="stroke:none"
+       transform="matrix(0.62499947,0,0,0.62499956,2.6681456e-6,24.944875)">
       <rect
-         style="fill:#ffffff;fill-rule:evenodd;stroke:#ffffff;stroke-width:1.14575;stroke-linecap:square;paint-order:markers stroke fill"
+         style="fill:#ffffff;fill-rule:evenodd;stroke:none;stroke-width:1.14575;stroke-linecap:square;paint-order:markers stroke fill"
          id="rect44"
          width="46.854256"
          height="46.854252"
@@ -81,7 +83,7 @@
            id="tspan6823"
            x="-4.8533864"
            y="114.63548"
-           style="stroke-width:2.20883px">⚄</tspan></text>
+           style="stroke:none;stroke-width:2.20883px">⚄</tspan></text>
     </g>
   </g>
 </svg>

@@ -7,7 +7,7 @@ onready var score:Label = $Control/VBoxContainer/Header/Score
 onready var misc:Label = $Control/VBoxContainer/Header/Misc
 onready var pauseMenu:Control = $Control/Paused
 onready var control:Control = $Control
-onready var sfx: = $SoundFx
+onready var sfx:SoundFx = $SoundFx
 onready var colorRect:ColorRect = $ColorRect
 
 var buttons:Array = []

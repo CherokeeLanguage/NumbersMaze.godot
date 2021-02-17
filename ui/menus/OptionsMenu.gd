@@ -27,8 +27,6 @@ func _ready() -> void:
 	buttons.append($VBox/HBox_1/TvZoom)
 	count = buttons.size()
 	update_buttons()
-	music.list=["res://audio/music/DoKashiteru_-_Yiourgh.ogg"]
-	music.play()
 	
 	tv_box.visible = OS.get_name().begins_with("Android")
 	

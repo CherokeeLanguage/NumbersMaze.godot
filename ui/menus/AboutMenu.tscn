@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://fonts/CherokeeHandone-64.tres" type="DynamicFont" id=1]
 [ext_resource path="res://fonts/CherokeeHandone-48.tres" type="DynamicFont" id=2]
@@ -6,7 +6,6 @@
 [ext_resource path="res://graphics/on-screen-controls/shadedDark/shadedDark26.png" type="Texture" id=4]
 [ext_resource path="res://graphics/on-screen-controls/shadedDark/shadedDark45.png" type="Texture" id=5]
 [ext_resource path="res://graphics/on-screen-controls/shadedDark/shadedDark27.png" type="Texture" id=6]
-[ext_resource path="res://audio/Music.tscn" type="PackedScene" id=7]
 [ext_resource path="res://ui/menus/BaseMenu.tscn" type="PackedScene" id=8]
 
 [node name="About" instance=ExtResource( 8 )]
@@ -142,5 +141,3 @@ size_flags_stretch_ratio = 0.05
 margin_top = 1077.0
 margin_right = 1920.0
 margin_bottom = 1080.0
-
-[node name="Music" parent="." index="3" instance=ExtResource( 7 )]

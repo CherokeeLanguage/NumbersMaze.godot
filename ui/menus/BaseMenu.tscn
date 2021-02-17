@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://ui/menus/BaseMenu.gd" type="Script" id=1]
 [ext_resource path="res://ui/backdrops/backdrop.tscn" type="PackedScene" id=2]
 [ext_resource path="res://themes/menu-theme.tres" type="Theme" id=3]
 [ext_resource path="res://audio/SoundFx.tscn" type="PackedScene" id=4]
+[ext_resource path="res://audio/Music.tscn" type="PackedScene" id=5]
 
 [node name="BaseMenu" type="Control"]
 anchor_right = 1.0
@@ -16,4 +17,6 @@ __meta__ = {
 
 [node name="backdrop" parent="." instance=ExtResource( 2 )]
 
-[node name="SoundFx" parent="." instance=ExtResource( 4 )]
+[node name="_SoundFx" parent="." instance=ExtResource( 4 )]
+
+[node name="_Music" parent="." instance=ExtResource( 5 )]

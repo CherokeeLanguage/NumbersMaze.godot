@@ -1,9 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://ui/menus/title-bar-style-box.tres" type="StyleBox" id=1]
 [ext_resource path="res://fonts/CherokeeHandone-128.tres" type="DynamicFont" id=3]
 [ext_resource path="res://ui/menus/StartMenu.gd" type="Script" id=6]
-[ext_resource path="res://audio/Music.tscn" type="PackedScene" id=7]
 [ext_resource path="res://ui/menus/BaseMenu.tscn" type="PackedScene" id=8]
 
 [node name="StartMenu" instance=ExtResource( 8 )]
@@ -20,14 +19,14 @@ __meta__ = {
 
 [node name="Spacer_0" type="VSeparator" parent="VBoxContainer" index="0"]
 margin_right = 1920.0
-margin_bottom = 93.0
+margin_bottom = 67.0
 size_flags_vertical = 3
 
 [node name="GameTitle" type="Label" parent="VBoxContainer" index="1"]
 margin_left = 226.0
-margin_top = 97.0
+margin_top = 71.0
 margin_right = 1694.0
-margin_bottom = 272.0
+margin_bottom = 246.0
 size_flags_horizontal = 4
 custom_styles/normal = ExtResource( 1 )
 custom_fonts/font = ExtResource( 3 )
@@ -35,17 +34,17 @@ text = "Cherokee Numbers Maze"
 align = 1
 
 [node name="Spacer_1" type="VSeparator" parent="VBoxContainer" index="2"]
-margin_top = 276.0
+margin_top = 250.0
 margin_right = 1920.0
-margin_bottom = 279.0
+margin_bottom = 253.0
 size_flags_vertical = 2
 size_flags_stretch_ratio = 1.5
 
 [node name="PlayGame" type="Button" parent="VBoxContainer" index="3"]
 margin_left = 721.0
-margin_top = 420.0
+margin_top = 355.0
 margin_right = 1199.0
-margin_bottom = 534.0
+margin_bottom = 469.0
 size_flags_horizontal = 4
 text = "Play Game"
 __meta__ = {
@@ -54,9 +53,9 @@ __meta__ = {
 
 [node name="Options" type="Button" parent="VBoxContainer" index="4"]
 margin_left = 784.0
-margin_top = 538.0
+margin_top = 473.0
 margin_right = 1135.0
-margin_bottom = 652.0
+margin_bottom = 587.0
 size_flags_horizontal = 4
 disabled = true
 text = "Options"
@@ -64,11 +63,23 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="About" type="Button" parent="VBoxContainer" index="5"]
+[node name="HowToPlay" type="Button" parent="VBoxContainer" index="5"]
+margin_left = 692.0
+margin_top = 591.0
+margin_right = 1227.0
+margin_bottom = 705.0
+size_flags_horizontal = 4
+disabled = true
+text = "How to Play"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="About" type="Button" parent="VBoxContainer" index="6"]
 margin_left = 807.0
-margin_top = 656.0
+margin_top = 709.0
 margin_right = 1113.0
-margin_bottom = 770.0
+margin_bottom = 823.0
 size_flags_horizontal = 4
 disabled = true
 text = "About"
@@ -76,11 +87,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Quit" type="Button" parent="VBoxContainer" index="6"]
+[node name="Quit" type="Button" parent="VBoxContainer" index="7"]
 margin_left = 844.0
-margin_top = 774.0
+margin_top = 827.0
 margin_right = 1075.0
-margin_bottom = 888.0
+margin_bottom = 941.0
 size_flags_horizontal = 4
 size_flags_vertical = 0
 disabled = true
@@ -89,11 +100,9 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Spacer_2" type="VSeparator" parent="VBoxContainer" index="7"]
-margin_top = 892.0
+[node name="Spacer_2" type="VSeparator" parent="VBoxContainer" index="8"]
+margin_top = 945.0
 margin_right = 1920.0
 margin_bottom = 1080.0
 size_flags_vertical = 3
 size_flags_stretch_ratio = 2.0
-
-[node name="Music" parent="." index="2" instance=ExtResource( 7 )]

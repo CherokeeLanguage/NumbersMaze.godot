@@ -2,6 +2,7 @@ extends Node
 
 #class_name Main
 
+onready var HowToPlay:PackedScene = PackedScenes.HowToPlay
 onready var FadeOutIn:PackedScene = PackedScenes.FadeOutIn
 onready var startMenu:PackedScene = PackedScenes.StartMenu
 onready var playMenu:PackedScene = PackedScenes.SelectGameSlot
@@ -125,6 +126,7 @@ func __show(menu)->void:
 	if menu is StartMenu:
 		menu.connect("play_game", self, "play_game")
 		menu.connect("options", self, "options")
+		menu.connect("how_to_play", self, "how_to_play")
 		menu.connect("about", self, "about")
 		menu.connect("quit", self, "quit")
 		
@@ -142,6 +144,9 @@ func __show(menu)->void:
 		oMenu.fx_volume.value=game_settings.volume_fx
 		oMenu.music_volume.value=game_settings.volume_music
 		oMenu.tv_zoom.value=game_settings.tv_zoom
+
+func how_to_play():
+	show_ui(HowToPlay)
 
 func quit_level():
 	numberAudio.stop()

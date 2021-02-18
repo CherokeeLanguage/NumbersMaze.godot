@@ -5,6 +5,7 @@ class_name StartMenu
 var buttons:Array = []
 var ix:int = 0
 var count:int = 0
+var is_html:bool = false
 
 signal play_game
 signal options
@@ -24,19 +25,26 @@ func _ready():
 	
 	_music.list = ["res://audio/music-startmenu/George_Ellinas_-_Pulse_(George_Ellinas_remix).ogg"]
 	_music.play()
+	
+	is_html = OS.get_name() == "HTML5"
+	($VBoxContainer/Quit as Button).visible=!is_html
 
 func _physics_process(_delta):
 	if Input.is_action_just_pressed("up"):
-		ix = (ix-1) % count
+		ix = posmod(ix-1, count)
+		if is_html and ix == count - 1:
+			ix = count - 2
 		update_buttons()
 		return
 
 	if Input.is_action_just_pressed("down"):
-		ix = (ix+1) % count
+		ix = posmod(ix+1, count)
+		if is_html and ix == count - 1:
+			ix = 0
 		update_buttons()
 		return
 
-	if Input.is_action_just_pressed("btn_select"):
+	if Input.is_action_just_pressed("btn_select") and not is_html:
 		if ix+1 == count:
 			emit_signal("quit")
 		else:

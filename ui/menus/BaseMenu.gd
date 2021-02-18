@@ -4,7 +4,6 @@ class_name BaseMenu
 
 onready var _sfx:SoundFx = $_SoundFx
 onready var _music:Music = $_Music
-onready var _timer:Timer = $_Timer
 
 var size:Vector2
 var container:Node

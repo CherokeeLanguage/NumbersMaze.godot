@@ -40,8 +40,8 @@ func event_select():
 	Input.parse_input_event(ev)
 
 func _ready():
-	
-	print()
+
+	print(" ")
 	print("=== PLATFORM: "+OS.get_model_name()+" ["+OS.get_name()+"]")
 	for argument in OS.get_cmdline_args():
 		if argument.begins_with("--tv="):
@@ -51,7 +51,9 @@ func _ready():
 				is_tv = false
 			break
 	print("--- TV: "+str(is_tv))	
-	print()
+	print(" ")
+	print("Physic iterations/second: "+str(Engine.iterations_per_second))
+	print(" ")
 	
 	game_settings = GameSettings.new()
 	

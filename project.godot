@@ -89,6 +89,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://ui/menus/HowToPlay.gd"
 }, {
+"base": "Object",
+"class": "HowToPlayText",
+"language": "GDScript",
+"path": "res://scripts/classes/HowToPlayText.gd"
+}, {
 "base": "Node2D",
 "class": "LevelMap",
 "language": "GDScript",
@@ -196,6 +201,7 @@ _global_script_class_icons={
 "GameSettings": "",
 "GameSlot": "",
 "HowToPlayScene": "",
+"HowToPlayText": "",
 "LevelMap": "",
 "MazeGenerator": "",
 "Music": "",

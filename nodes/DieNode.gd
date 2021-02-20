@@ -122,7 +122,7 @@ func explode(player_fireball:bool = false)->void:
 	sfx.effect(Consts.fx.explode, true)
 	var rng:RandomNumberGenerator = RandomNumberGenerator.new()
 	rng.randomize()
-	for _ix in range(value+1):
+	for _ix in range(min(value+1, 8)):
 		var x:int = rng.randi_range(-1, 1)
 		var y:int = rng.randi_range(-1, 1)
 		var direction:Vector2 = Vector2(x, y).normalized()

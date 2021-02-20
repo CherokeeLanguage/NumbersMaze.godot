@@ -246,6 +246,6 @@ func add_enemy(chase_player:bool=false)->void:
 	portal_path_set(node, chase_player)
 
 func _on_EnemyTimer_timeout() -> void:
-	if rng.randi()%9999 < min(level, 2000):
+	if rng.randi()%4999 < min(level, 2000):
 		add_enemy()
 	enemyTimer.start(4)

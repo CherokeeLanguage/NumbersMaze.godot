@@ -103,12 +103,8 @@ func addControllerMappings()->void:
 	print("Added/updated %d joypad mappings."%count)
 	
 func joy_connection_changed(index:int, connected:bool)->void:
-	print("Joypad: joy_connection_changed("+str(index)+", "+str(connected)+")")
-	print("Joypad: "+Input.get_joy_guid(index)+", "+Input.get_joy_name(index))
-	for ix in range(8):
-		if Input.get_joy_guid(ix).empty():
-			continue
-		print("Joypad: "+str(ix)+", "+Input.get_joy_guid(ix)+", "+Input.get_joy_name(ix))
+	if connected:
+		print("Gamepad detected: "+Input.get_joy_guid(index)+", "+Input.get_joy_name(index))
 
 func ui_clear()->void:
 	for child in ui.get_children():

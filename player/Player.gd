@@ -21,7 +21,6 @@ var globalPosition:Vector2 = Vector2.ZERO
 var rays:Array = []
 var items:Array = []
 var fireball_enabled:bool = true
-
 func setGlobalPosition(pos:Vector2)->void:
 	globalPosition=pos
 	resetPosition=true
@@ -65,7 +64,6 @@ func _physics_process(delta):
 
 func fireball_check():
 	if Input.is_action_just_pressed("btn_a") and fireball_enabled:
-		print("Total remaining: "+str(dieTracker.getChallengeTotal()))
 		var fireball:PlayerFireballNode = FireballNode.instance()
 		add_child(fireball)
 		
@@ -90,9 +88,11 @@ func fireball_check():
 		fireball.global_position = global_position
 		match facing:
 			FACING.NORTH:
-				fireball.global_position.y -= 32
+				fireball.global_position.y -= 24
+				fireball.global_position.x -= 1
 			FACING.SOUTH:
-				fireball.global_position.y += 32
+				fireball.global_position.y += 24
+				fireball.global_position.x += 8
 			FACING.EAST:
 				fireball.global_position.x += 8
 				fireball.global_position.y += 16
@@ -155,6 +155,13 @@ func move_check(delta:float)->void:
 		impulse.y=-1
 	if Input.is_action_pressed("down"):
 		impulse.y=1
+	if Input.is_action_pressed("move_to"):
+		var way_point:Vector2 = get_global_mouse_position()
+		var rad: = way_point.angle_to_point(global_position)
+		impulse = Vector2.RIGHT.rotated(rad)
+	animation_update(impulse, delta)
+	
+func animation_update(impulse:Vector2, delta:float)->void:
 	if impulse.length()>0:
 		apply_central_impulse(impulse.normalized()*6000*delta)
 		var a = wrapf(rad2deg(impulse.angle()), 0, 360)
@@ -170,6 +177,7 @@ func move_check(delta:float)->void:
 		NE: 315		
 		"""
 		if idle:
+			idle = false
 			facing = null
 		if a>=0 and a<=45 and facing!=FACING.EAST:
 			facing = FACING.EAST
@@ -186,7 +194,6 @@ func move_check(delta:float)->void:
 		if a>45 and a<135 and facing!=FACING.SOUTH:
 			facing = FACING.SOUTH
 			animation.play("south")
-		idle = false
 	else:
 		if not idle:
 			idle = true

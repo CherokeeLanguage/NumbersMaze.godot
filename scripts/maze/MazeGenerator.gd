@@ -59,7 +59,6 @@ func dump()->void:
 		print(line)
 	
 func generate()->void:
-	
 # warning-ignore:integer_division
 	width = level + 7
 	if (width > 16):
@@ -168,22 +167,63 @@ func generate()->void:
 			if cell.isPortal():
 				portals.append(Vector2(x, y))
 				
-	for x in range(1, width-1):
-		for y in range(1, height-1):
-			var cell: = (maze[x][y] as MazeCell)
-			if not cell.isPortal():
-				if cell.wall.n and rng.randi() % MAZE_HOLE_MODULO == 0:
+	if level>7:
+		print("- processing extra wall removal")
+		var oCell:MazeCell
+		var x:int=width/2#for x in range(max(width/2-4, 1), min(width/2+5, width-1), 8):
+		
+		print(" - [y]")
+		for _y in range(max(height/3, 1), min(height*2/3+1, height-1)):
+			var cell: = (maze[x][_y] as MazeCell)
+			if cell.isPortal():
+				continue
+			print(" - removing walls at: "+str(Vector2(x,_y)))
+			if cell.wall.n:
+				oCell=(maze[x][_y-1] as MazeCell)
+				if not oCell.isPortal():
 					cell.wall.n=false
-					(maze[x][y-1] as MazeCell).wall.s=false
-				if cell.wall.s and rng.randi() % MAZE_HOLE_MODULO == 0:
+					oCell.wall.s=false
+			if cell.wall.s:
+				oCell=(maze[x][_y+1] as MazeCell)
+				if not oCell.isPortal():
 					cell.wall.s=false
-					(maze[x][y+1] as MazeCell).wall.n=false
-				if cell.wall.e and rng.randi() % MAZE_HOLE_MODULO == 0:
+					oCell.wall.n=false
+
+		print("")
+		print(" - [x]")
+		for _x in range(max(width/3, 1), min(width*2/3+1, width-1)):
+			var y:int=height/2
+			var cell: = (maze[_x][y] as MazeCell)
+			if cell.isPortal():
+				continue
+			print(" - removing walls at: "+str(Vector2(_x,y)))
+			if cell.wall.e:
+				oCell=(maze[_x+1][y] as MazeCell)
+				if not oCell.isPortal():
 					cell.wall.e=false
-					(maze[x+1][y] as MazeCell).wall.w=false
-				if cell.wall.w and rng.randi() % MAZE_HOLE_MODULO == 0:
+					oCell.wall.w=false
+			if cell.wall.w:
+				oCell=(maze[_x-1][y] as MazeCell)
+				if not oCell.isPortal():
 					cell.wall.w=false
-					(maze[x-1][y] as MazeCell).wall.e=false
+					oCell.wall.e=false
+		print("")
+#	for x in range(1, width-1):
+#		for y in range(1, height-1):
+#			var cell: = (maze[x][y] as MazeCell)
+#			if not cell.isPortal():
+#				if cell.wall.n and rng.randi() % MAZE_HOLE_MODULO == 0:
+#					cell.wall.n=false
+#					(maze[x][y-1] as MazeCell).wall.s=false
+#				if cell.wall.s and rng.randi() % MAZE_HOLE_MODULO == 0:
+#					cell.wall.s=false
+#					(maze[x][y+1] as MazeCell).wall.n=false
+#				if cell.wall.e and rng.randi() % MAZE_HOLE_MODULO == 0:
+#					cell.wall.e=false
+#					(maze[x+1][y] as MazeCell).wall.w=false
+#				if cell.wall.w and rng.randi() % MAZE_HOLE_MODULO == 0:
+#					cell.wall.w=false
+#					(maze[x-1][y] as MazeCell).wall.e=false
 
 			
 class MazeCell:

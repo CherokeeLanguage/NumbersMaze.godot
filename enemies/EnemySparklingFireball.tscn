@@ -5,7 +5,7 @@
 [ext_resource path="res://graphics/enemies/sparkling-fireball.png" type="Texture" id=3]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 1.0
+radius = 20.0532
 
 [sub_resource type="Animation" id=2]
 resource_name = "animation"
@@ -30,10 +30,10 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.1, 0.3, 2.65 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.3, 0.32, 2.65, 2.66, 2.87 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ 1.0, 15.6012, 31.0, 31.0 ]
+"values": [ 1.0, 15.6012, 31.0, 38.6227, 31.0, 38.5, 15.241 ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("CollisionShape2D:disabled")
@@ -70,10 +70,10 @@ script = ExtResource( 2 )
 texture = ExtResource( 3 )
 hframes = 8
 vframes = 7
-frame = 50
+frame = 48
 
 [node name="CollisionShape2D" parent="." index="1"]
-position = Vector2( 0.303996, -2.59464 )
+position = Vector2( 0.2, -3.5 )
 shape = SubResource( 1 )
 disabled = true
 

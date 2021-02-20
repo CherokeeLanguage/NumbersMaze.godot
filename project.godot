@@ -224,7 +224,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="Numbers Maze"
+config/name="Cherokee Numbers Maze"
 config/description="Cherokee Numbers Maze"
 run/main_scene="res://main/Main.tscn"
 boot_splash/image="res://graphics/splash/logo.png"
@@ -407,6 +407,11 @@ btn_start={
 "events": [ Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"button_index":11,"pressure":0.0,"pressed":false,"script":null)
  ]
 }
+move_to={
+"deadzone": 0.5,
+"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
+ ]
+}
 
 [input_devices]
 
@@ -425,6 +430,11 @@ pointing/emulate_mouse_from_touch=false
 [node]
 
 name_num_separator=2
+
+[physics]
+
+2d/thread_model=2
+2d/default_gravity=200
 
 [rendering]
 

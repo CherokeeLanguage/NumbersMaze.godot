@@ -131,6 +131,10 @@ func pickup_check()->void:
 						distance = item_distance
 
 		if theItem!=null:
+			for item in items.duplicate():
+				if not is_instance_valid(item):
+					items.erase(item)
+					print(" - removed invalid entry from items list")
 			if items.size()>=4:
 				sfx.effect(Consts.fx.growl)
 				return

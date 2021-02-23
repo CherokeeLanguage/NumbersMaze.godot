@@ -65,8 +65,17 @@ func on_Timer_timeout()->void:
 Gets the next random die amount. Removes amount from remaining!!!
 """
 func nextDie(current_challenge:int):
+	if current_challenge>6 and not current_challenge in valid_die_faces:
+		var set: = in_play_set()
+		for item_value in set:
+			var maybe:int = current_challenge - item_value
+			if maybe in valid_die_faces:
+				current_challenge = maybe
+				break
+	
 	var is_in_play:bool = has_in_play(current_challenge)
 	var is_valid_die:bool = current_challenge in valid_die_faces
+	
 	var amount:int = 0
 	while (amount>max_die or amount==0 or amount>remaining):
 		if pending_die_faces.empty():

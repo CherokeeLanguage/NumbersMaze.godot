@@ -211,12 +211,17 @@ func _on_World_challenge_changed(number:int) -> void:
 		playerHud.challenge.text="ᏄᎳ! ᏄᎳ!"
 		return
 	var text:String = ChallengeAudioText.getCardinal(number)
-	if number>world.level/2 - 1:
+	if number>world.level*3/2 - 4:
 		playerHud.challenge.text=text+" ["+str(number)+"]"
 		print("Challenge: "+text+" ["+str(number)+"]")
 	else:
 		playerHud.challenge.text=text
-		print("Challenge: "+text)
+		var q:String="?"
+		if number > 9:
+			q = "??"
+		if number > 99:
+			q = "???"
+		print("Challenge: "+text+" ["+q+"]")
 
 func _on_World_score_changed(number) -> void:
 	playerHud.score.text=Utils.spaceSep(number)

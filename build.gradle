@@ -1,5 +1,0 @@
-plugins {
-    id "idea"
-}
-
-// To simplify usage of JetBrains Rider

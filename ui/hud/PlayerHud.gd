@@ -13,7 +13,6 @@ onready var colorRect:ColorRect = $ColorRect
 var buttons:Array = []
 var ix:int = 0
 var count:int = 0
-var visible:bool = true setget set_visible
 var size:Vector2
 
 signal quit_level

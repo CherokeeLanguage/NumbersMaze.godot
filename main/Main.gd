@@ -60,8 +60,7 @@ func _ready():
 	Utils.setFxVolume(game_settings.volume_fx)
 	Utils.setMasterVolume(game_settings.volume_master)
 	Utils.setMusicVolume(game_settings.volume_music)
-	set_tv_zoom(game_settings.tv_zoom)
-	
+		
 	updateInputMap()
 	addControllerMappings()
 	world.camera=camera
@@ -131,7 +130,7 @@ func show_ui(scene:PackedScene):
 func __show(menu)->void:
 	ui_clear()
 	ui.add_child(menu)
-	reset_ui_margin()
+#	reset_ui_margin()
 	
 	if menu.has_signal("main_menu") and not menu is StartMenu:
 		menu.connect("main_menu", self, "main_menu")
@@ -151,12 +150,10 @@ func __show(menu)->void:
 		oMenu.connect("master_volume", self, "set_master_volume")
 		oMenu.connect("fx_volume", self, "set_fx_volume")
 		oMenu.connect("music_volume", self, "set_music_volume")
-		oMenu.connect("tv_zoom", self, "set_tv_zoom")
 		
 		oMenu.master_volume.value=game_settings.volume_master
 		oMenu.fx_volume.value=game_settings.volume_fx
 		oMenu.music_volume.value=game_settings.volume_music
-		oMenu.tv_zoom.value=game_settings.tv_zoom
 
 func how_to_play():
 	show_ui(HowToPlay)
@@ -248,23 +245,4 @@ func set_music_volume(value:int)->void:
 		game_settings.volume_music = value
 		game_settings.save()
 	Utils.setMusicVolume(value)
-
-func set_tv_zoom(value:int)->void:
-	if game_settings.tv_zoom != value:
-		game_settings.tv_zoom = value
-		game_settings.save()
-		
-	var zoom:float = 1+float(game_settings.tv_zoom)/100.0
-	print("set_tv_zoom: "+str(value)+" ["+str(zoom)+"]")
-	camera.zoom=Vector2(zoom, zoom)
-	reset_ui_margin()
-	
-func reset_ui_margin()->void:
-	var zoom:float = 1+float(game_settings.tv_zoom)/100.0
-	
-	for menu in ui.get_children():
-		if menu is BaseMenu:
-			menu.tv_zoom(zoom)
-			
-	playerHud.tv_zoom(zoom)
 	

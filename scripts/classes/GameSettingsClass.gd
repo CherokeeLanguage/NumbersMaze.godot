@@ -7,9 +7,8 @@ export var folder:String = "user://"
 var volume_master:int
 var volume_fx:int
 var volume_music:int
-var tv_zoom:int
 
-var keys:Array = ["volume_master", "volume_fx", "volume_music", "tv_zoom"]
+var keys:Array = ["volume_master", "volume_fx", "volume_music"]
 
 func _init() -> void:
 	self.load()
@@ -28,7 +27,6 @@ func load()->void:
 	volume_master = 100
 	volume_fx = 75
 	volume_music = 10
-	tv_zoom = 0
 	var f: = File.new()	
 	if not f.file_exists(file()):
 		save()
@@ -53,7 +51,6 @@ func load()->void:
 	volume_master = clamp(volume_master, 0, 100)
 	volume_fx = clamp(volume_fx, 0, 100)
 	volume_music = clamp(volume_music, 0, 100)
-	tv_zoom = clamp(tv_zoom, -15, 15)
 
 func _dictionary() -> Dictionary:
 	var d: = Dictionary()

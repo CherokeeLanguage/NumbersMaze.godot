@@ -251,9 +251,11 @@ gdscript/warnings/unsafe_call_argument=true
 
 window/size/width=1920
 window/size/height=1080
+window/size/fullscreen=true
 window/size/test_width=1280
 window/size/test_height=720
 window/dpi/allow_hidpi=true
+window/vsync/use_vsync=false
 window/stretch/mode="2d"
 window/stretch/aspect="keep"
 
@@ -438,14 +440,12 @@ name_num_separator=2
 
 [rendering]
 
-quality/driver/driver_name="GLES2"
+quality/driver/fallback_to_gles2=true
 quality/intended_usage/framebuffer_allocation=0
 quality/intended_usage/framebuffer_allocation.mobile=0
 2d/snapping/use_gpu_pixel_snap=true
-threads/thread_model=2
 vram_compression/import_etc=true
 vram_compression/import_etc2=false
-gles2/compatibility/disable_half_float=true
 batching/precision/uv_contract=true
 environment/default_clear_color=Color( 0, 0, 0, 1 )
 environment/default_environment="res://default_env.tres"

@@ -166,13 +166,6 @@ anims/north = SubResource( 7 )
 anims/south = SubResource( 8 )
 anims/west = SubResource( 9 )
 
-[node name="CameraFollow" type="RemoteTransform2D" parent="."]
-update_rotation = false
-update_scale = false
-__meta__ = {
-"_edit_lock_": true
-}
-
 [node name="Rays" type="Node2D" parent="."]
 __meta__ = {
 "_edit_group_": true,

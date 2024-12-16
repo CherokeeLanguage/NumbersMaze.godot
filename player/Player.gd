@@ -7,7 +7,6 @@ enum FACING { NORTH, EAST, SOUTH, WEST}
 onready var FireballNode:PackedScene = PackedScenes.PlayerFireball
 
 onready var animation:AnimationPlayer = $AnimationPlayer
-# onready var cameraFollow:RemoteTransform2D = $CameraFollow
 onready var raysNode:Node2D = $Rays
 onready var fbTimer:Timer=$FireBallTimer
 onready var collider:CollisionShape2D = $CollisionShape2D

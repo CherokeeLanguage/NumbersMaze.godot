@@ -241,27 +241,22 @@ PackedScenes="*res://nodes/PackedScenes.gd"
 
 [debug]
 
-gdscript/warnings/narrowing_conversion=false
-gdscript/warnings/integer_division=false
 gdscript/warnings/unsafe_property_access=true
 gdscript/warnings/unsafe_method_access=true
+gdscript/warnings/unsafe_cast=true
 gdscript/warnings/unsafe_call_argument=true
 
 [display]
 
 window/size/width=1920
 window/size/height=1080
-window/size/fullscreen=true
-window/size/test_width=1280
-window/size/test_height=720
+window/size/test_width=1920
+window/size/test_height=1080
 window/dpi/allow_hidpi=true
 window/vsync/use_vsync=false
+window/vsync/vsync_via_compositor=true
 window/stretch/mode="2d"
 window/stretch/aspect="keep"
-
-[gui]
-
-theme/use_hidpi=true
 
 [importer_defaults]
 
@@ -429,13 +424,8 @@ pointing/emulate_mouse_from_touch=false
 2d_physics/layer_5="PlayerBullets"
 2d_physics/layer_6="EnemyBullets"
 
-[node]
-
-name_num_separator=2
-
 [physics]
 
-2d/thread_model=2
 2d/default_gravity=200
 
 [rendering]
@@ -444,9 +434,6 @@ quality/driver/fallback_to_gles2=true
 quality/intended_usage/framebuffer_allocation=0
 quality/intended_usage/framebuffer_allocation.mobile=0
 2d/snapping/use_gpu_pixel_snap=true
-vram_compression/import_etc=true
-vram_compression/import_etc2=false
-batching/precision/uv_contract=true
 environment/default_clear_color=Color( 0, 0, 0, 1 )
 environment/default_environment="res://default_env.tres"
 quality/2d/use_pixel_snap=true

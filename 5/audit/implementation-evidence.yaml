@@ -1,0 +1,65 @@
+# Implementation evidence — NumbersMaze.godot#5
+# Executed instruments, 2026-11-11, branch feature/itch-publish (base main @ f36a902).
+# All runs executed on the real implementation (test-discipline: run real code);
+# no test files authored (repo has no test framework) — this record is the evidence.
+
+schema: implementation-evidence
+issue: NumbersMaze.godot#5
+date: 2026-11-11
+branch: feature/itch-publish
+
+sc2_fault_matrix:
+  note: "five executed runs, one per fault condition, each with the other prerequisites in place; every run exits non-zero BEFORE any butler invocation"
+  runs:
+    - run: 1
+      fault: butler absent from PATH and .tools/butler/
+      setup: itch.conf present (copied from example); butler not on PATH (command -v confirmed), .tools/butler/butler removed
+      observed_exit: 1
+      guidance: "ERROR: butler not found on PATH and .tools/butler/butler is missing. / Vendor it (one-time): curl -L https://broth.itch.zone/butler/linux-amd64/LATEST/archive/default -o butler.zip / Then authenticate (one-time): butler login"
+      carries_vendoring_url: true
+      carries_login_pointer: true
+    - run: 2
+      fault: itch.conf missing
+      observed_exit: 1
+      guidance: "ERROR: itch.conf not found — run: cp itch.conf.example itch.conf, then fill ITCH_USER and ITCH_GAME with the real target."
+    - run: 3
+      fault: itch.conf carrying REPLACE_ME placeholders
+      setup: conf with ITCH_USER=REPLACE_ME, ITCH_GAME=REPLACE_ME
+      observed_exit: 1
+      guidance: "ERROR: itch.conf still carries REPLACE_ME placeholders — fill in the real itch.io target."
+    - run: 4
+      fault: itch.conf lacking a required key
+      setup: conf with ITCH_USER only
+      observed_exit: 1
+      guidance: "ITCH_GAME: ERROR: itch.conf must define ITCH_GAME"
+    - run: 5
+      fault: artifact path absent
+      setup: butler present (vendored), itch.conf filled, tmp/NumbersMaze.apk absent
+      observed_exit: 1
+      guidance: "ERROR: artifact not found: tmp/NumbersMaze.apk / Export it first with the matching Godot editor preset (see docs/itch-app-setup.md)."
+      red_observable_confirmed: "pre-GREEN state (script through Item 3) exited 0 with no artifact guard and no push — plan Item 4's RED as remediated"
+
+sc3_no_secrets:
+  grep_tracked_files: "git grep -inE '(api[_-]?key|token|secret|password)' over itch-push.sh, itch.conf.example, README.md, AGENTS.md, docs/itch-app-setup.md, .gitignore — only self-describing 'do NOT put any passwords or API keys here' / 'credentials live in butler's own store' wording matched"
+  gitignore_read: "git check-ignore itch.conf .tools/butler/butler -> both listed (exit 0); .gitignore lines 24-25 carry itch.conf and .tools/butler/"
+  example_fields: "ITCH_USER=cherokee-language, ITCH_GAME=cherokee-numbers-maze (non-secret target); artifact overrides + ITCH_URL commented"
+
+sc4_butler_resolution:
+  script_read: "PATH first (command -v butler), then .tools/butler/butler; no-butler guidance names broth.itch.zone/butler/linux-amd64/LATEST/archive/default + butler login (verified in run 1 output)"
+
+sc5_channel_map:
+  script_read: "five pushes: html5 (directory, index.html-at-root check), android (APK), windows (exe), linux (x86_64), macos (zip); receipts via butler status per channel"
+  tagging_substring_check: "windows->win (Windows), linux->linux (Linux), macos->mac (Mac), android->android (Android), html5->no platform substring (tagged via dashboard per runbook) — no wrong-platform substring"
+
+sc6_no_version_claims:
+  script_read: "grep userversion over itch-push.sh -> no match; no --userversion on any push"
+
+vendoring_live_validation:
+  command: "curl -L https://broth.itch.zone/butler/linux-amd64/LATEST/archive/default -> butler.zip -> unzip into .tools/butler/"
+  result: "butler v15.32.0, built Oct 6 2026 (matches research card's current version); URL live-verified 2026-11-11"
+  git_visibility: ".tools/ absent from git status (Item 1's gitignore effective)"
+
+suite_green:
+  bash_n: clean
+  fault_matrix_rerun: "all five runs exit 1 (2026-11-11 consolidated pass)"
+  sc3_sweep: clean

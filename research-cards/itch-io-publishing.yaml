@@ -1,0 +1,62 @@
+topic: itch.io publishing mechanics for NumbersMaze.godot (butler CLI + itch hosting)
+verified: 2026-11-10
+confidence: 0.9
+consumed_by: NumbersMaze.godot#5 (spec)
+
+sources:
+  - url: https://itch.io/docs/butler/
+    note: butler manual index (fetched 2026-11-10)
+  - url: https://itch.io/docs/butler/installing
+    note: install methods (fetched 2026-11-10)
+  - url: https://itch.io/docs/butler/login
+    note: authentication (fetched 2026-11-10)
+  - url: https://itch.io/docs/butler/pushing.html
+    note: pushing builds + channel naming (fetched 2026-11-10; /pushing-builds 404s — .html suffix required)
+  - url: https://broth.itch.zone/butler
+    note: broth channel index JSON (fetched 2026-11-10)
+  - url: https://github.com/itchio/butler/releases
+    note: release notes (fetched 2026-11-10)
+  - url: https://itch.io/docs/creators/html5
+    note: HTML5 games on itch (fetched 2026-11-10)
+  - url: https://itch.io/t/2025776/experimental-sharedarraybuffer-support
+    note: admin SAB thread (fetched 2026-11-10)
+  - url: https://itch.io/docs/creators/faq
+  - url: https://itch.io/docs/creators/getting-started
+  - url: https://docs.godotengine.org/en/3.2/getting_started/workflow/export/exporting_for_web.html
+  - url: https://docs.godotengine.org/en/3.6/tutorials/export/exporting_for_web.html
+
+findings:
+  butler:
+    current_version: 15.32.0 (2026-10-06)
+    automation_install: https://broth.itch.zone/butler/linux-amd64/LATEST/archive/default
+    install_note: zip; live-probed HTTP 206 2026-11-10 (butler-linux-amd64.zip, 10.7 MB); broth.itch.ovh is dead (DNS non-resolution 2026-11-10) — BoundPronouns#55's .ovh/unpack URL is stale
+    auth: butler login (browser OAuth) writes butler's own credential store; BUTLER_API_KEY env is the CI/headless alternative
+    push: "butler push <dir-or-zip> user/game:channel (lowercase); first push makes the file appear on the page; re-pushes are idempotent patch pushes serving immediately; butler requires an existing project page — it never creates one"
+    channel_naming: contains win/windows→Windows tag, linux→Linux, mac/osx→Mac, android→Android; no architecture tagging; kebab-case; NO name-based tag for web channels — "HTML5 / Playable in browser" tag + page kind "HTML" are Edit-game-page actions after the first push
+    versioning: backend assigns increasing integers per channel by default; --userversion / --userversion-file optional; ordering is upload order
+    caps: 30 GB uncompressed backend cap; butler status prints Channel/Upload/Build/Version (also --json)
+    flags_of_note: --dry-run, --if-changed, --auto-wrap (default true), --auto-unzip (default true since v15.27.0 — a dir containing exactly one .zip pushes the zip's contents), --hidden (channel creation only), --fix-permissions (default true)
+  html5_hosting:
+    form: ZIP containing index.html at its root (only ZIP accepted — no .rar/.tar.gz/.7z); relative paths mandatory; UTF-8 names
+    limits: ≤1000 extracted files; ≤240-char paths; ≤500 MB total extracted; ≤200 MB per file (higher on request)
+    cdn: auto-gzips html/js/css/svg/wasm/pck; serves .gz/.br pre-compressed with matching content-encoding
+    sharedarraybuffer: opt-in per project (Embed Options → Frame Options checkbox); NOT needed by a stock Godot 3.x export — Godot 3.2 docs list Threads as unimplemented on HTML5; leave the checkbox off for NumbersMaze
+  android:
+    apk: accepted; butler channel names containing android auto-tag as Android application
+    aab: no official itch doc on AAB; community + platform-mechanics evidence — itch stores files without format restriction but provides no install path for .aab (Play-Store bundle); side-loadable distribution needs .apk
+  page_setup:
+    kinds: one "Kind of project" setting per page; a page can carry both a playable HTML build and downloadable channels (standard butler workflow: push multiple channels, set kind HTML, tag the html channel)
+    payment_caveat: HTML-kind pages take donations only; selling access requires kind Downloadable (moot for a free game)
+    cover: 315:250 aspect ratio; 630×500 recommended
+    publish_states: Draft (editable/secret-link only — serves downloads to no one), Restricted, Public; no documented minimum-upload requirement for publishing (stated gap)
+    account_limits: soft 20 project pages; per-file size limit + 10 files max per page, raisable
+  godot_3_2_web_export:
+    output: index.html, index.js, index.wasm, index.pck, index.png, favicon.png (+ index.audio.worklet.js empirically in this repo's Feb-2021 export — 3.2.4-era); all static assets, no special headers
+    threads: unimplemented on Godot 3.2 HTML5 (docs); no SAB requirement
+    note: NumbersMaze's staged html5/ export totals ~45 MB — fits itch's HTML5 limits
+
+gaps:
+  - whether itch's HTML5 ZIP limits are enforced on butler-pushed HTML channels (limits stated in the general HTML5 guide; 30 GB butler cap is separate) — treated as likely applicable, not doc-verified for butler pushes
+  - no official statement on .aab handling (community evidence only)
+  - whether publishing a page with zero uploads is permitted is undocumented
+  - butler status has no dedicated docs page; semantics from release notes + master source (v15.32.0 tag not diffed)

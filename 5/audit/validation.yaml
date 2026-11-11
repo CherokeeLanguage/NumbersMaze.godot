@@ -55,3 +55,8 @@ spec:
         text: gradle toolchain version list (JDK 17 / android-34 / build-tools 34.0.0 / NDK r23c) asserted without source and contradicted by the repo's own gradle template (android/build/config.gradle — AGP 4.1.2, compileSdk 29, buildTools 30.0.1, NDK 21.4, gradle 6.5); the values were the 3.6 editor-template toolchain from the diagnosis chat, never recorded in the research record
         remediation: version list dropped from the spec (requirement kept as "no gradle build and none of its JDK/Android-SDK prerequisites"); the toolchain facts for BOTH toolchains recorded in the research record with sources (repo config.gradle, 3.6 template android_source.zip, Godot 3.6 docs URL, fetched 2026-11-11)
     remediation_note: all three findings fixed in .issues/5/spec.md and mirrored into the remote body; research card extended and synced; round-5 validation dispatched on the revised artifact
+  - round: 5
+    artifact_state: post round-4 remediation
+    verdict: PASS
+    findings: []
+    note: zero-finding verdict — all defect classes and analysis families applied; every current-state and negation claim verified against the repo, siblings, research record, and remote body (preset state, AGENTS.md/branch state, toolchain traceability, live itch namespace); repo-boundary containment both prongs pass

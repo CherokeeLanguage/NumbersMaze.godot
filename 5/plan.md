@@ -88,8 +88,12 @@ stage only the files this plan's items deliver — never that content.
   Push section: five pushes in spec order — html5 (directory push), android,
   windows, linux, macos — each `"$BUTLER" push <artifact> "$ITCH_USER/$ITCH_GAME:<channel>"`;
   receipts: `"$BUTLER" status` per channel. No `--userversion` anywhere.
-- **RED:** artifact-absent fault scenario still exits 127 (script stops at
-  Item 3's sections; no artifact guard, no pushes).
+- **RED:** with butler present, `itch.conf` filled, and an artifact path
+  absent, the script as authored through Item 3 completes its conf and butler
+  sections and falls off its end — the run exits 0 with no artifact guard and
+  no push, so the specified behavior (exit ≠ 0 naming the missing piece
+  before any butler invocation) fails via the wrong exit code and the missing
+  guidance.
 - **GREEN:** extend the script with the artifact/push/receipt sections.
 - **Instrument:** (5) executed artifact-absent fault run — butler present
   (vendored into gitignored `.tools/butler/` using the documented vendoring
@@ -112,7 +116,9 @@ stage only the files this plan's items deliver — never that content.
   (the live URL), and one-time `butler login`; Edit-game tagging of the
   `html5` channel as "HTML5 / Playable in browser" (no name-based web tag);
   publish; verification (`butler status` per channel; page serves the playable
-  build + download buttons); rollback notes (butler patch history, dashboard
+  build + download buttons; **record the live page URL** — fill the
+  `ITCH_URL` field in `itch.conf.example` (uncomment it) and add the URL to
+  README.md, per R-6's assignment of this step to the runbook); rollback notes (butler patch history, dashboard
   re-edits, draft/revoke); android channel needs the APK — a `.aab` is not
   device-installable from itch; the export preset is APK-format on the
   prebuilt-template path with `export_path` `tmp/NumbersMaze.apk` (a

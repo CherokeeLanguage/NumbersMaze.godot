@@ -1,0 +1,25 @@
+# Validation record — NumbersMaze.godot#3 spec audit (2026-11-11)
+# Criteria set: spec card validation-standards (criteria invariance held).
+schema: spec-audit-validation
+issue: NumbersMaze.godot#3
+date: 2026-11-11
+
+  - round: 1
+    artifact_state: spec as filed 2026-11-09 (mirror-repaired locally this session; remote body + mirror verified verbatim-identical)
+    verdict: PASS
+    findings: []
+    adjudications:
+      - observation: CherokeeLessons.com#25 paired-spec reference never materialized in any store
+        classification: not-a-finding
+        ground: non-load-bearing, explicitly out-of-scope sibling reference; the channel mapping's load-bearing ground is the dated export-path verification in the same sentence; the sibling route's non-materialization is downstream repo-state movement superseded by the developer-directed #5 (filed 2026-11-10)
+    sc_satisfaction_on_trunk:
+      sc1: SATISFIED (script guards/resolution/pushes read; check-ignore exit 0; corroborated by #5's fault matrix)
+      sc2: SATISFIED (ITCH_URL + README exact match; live URL resolves to the published playable page)
+      sc3: SATISFIED-WITH-DELTAS — outcome holds (mac→macos superset tagging Mac; html-zipped→html5 directory push, itch-hosting-equivalent; android added beyond #3's mapping under #5's developer-directed APK-format scope; target bound via guarded conf — evidenced by the 2026-11-11 executed pushes)
+      sc4: SATISFIED (no --userversion; live page shows butler auto-numbering v1)
+    deliverable_completeness: complete on trunk (main @ f7b2f66) — no pending work
+    closure_grounds:
+      - all four SC outcomes verified by executed instruments on trunk (file reads, check-ignore, grep), not asserted
+      - publication outcome executed 2026-11-11: five-channel butler receipts (.issues/5/audit/sc1-push-evidence.yaml) + live page serving Run game + all downloads
+      - #3's out-of-scope remainder (page creation, initial deployment) was assigned to the paired CherokeeLessons.com#25 route, which never materialized; #5 (developer-directed) took over and delivered that scope
+      - supersession recorded: the delivered channel set (linux/windows/macos/html5-dir/android) supersedes #3's four-channel mapping under #5's developer-directed five-channel design

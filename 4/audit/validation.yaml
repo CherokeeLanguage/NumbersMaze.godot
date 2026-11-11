@@ -23,3 +23,65 @@ spec:
         ground: fix element answered to the disproven escape mechanism; no stated cause calls for the edit
         remediation: pattern edit removed from the approach; approach step 2 now adds .godot/ only
     outcome: all four findings remediated in place; fresh re-review dispatched
+  - round: 2
+    date: 2026-11-10
+    reviewer: fresh-context subagent (general)
+    verdict: FAIL
+    findings:
+      - class: fabricated-claims
+        target: spec.md Evidence base — include-filter claim scoped to both export preset files
+        ground: export_presets-tv.cfg (all 5 presets) declares include_filter="*.txt, *.json" without *.bbcode; only export_presets.cfg carries *.bbcode; materially affects whether text/how-to-play.bbcode ships in TV exports
+        remediation: evidence bullet rewritten to state each file's filter accurately; AGENTS.md export-filter guidance to be revised accordingly during implementation
+      - class: gap-analysis
+        target: R-4 content coverage — no covering success criterion
+        ground: SC-1..SC-7 instrument existence, form, accuracy, and ignore hygiene but none instruments R-4's content categories; a factually-clean stub would pass every SC while violating R-4
+        remediation: SC-8 added (fresh-context review confirming each R-4 category present in the final AGENTS.md); traceability line updated to include SC-8
+    outcome: both findings remediated in place; fresh re-review dispatched
+  - round: 3
+    date: 2026-11-10
+    reviewer: fresh-context subagent (general)
+    verdict: FAIL
+    findings:
+      - class: fabricated-claims
+        target: spec.md Problem/root-cause-3 — text/changelog.txt framed as stale pre-pattern index entry; d6c96a7 framed as operative intent
+        ground: git log --diff-filter=AD shows ce0dea4 (2024-12-14, "Add changelog file to track project history") deliberately re-added the file 3.5 years after d6c96a7 (2021-02-16) untracked it; the tracked state is the operative intent and the spec's untrack step would reverse it unacknowledged; also internally inconsistent with the spec's own edge-case note
+        remediation: root cause 4 added (stale text/.gitignore entry contradicting the recorded decision); untrack list narrowed to .godot/ + nested .idea files; text/.gitignore /changelog.txt entry removal added; impact/edge-case sections updated (changelog stays tracked)
+      - class: fabricated-claims
+        target: spec.md Problem — "JetBrains nested workspace metadata from 2022"
+        ground: files indexed 2023-01-23 (commit ab0abfc); no source supports 2022 (filesystem mtime misread as provenance)
+        remediation: date corrected to added 2023-01-23 (ab0abfc); pattern-landing date 2023-06-10 (f55d9ff) recorded in evidence base
+    outcome: both findings remediated in place; fresh re-review dispatched
+  - round: 4
+    date: 2026-11-10
+    reviewer: fresh-context subagent (general)
+    verdict: FAIL
+    findings:
+      - class: gap-analysis
+        target: SC set — route selection stated in prose only, not enforced by any criterion
+        ground: SC-6 (empty tracked-but-ignored set) is outcome-based and passes under routes the spec's own root-cause analysis rejects — untracking text/changelog.txt instead of removing the stale entry reverses the ce0dea4 re-track silently; deleting the /.idea/ pattern instead of untracking keeps the IDE files tracked
+        remediation: SC-9 added (text/changelog.txt remains tracked; instrument git ls-files non-empty) and SC-10 added (nested .idea files untracked with /.idea/ pattern retained; two-part instrument); traceability updated
+    outcome: finding remediated in place; fresh re-review dispatched
+  - round: 5
+    date: 2026-11-11
+    reviewer: fresh-context subagent (general)
+    verdict: PASS
+    findings: []
+    outcome: zero-finding verdict; spec validated, implementation authorized to proceed per spec
+
+implementation:
+  - round: 1
+    date: 2026-11-11
+    reviewer: fresh-context subagent (general)
+    verdict: FAIL
+    findings:
+      - class: fabricated-claims
+        target: AGENTS.md Engine bullet — smoke-check parenthetical "imports assets"
+        ground: Godot 3.x game-mode --path . --quit does not import assets — import machinery (EditorFileSystem::scan) is editor-mode-only, reachable only via -e/--editor or --export-* flags (verified against ~/git/godot.x 3.2.4-rc source, main/main.cpp editor gating)
+        remediation: smoke-check command corrected to -e --path . --quit with editor-mode attribution and the game-mode-without-importing caveat stated
+    outcome: remediated; fresh re-review dispatched
+  - round: 2
+    date: 2026-11-11
+    reviewer: fresh-context subagent (general)
+    verdict: PASS
+    findings: []
+    outcome: zero-finding verdict; SC-1..SC-10 all PASS; deliverable verified ready for PR

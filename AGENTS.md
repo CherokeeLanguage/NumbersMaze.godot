@@ -62,6 +62,29 @@ nothing here is guessable from filenames.
   including keystore credentials — never print, copy, or commit its contents.
   Export output lands in gitignored `tmp/` and `html5/`.
 
+## itch.io publication
+
+- The game publishes to itch.io only (developer direction 2026-11-11); there
+  is no Google Play path. `itch-push.sh` (repo root) is **push-only** — it
+  never builds or exports; run the Godot editor's export presets first, then
+  `./itch-push.sh` pushes the five artifacts to the channels `html5`,
+  `android`, `windows`, `linux`, `macos` and prints per-channel `butler
+  status` receipts.
+- butler is vendored at `.tools/butler/` (gitignored), not installed
+  system-wide — the script resolves `PATH` first, then that vendored copy.
+  Vendor it (one-time) with the command in `itch-push.sh`'s header:
+  `curl -L https://broth.itch.zone/butler/linux-amd64/LATEST/archive/default -o butler.zip`,
+  then unzip into `.tools/butler/`. Authenticate once with `butler login`
+  (credentials live in butler's own store — no keys in this repo).
+- `itch.conf` (copied from `itch.conf.example`) is gitignored and
+  machine-local — it carries the push target and artifact paths, never
+  credentials. Pushes carry no `--userversion` (butler auto-numbering stands).
+- The Android export preset is APK-format on the prebuilt-template path — no
+  gradle/JDK needed for the itch APK; its export path is
+  `tmp/NumbersMaze.apk` (`.aab` has no install path on itch).
+- Page setup (slot creation, cover, tagging, publish, rollback) is the
+  developer's dashboard work: `docs/itch-app-setup.md` is the runbook.
+
 ## Deck
 
 - `.opencode/` is the OpenCode agent-deck checkout (floor.md, hooks, skills) —

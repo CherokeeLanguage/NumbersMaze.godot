@@ -3,3 +3,8 @@ comments:
   body: 'PR #7 opened (feature/itch-publish -> main, squash 2fdf5aa). Verify PASS
     zero findings. SC-1 pending developer-assisted run per spec Scope.'
   timestamp: '2026-11-11T15:18:19+00:00'
+- type: internal
+  body: 'Delivered via PR #7 (merged 2026-11-11T15:19:29Z); SC-1 executed post-merge
+    (evidence: 5/audit/sc1-push-evidence.yaml). Follow-ups on PR #8: post-merge-snapshot
+    tracking commits + R-6 live-URL recording + runbook 4.1 correction.'
+  timestamp: '2026-11-11T15:57:40+00:00'

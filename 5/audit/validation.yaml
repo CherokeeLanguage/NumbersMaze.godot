@@ -1,0 +1,35 @@
+spec:
+  - round: 1
+    artifact_state: as filed (remote-first, post writer self-check)
+    verdict: FAIL
+    findings:
+      - family: fabricated-claims
+        classification: finding
+        text: '"Each sibling is libGDX/Java" is false for Animals — Animals is a Godot 3 project (project.godot config_version=4) whose legacy libGDX build is reference material per its own #11 spec and whose published artifacts are the legacy libGDX jar+APK staged in dist/; the operative artifact-level claims were accurate, the flat repo characterization was not'
+        remediation: Sibling comparison restated precisely — Syllabary/BoundPronouns libGDX, Animals Godot with legacy-jar deploy sources; Problem and Approach reworded to the artifact-level distinction (single desktop jar vs per-OS Godot binaries) that actually drives the design
+      - family: gap-analysis
+        classification: finding
+        text: R-8 requires both itch.conf and .tools/butler/ gitignore entries; SC-3 asserted only itch.conf — a deliverable gitignoring only itch.conf passes every SC while violating R-8's second entry
+        remediation: SC-3 extended to assert both entries gitignored, instrument amended (both entries present)
+      - family: fabricated-claims
+        classification: finding
+        text: '"README.md is a 3-line stub" — the file is 2 lines (verified working tree and main)'
+        remediation: Count corrected to 2 lines
+      - family: fabricated-claims
+        classification: finding
+        text: '"No 630×500 itch-cover-ratio asset exists" — assets/icons/itch-io-feature-graphic-630x500.png (+ .svg) exists, verified an actual 630×500 PNG (created 2026-11-10 23:54, before the spec final write); the writer''s claim came from a head-truncated directory listing'
+        remediation: Observed-facts bullet, R-5 parenthetical, and the out-of-scope cover bullet restated to the verified presence (matching cover asset exists; its upload stays a developer-side runbook step)
+    remediation_note: all four findings fixed in .issues/5/spec.md and mirrored into the remote body in the same action; round-2 validation dispatched on the revised artifact
+  - round: 2
+    artifact_state: post round-1 remediation
+    verdict: FAIL
+    findings:
+      - family: gap-analysis
+        classification: finding
+        text: R-2 names five fault conditions (butler absent; conf missing; conf REPLACE_ME; conf lacking a required key; artifact path absent) but SC-2's instrument ran only three — the lacking-required-key branch received no instrument run, so that requirement element was demonstrable only by assertion
+        remediation: SC-2 extended to enumerate all five fault conditions with five executed runs, one per condition
+      - family: fabricated-claims
+        classification: finding
+        text: '"that repo is outside the developer-named comparison set and not locally present" — a local checkout of the same origin exists at ../CherokeeLessons.com-broken (stale Forestry-era HEAD, no .issues store); the negation was checkable at write time and, as worded, contradicted by disk'
+        remediation: Ground restated to the verified facts — the developer-named comparison set is the sufficient scoping ground and the CherokeeLessons.com issue store is locally absent (stale broken checkout noted); the route decision itself survives
+    remediation_note: both findings fixed in .issues/5/spec.md (SC-2 mirrored into the remote body in the same action); round-3 validation dispatched on the revised artifact

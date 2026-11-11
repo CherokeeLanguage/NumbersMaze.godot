@@ -1,0 +1,19 @@
+# itch.io publish target — used by itch-push.sh.
+# Copy to itch.conf (gitignored) and fill in; do NOT put any passwords or
+# API keys here — butler keeps credentials in its own store (`butler login`).
+
+ITCH_USER=cherokee-language
+ITCH_GAME=cherokee-numbers-maze
+
+# Artifact paths — where the Godot editor exports land (the machine-local
+# export presets' export_path settings). Uncomment and adjust to override
+# the defaults itch-push.sh falls back to:
+#ITCH_HTML5_DIR=tmp/html5
+#ITCH_ANDROID_APK=tmp/NumbersMaze.apk
+#ITCH_WINDOWS_EXE=tmp/NumbersMaze-x86_64.exe
+#ITCH_LINUX_BIN=tmp/NumbersMaze.x86_64
+#ITCH_MACOS_ZIP=tmp/NumbersMaze-mac.zip
+
+# Published landing page — uncomment and fill once the page is published
+# (see docs/itch-app-setup.md, verification step):
+#ITCH_URL=https://cherokee-language.itch.io/cherokee-numbers-maze

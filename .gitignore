@@ -19,3 +19,7 @@ data_*/
 pepk.jar
 scripts/logs/
 ui/menus/logs/
+
+# itch.io publication (itch-push.sh): machine-local target config + vendored butler
+itch.conf
+.tools/butler/

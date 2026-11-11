@@ -85,7 +85,7 @@ check_file "${ITCH_MACOS_ZIP}"
 
 # --- Push (idempotent patch pushes; first push creates the download) ------
 echo "==> Pushing html5: ${ITCH_HTML5_DIR}"
-"${BUTLER}" push "${ITCH_HTML5_DIR}" "${ITCH_USER}/${ITCH_GAME}:html5"
+"${BUTLER}" push --ignore='*.import' "${ITCH_HTML5_DIR}" "${ITCH_USER}/${ITCH_GAME}:html5"
 
 echo "==> Pushing android: ${ITCH_ANDROID_APK}"
 "${BUTLER}" push "${ITCH_ANDROID_APK}" "${ITCH_USER}/${ITCH_GAME}:android"

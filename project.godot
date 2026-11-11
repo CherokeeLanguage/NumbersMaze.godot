@@ -250,6 +250,7 @@ gdscript/warnings/unsafe_call_argument=true
 
 window/size/width=1920
 window/size/height=1080
+window/size/fullscreen=true
 window/size/test_width=1920
 window/size/test_height=1080
 window/dpi/allow_hidpi=true
@@ -434,6 +435,7 @@ quality/driver/fallback_to_gles2=true
 quality/intended_usage/framebuffer_allocation=0
 quality/intended_usage/framebuffer_allocation.mobile=0
 2d/snapping/use_gpu_pixel_snap=true
+vram_compression/import_etc=true
 environment/default_clear_color=Color( 0, 0, 0, 1 )
 environment/default_environment="res://default_env.tres"
 quality/2d/use_pixel_snap=true

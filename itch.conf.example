@@ -14,6 +14,5 @@ ITCH_GAME=cherokee-numbers-maze
 #ITCH_LINUX_BIN=tmp/NumbersMaze.x86_64
 #ITCH_MACOS_ZIP=tmp/NumbersMaze-mac.zip
 
-# Published landing page — uncomment and fill once the page is published
-# (see docs/itch-app-setup.md, verification step):
-#ITCH_URL=https://cherokee-language.itch.io/cherokee-numbers-maze
+# Published landing page (live since 2026-11-11):
+ITCH_URL=https://cherokee-language.itch.io/cherokee-numbers-maze

@@ -1,0 +1,24 @@
+artifact: spec
+cycles:
+  - round: 1
+    date: 2026-11-11
+    reviewer: fresh-context dispatch (general subagent, no prior context)
+    verdict: FAIL
+    findings:
+      - class: internal contradiction / factual miscount
+        location: R-2 (inherited by SC-2, I-2)
+        text: R-2 stated "the same five elements" but enumerated six; the demo-video link was #9's Approach optional, not one of #9's R-5's five — count and attribution both wrong
+        remediation: R-2 restates "the same content elements, enumerated here (six)" with the correct attribution; SC-2/I-2 read against the enumerated six
+      - class: gap analysis
+        location: R-3 and R-5 vs the SC table and instruments
+        text: the stale-content prohibition (R-3) and the install-instructions exclusion (R-5) were SHALL requirements carried by no criterion and no instrument — a re-authored body could reintroduce store items or add install notes while passing every SC
+        remediation: SC-5 (I-5, the #9-carried tripwire + prohibition read) added for R-3; SC-6 (I-6, install-token tripwire + download-only read) added for R-5; R-2's unenforceable "wording unchanged" phrase replaced by the concrete fact-binding preservation I-2 greps
+      - class: incapable instrument (class 5)
+        location: SC-1 / I-1
+        text: I-1 covered only '**' and '<http'; R-1 also prohibits markdown headings and bullets, which the instrument could not detect — the coverage argument derived the post-change inventory from the pre-change body, a question the criterion does not ask
+        remediation: I-1's pattern extended to line-anchored heading and bullet tokens ('^#{1,6} ', '^- ', '^\* ', '^[0-9]+\. '); capability note restated (sensitivity proven by the 7-line pre-change match; coverage now spans all four prohibited shapes)
+    adjudicated_classes:
+      - internal contradiction: finding (remediated)
+      - gap analysis: finding (remediated)
+      - incapable instrument: finding (remediated)
+    outcome: revised in place; re-validation round 2 dispatched

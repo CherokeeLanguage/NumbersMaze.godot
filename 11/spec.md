@@ -57,19 +57,22 @@ markdown is correct there), `itch-push.sh`, `itch.conf.example`,
   `<url>` autolink brackets. The usage-header comment, the title line, and
   the cut-line structure above the body are unchanged (they are repo-side
   guidance, never pasted).
-- **R-2 — Content details preserved.** The body SHALL carry the same five
-  elements as the delivered copy (#9's R-5, verified at its merge): the
-  pitch (learn the Cherokee numbers — ᏣᎳᎩ ᏗᏎᏍᏗ — by playing a maze game);
-  the challenge-and-level mechanics (wander the maze, collect dice matching
-  the challenge, explode them, advance to larger levels with more numbers);
-  the controls with the bindings verified this session against
+- **R-2 — Content details preserved.** The body SHALL carry the same
+  content elements as the delivered copy, enumerated here (six — the
+  delivered copy carries six; #9's R-5 enumerated five of them and its
+  Approach carried the demo video as an optional link): the pitch (learn
+  the Cherokee numbers — ᏣᎳᎩ ᏗᏎᏍᏗ — by playing a maze game); the
+  challenge-and-level mechanics (wander the maze, collect dice matching
+  the challenge, explode them, advance to larger levels with more
+  numbers); the controls with the bindings verified this session against
   `project.godot`'s input map and `player/Player.gd` (gamepad: stick/D-pad
   move, A fireball, X pick up, Y drop; keyboard: arrows move, F/Space/Enter
   fireball, D pick up, S drop); the itch platforms (browser-playable plus
   Windows/macOS/Linux/Android downloads served by the page); the demo-video
   link (YouTube `tj6c0UGRMF4`); and the issue-tracker link
-  (`https://github.com/CherokeeLanguage/NumbersMaze.godot/issues`). Wording
-  is unchanged except where the format requires it.
+  (`https://github.com/CherokeeLanguage/NumbersMaze.godot/issues`). The
+  element set and every fact binding (URLs, control bindings) are the
+  delivered copy's — the re-authoring changes markup, not facts.
 - **R-3 — Stale-content prohibition carries over.** itch.io SHALL remain
   the only named distribution channel: no Google Play / Google App Store /
   Amazon / Apple / Microsoft Store / Linux Store items, no external
@@ -96,10 +99,12 @@ markdown is correct there), `itch-push.sh`, `itch.conf.example`,
 
 | ID | Criterion | Class | Instrument | Traces to |
 |---|---|---|---|---|
-| SC-1 | no markdown syntax below the cut line | structural | I-1 | R-1 |
-| SC-2 | the body is raw HTML carrying the five elements with the delivered details | structural | I-2 | R-2 |
+| SC-1 | no markdown syntax below the cut line — no `**` emphasis, no markdown headings or bullets, no `<url>` autolink brackets | structural | I-1 | R-1 |
+| SC-2 | the body is raw HTML carrying the six enumerated content elements with the delivered details | structural | I-2 | R-2 |
 | SC-3 | the runbook states the raw-HTML format | structural | I-3 | R-4 |
 | SC-4 | pattern structure and single paste source preserved | structural | I-4 | R-1, R-4 |
+| SC-5 | itch.io is the only named distribution channel — none of the stale distribution content appears | structural | I-5 | R-3 |
+| SC-6 | the copy carries no installation instructions | structural | I-6 | R-5 |
 
 Every criterion is atomic, binary-verifiable by its instrument, and
 deliverable-owned. No behavioral criteria: the change touches no runtime
@@ -108,24 +113,33 @@ surface.
 ### Verification instruments
 
 ```
-I-1  grep -nE '\*\*|<http' below-the-cut-line content of docs/itch-page-description.md
-     → zero matches  (the '**' bold markers and '<https' autolink brackets
-     are the markdown shapes the body used; no headings/bullets exist in
-     the delivered body, so these two tokens cover its markdown inventory)
-I-2  body read: <p>/<strong>/<a href> tags present; five-element read
-     against R-2's list; fact greps — 'youtube.com/watch?v=tj6c0UGRMF4',
+I-1  below-the-cut-line content of docs/itch-page-description.md:
+     grep -nE '\*\*|<http|^#{1,6} |^- |^\* |^[0-9]+\. '
+     → zero matches  (covers every markdown shape R-1 prohibits: bold
+     markers, autolink brackets, headings, unordered/ordered bullets)
+I-2  body read: <p>/<strong>/<a href> tags present; element read against
+     R-2's enumerated six; fact greps — 'youtube.com/watch?v=tj6c0UGRMF4',
      'github.com/CherokeeLanguage/NumbersMaze.godot/issues', the control
-     bindings (A/F/Space/Enter, X/D, Y/S, D-pad/stick) — all match the
-     delivered copy
+     bindings (A/F/Space/Enter fireball, X/D pick up, Y/S drop,
+     stick/D-pad move) — all match the delivered copy's facts
 I-3  grep -n "raw HTML" docs/itch-app-setup.md → matches in the Step 2 item
 I-4  head-of-file read (usage-header comment, title, cut-line comment,
      '---' cut line) + grep itch-page-description docs/itch-app-setup.md
      → Step 2 still names the file as the paste source
+I-5  grep -inE 'Google Play|Google App Store|App Store|Amazon|Apple|Microsoft Store|Linux Store|HTML-Games|play\.google\.com|apps\.apple\.com|amazon\.com' docs/itch-page-description.md
+     → zero matches, plus the distribution content read against R-3's
+     prohibition list
+I-6  grep -in 'install' docs/itch-page-description.md → zero matches,
+     plus the platforms element read confirms download-only wording
 ```
 
-I-1 was exercised against the current state on 2026-11-11: the delivered
-body matches both tokens (multiple `**` spans; two `<http` autolinks), so
-the post-change zero-matches is informative.
+Instrument capability against the pre-change state, exercised 2026-11-11:
+I-1 matches 7 lines of the delivered body (the markdown shapes it guards);
+I-5 and I-6 match nothing today — their guards are reintroduction and
+addition shapes (a re-authored body could introduce a store item or an
+install note), which the token sets demonstrably match (`Google App Store`,
+`HTML-Games`, bare `install`); the post-change zero-matches is the
+criterion's evidence.
 
 ## Out of scope
 

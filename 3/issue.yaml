@@ -1,10 +1,12 @@
 title: 'Spec: convert the NumbersMaze.godot repo''s deploy target to itch.io (standard
   itch.io deployment)'
-status: open
+status: closed
 labels:
 - needs-approval
 - spec
 body: ''
 created_at: '2026-11-11T16:14:07+00:00'
-updated_at: '2026-11-11T16:14:17+00:00'
+updated_at: '2026-11-11T16:16:55+00:00'
 github_url: https://github.com/CherokeeLanguage/NumbersMaze.godot/issues/3
+closed_at: '2026-11-11T16:16:55+00:00'
+close_reason: completed

@@ -38,3 +38,20 @@ spec:
     verdict: PASS
     findings: []
     note: zero-finding verdict — all eight defect classes, all analysis families, and the proactive repo-boundary containment check applied; every factual claim verified against the repo, the three siblings, the research record, and the remote body; live itch namespace and broth URL re-checked
+  - round: 4
+    artifact_state: post developer directive revision (2026-11-11: itch.io is the only publishing platform going forwards)
+    verdict: FAIL
+    findings:
+      - family: fabricated-claims
+        classification: finding
+        text: spec attributed the name "Android (aab)" to the machine-local preset — the developer had renamed it to "Android (apk)" during the editor session (file rewritten 09:33, spec written 09:39); only the .aab export-path suffix remains mismatched; the aab name lives in the tracked TV preset (true gradle-AAB config)
+        remediation: observed-facts bullet restated to the verified current state (dated); R-5 requirement made state-independent (APK-format prebuilt path, artifact at tmp/NumbersMaze.apk) with the current-state snapshot kept in provenance only
+      - family: research-adequacy
+        classification: finding
+        text: AGENTS.md/#4 state claims stale — AGENTS.md is committed (9e936e3, 2026-11-11, branch ahead of main, #4 in implementation), spec still said untracked/no-commits/spec-phase
+        remediation: provenance bullet and R-7 coordination sentence restated to the verified branch state (9e936e3, ahead of main, #4 in implementation); the plan-stage sequencing decision now feeds on true state
+      - family: fabricated-claims
+        classification: finding
+        text: gradle toolchain version list (JDK 17 / android-34 / build-tools 34.0.0 / NDK r23c) asserted without source and contradicted by the repo's own gradle template (android/build/config.gradle — AGP 4.1.2, compileSdk 29, buildTools 30.0.1, NDK 21.4, gradle 6.5); the values were the 3.6 editor-template toolchain from the diagnosis chat, never recorded in the research record
+        remediation: version list dropped from the spec (requirement kept as "no gradle build and none of its JDK/Android-SDK prerequisites"); the toolchain facts for BOTH toolchains recorded in the research record with sources (repo config.gradle, 3.6 template android_source.zip, Godot 3.6 docs URL, fetched 2026-11-11)
+    remediation_note: all three findings fixed in .issues/5/spec.md and mirrored into the remote body; research card extended and synced; round-5 validation dispatched on the revised artifact

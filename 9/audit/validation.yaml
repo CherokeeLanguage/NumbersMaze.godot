@@ -33,3 +33,20 @@ cycles:
     adjudicated_classes:
       - incapable instrument: finding ×3 (all remediated)
     outcome: revised in place; re-validation round 3 dispatched
+  - round: 3
+    date: 2026-11-11
+    reviewer: fresh-context dispatch (general subagent, no prior context)
+    verdict: FAIL
+    findings:
+      - class: incapable instrument (class 5)
+        location: SC-6 instrument
+        text: the three-token tripwire (Google Play|Amazon|Apple) cannot match the source page's actual stale wordings — 'Google App Store' (source line 24) and bare 'App Store' forms pass the grep while violating the criterion
+        remediation: R-5's prohibition enumerated concretely (itch.io sole channel; no Google Play/Google App Store/Amazon/Apple/Microsoft Store/Linux Store items; no /HTML-Games play-online link; no non-itch direct-download links); SC-6 instrument broadened to the full token tripwire plus the prohibition-list content read
+      - class: gap analysis
+        location: R-5 distribution clause vs SC-5/SC-6
+        text: the spec's own observed-failures inventory lists the source's non-store stale content (HTML-Games link, pre-itch direct downloads) but no criterion instrumented its absence — a body retaining it would pass every SC while violating R-5
+        remediation: the enumerated prohibition (and its instrument I-6) now covers the non-itch play-online link and direct-download file links
+    adjudicated_classes:
+      - incapable instrument: finding (remediated)
+      - gap analysis: finding (remediated)
+    outcome: revised in place; instruments moved to a fenced verification-instruments subsection (removes the markdown-table pipe-escaping tension that caused round 2's defect); re-validation round 4 dispatched

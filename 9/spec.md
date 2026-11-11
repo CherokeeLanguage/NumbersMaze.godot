@@ -110,8 +110,14 @@ untouched.
   (4) the itch platforms — browser-playable build plus Windows, macOS,
   Linux, and Android downloads served by the itch page; (5) the project's
   issue-tracker link (`https://github.com/CherokeeLanguage/NumbersMaze.godot/issues`).
-  Distribution claims SHALL reflect the itch-only reality: no Google Play,
-  Amazon, or Apple store sections (developer direction 2026-11-11).
+  Distribution claims SHALL reflect the itch-only reality (developer
+  direction 2026-11-11): the description SHALL name itch.io as the sole
+  distribution channel and SHALL carry none of the source page's stale
+  distribution content — no Google Play / Google App Store / Amazon /
+  Apple / Microsoft Store / Linux Store items, no external play-online
+  link (the source's `/HTML-Games/NumbersMaze` path), and no non-itch
+  direct-download file links (the source's `NumbersMaze.x86_64`,
+  `NumbersMaze-x86_64.exe`, `NumbersMaze-mac.zip` links).
 - **R-6 — Runbook pointer.** `docs/itch-app-setup.md` Step 2's description
   item SHALL name `docs/itch-page-description.md` as the paste source,
   replacing the current "out of scope … see BoundPronouns'" wording. The
@@ -138,18 +144,47 @@ untouched.
 
 | ID | Criterion | Class | Instrument | Traces to |
 |---|---|---|---|---|
-| SC-1 | `README.md` contains no deploy/publish procedure | structural | `grep -inE 'butler|itch-push|itch\.conf' README.md` returns zero matches, and the README contains no step-numbered deploy section | R-1 |
-| SC-2 | README states the four R-1 elements: identity (game + Cherokee name), Godot 3.x requirement, local run path, docs index | structural | README read against the four-element list | R-1 |
-| SC-3 | README's URL = `ITCH_URL` in `itch.conf.example` = `https://cherokee-language.itch.io/cherokee-numbers-maze` | structural | string match across both files | R-2 |
-| SC-4 | `docs/itch-page-description.md` exists with the sibling pattern structure: usage-header comment, cut line, verbatim body below | structural | file read (head of file) | R-4 |
-| SC-5 | the description body covers the five R-5 elements | structural | file read against the five-element list | R-5 |
-| SC-6 | the description carries no stale store claims | structural | `grep -inE 'Google Play|Amazon|Apple' docs/itch-page-description.md` returns zero matches | R-5 |
-| SC-7 | the runbook's Step 2 description item names this repo's `docs/itch-page-description.md` as the paste source, replacing the out-of-scope wording | structural | `grep -n "out of scope for this repo's publication tooling" docs/itch-app-setup.md` returns zero matches, and the Step 2 item read shows the paste-source wording | R-6 |
-| SC-8 | every R-3 fact remains stated in the tracked docs/scripts | structural | grep each fact: `itch-push.sh` header (push-only, vendored butler), `docs/itch-app-setup.md` (conf copy, login, push + receipts), `itch.conf.example` (URL) | R-3 |
+| SC-1 | `README.md` contains no deploy/publish procedure | structural | I-1 | R-1 |
+| SC-2 | README states the four R-1 elements: identity (game + Cherokee name), Godot 3.x requirement, local run path, docs index | structural | I-2 | R-1 |
+| SC-3 | README's URL = `ITCH_URL` in `itch.conf.example` = `https://cherokee-language.itch.io/cherokee-numbers-maze` | structural | I-3 | R-2 |
+| SC-4 | `docs/itch-page-description.md` exists with the sibling pattern structure: usage-header comment, cut line, verbatim body below | structural | I-4 | R-4 |
+| SC-5 | the description body covers the five R-5 elements | structural | I-5 | R-5 |
+| SC-6 | the description carries no stale distribution content: itch.io is the only named distribution channel, and none of the source page's stale distribution content appears (Google Play / Google App Store / Amazon / Apple / Microsoft Store / Linux Store items, the `/HTML-Games/NumbersMaze` play-online link, the non-itch direct-download file links) | structural | I-6 | R-5 |
+| SC-7 | the runbook's Step 2 description item names this repo's `docs/itch-page-description.md` as the paste source, replacing the out-of-scope wording | structural | I-7 | R-6 |
+| SC-8 | every R-3 fact remains stated in the tracked docs/scripts | structural | I-8 | R-3 |
 
-Every criterion is atomic, binary-verifiable by the stated instrument, and
+Every criterion is atomic, binary-verifiable by its instrument, and
 deliverable-owned (the docs' content — not the toolchain's). No behavioral
 criteria: the change touches no runtime surface.
+
+### Verification instruments
+
+```
+I-1  grep -inE 'butler|itch-push|itch\.conf' README.md
+     → zero matches, and no step-numbered deploy section in the README
+I-2  README read against the four R-1 elements
+I-3  string match across README.md and itch.conf.example — both state
+     https://cherokee-language.itch.io/cherokee-numbers-maze
+I-4  head-of-file read of docs/itch-page-description.md — usage-header
+     comment, cut line, verbatim body below
+I-5  description body read against the five R-5 elements
+I-6  grep -inE 'Google Play|Google App Store|App Store|Amazon|Apple|Microsoft Store|Linux Store|HTML-Games|play\.google\.com|apps\.apple\.com|amazon\.com' docs/itch-page-description.md
+     → zero matches, plus the distribution content read against R-5's
+     enumerated prohibition list
+I-7  grep -n "out of scope for this repo's publication tooling" docs/itch-app-setup.md
+     → zero matches, plus the Step 2 item read shows this repo's
+     docs/itch-page-description.md as the paste source
+I-8  per-fact greps: itch-push.sh header states the push-only contract and
+     the vendored-butler fallback with its vendoring command;
+     docs/itch-app-setup.md states the itch.conf copy step, butler login,
+     and the push + per-channel receipts; itch.conf.example states ITCH_URL
+     with the live URL
+```
+
+Instruments I-1, I-6, and I-7 were exercised against the pre-change state on
+2026-11-11: I-1 and I-6 match the tokens they guard (proving post-change
+zero-matches is informative), and I-7 matches exactly once pre-change (the
+superseded wording), so the post-change zero observes the edit.
 
 ## Out of scope
 

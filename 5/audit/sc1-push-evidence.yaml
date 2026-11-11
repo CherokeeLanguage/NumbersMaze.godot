@@ -1,0 +1,32 @@
+# SC-1 executed evidence — first pushes, 2026-11-11 (developer-directed "deploy")
+schema: sc1-push-evidence
+issue: NumbersMaze.godot#5
+date: 2026-11-11
+
+push_run:
+  command: ./itch-push.sh (full log captured)
+  conf: itch.conf from itch.conf.example (ITCH_USER=cherokee-language, ITCH_GAME=cherokee-numbers-maze)
+  all_five_pushed: true
+  per_channel:
+    html5:    { upload: '#20443812', build: '#2357527', version: 1, pushed: '51.04 MiB (20 files, dir push)' }
+    android:  { upload: '#20443813', build: '#2357528', version: 1, pushed: '70.89 MiB (APK)' }
+    windows:  { upload: '#20443815', build: '#2357529', version: 1, pushed: '63.6 MiB (exe)' }
+    linux:    { upload: '#20443816', build: '#2357530', version: 1, pushed: '64.02 MiB (x86_64)' }
+    macos:    { upload: '#20443818', build: '#2357531', version: 1, pushed: '88.56 MiB (mac zip)' }
+  receipt_timing_note: >
+    android/linux/macos receipts initially reported "No channel found" —
+    the script's status calls ran before itch's backend finished processing
+    those builds; re-poll minutes later listed all three with their builds.
+    html5/windows receipts were already live in the script's own output.
+
+page_verification:
+  url: https://cherokee-language.itch.io/cherokee-numbers-maze
+  fetched: 2026-11-11
+  browser_playable: true ("Run game" present)
+  downloads_listed: [NumbersMaze.apk 70MB, NumbersMaze-x86_64.exe 63MB, NumbersMaze.x86_64 64MB, cherokee-numbers-maze-macos.zip 47MB]
+  platform_tags: [HTML5, Windows, macOS, Linux, Android]  # auto-applied by channel naming + page kind
+  made_with_godot: true
+
+advisories:
+  - butler single-file advisory on the windows exe push ("diffing/patching work poorly on all-in-one executables") — informational, push succeeded
+  - runbook Step 4.1 manual html5 tagging turned out unnecessary — the page kind HTML auto-serves the html5 channel ("Run game" live without dashboard action)

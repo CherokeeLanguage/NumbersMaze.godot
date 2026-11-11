@@ -60,3 +60,14 @@ spec:
     verdict: PASS
     findings: []
     note: zero-finding verdict — all defect classes and analysis families applied; every current-state and negation claim verified against the repo, siblings, research record, and remote body (preset state, AGENTS.md/branch state, toolchain traceability, live itch namespace); repo-boundary containment both prongs pass
+  - artifact: plan (.issues/5/plan.md)
+    round: 1
+    verdict: FAIL
+    findings:
+      - class: 5-internal-inconsistency
+        text: Item 4's RED stated exit 127 for the artifact-absent fault — impossible after Item 3 (script exists; with butler present + conf filled it falls off its end, exit 0, no guard, no push)
+        remediation: RED restated to the true observable (exit 0, no artifact guard, no push — specified behavior fails via wrong exit code and missing guidance)
+      - class: 6-incomplete-derivation
+        text: R-6's URL-recording step ("live page URL added to itch.conf.example (ITCH_URL) and README at publication per the runbook's verification step") had no enumerated home in Item 5's deliverable/instrument
+        remediation: Item 5's verification step now carries the URL-recording instruction (fill ITCH_URL in itch.conf.example + add URL to README); instrument checklist covers it via the element list
+    note: self-pass had already caught class 1 (SC-1 item coverage) and added Item 8 before dispatch; round-2 validation follows

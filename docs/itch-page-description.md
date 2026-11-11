@@ -23,6 +23,8 @@ numbers to learn.</p>
 
 <p><strong>Platforms:</strong> play it right here in your browser, or download builds for Windows, macOS, Linux, and Android — every build is served by this itch page.</p>
 
+<p><strong>Installing:</strong> the Android APK installs directly on your device — Android may ask you to allow installing apps from this source once. The Windows, macOS, and Linux builds are plain downloads: grab them and run.</p>
+
 <p>Demo video: <a href="https://www.youtube.com/watch?v=tj6c0UGRMF4">https://www.youtube.com/watch?v=tj6c0UGRMF4</a></p>
 
 <p>Find an issue with the game? Please report it at the project's GitHub:

@@ -3,6 +3,8 @@ Cherokee Language Numbers Maze
 
 ## Publishing to itch.io (manual)
 
+The published page: **https://cherokee-language.itch.io/cherokee-numbers-maze**
+
 The game publishes to itch.io via butler — the repo's push script never
 builds anything; it pushes editor-exported artifacts to five channels
 (`html5`, `android`, `windows`, `linux`, `macos`).

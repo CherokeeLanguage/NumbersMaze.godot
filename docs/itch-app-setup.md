@@ -88,12 +88,14 @@ research record `.issues/research-cards/itch-io-publishing.yaml`).
 
 ## Step 4 — Tag the html5 channel, then publish
 
-1. **Tag the browser build** (Dashboard → Edit-game): channel names tag
-   desktop platforms automatically (`windows`→Windows, `linux`→Linux,
-   `macos`→Mac via the `mac` substring, `android`→Android), but there is no
-   name-based tag for web channels (verified 2026-11-10) — after the first
-   push, set the `html5` channel's kind to "HTML5 / Playable in browser" in
-   the Edit-game form so the page offers the playable build.
+1. **Check the browser build is playable:** channel names tag desktop
+   platforms automatically (`windows`→Windows, `linux`→Linux, `macos`→Mac
+   via the `mac` substring, `android`→Android), and there is no name-based
+   tag for web channels (verified 2026-11-10) — but with the page kind set
+   to **HTML** at creation (Step 1), the first `html5` push serves the
+   playable build with no dashboard action: the page shows "Run game"
+   immediately (observed 2026-11-11). If it does not, set the `html5`
+   channel's kind to "HTML5 / Playable in browser" in the Edit-game form.
 2. Dashboard → Edit-game → Publish. Confirm the page serves the playable
    browser build and five download buttons.
 

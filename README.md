@@ -1,25 +1,27 @@
-# NumbersMaze.godot
-Cherokee Language Numbers Maze
+# Cherokee Numbers Maze — ᏣᎳᎩ ᏗᏎᏍᏗ ᏚᎴᎾᎯᎯ
 
-## Publishing to itch.io (manual)
+A maze game for learning the Cherokee numbers. Wander the maze, collect dice
+that match the level's challenge, and explode them; complete all of a level's
+challenges to advance to a larger level with more numbers to learn.
 
-The published page: **https://cherokee-language.itch.io/cherokee-numbers-maze**
+**Play the published page:** <https://cherokee-language.itch.io/cherokee-numbers-maze>
 
-The game publishes to itch.io via butler — the repo's push script never
-builds anything; it pushes editor-exported artifacts to five channels
-(`html5`, `android`, `windows`, `linux`, `macos`).
+## Running
 
-1. Export the artifacts with the Godot editor's export presets (paths in
-   `itch.conf.example`).
-2. `cp itch.conf.example itch.conf` and fill in the target (gitignored;
-   defaults carry the real target already).
-3. `butler login` — once; credentials live in butler's own store, never in
-   the repo.
-4. `./itch-push.sh` — pushes all five artifacts and prints per-channel
-   receipts.
+This is a Godot **3.x** project (`config_version=4`, GDScript 1.x) — open it
+with a Godot 3.x editor, never a Godot 4.x editor.
 
-butler is not required on `PATH`: the script falls back to the vendored copy
-at `.tools/butler/butler` (gitignored; the vendoring command is in the
-script's header). Full page setup — creating the game slot, the cover, the
-html5 channel tagging, publish and rollback — is documented step by step in
-[docs/itch-app-setup.md](docs/itch-app-setup.md).
+- Open the project in the Godot 3.x editor and press Play (main scene:
+  `main/Main.tscn`), or run it from a terminal:
+  `<godot3-binary> --path .`
+- Scratch test harness (runs a level with dice, quits on the select button):
+  `<godot3-binary> --path . res://misc/TestScene.tscn`
+
+## Documentation
+
+- [docs/itch-app-setup.md](docs/itch-app-setup.md) — the itch.io app-page
+  setup and publishing runbook
+- [docs/itch-page-description.md](docs/itch-page-description.md) — the itch
+  page's description copy (paste-verbatim)
+- [AGENTS.md](AGENTS.md) — repo and agent notes: architecture, conventions,
+  gotchas

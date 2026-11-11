@@ -46,11 +46,12 @@ research record `.issues/research-cards/itch-io-publishing.yaml`).
    the vector source; itch accepts PNG/JPG only, so the SVG stays in the
    repo. (`android-feature-graphic-1024x500.png` is Play-ratio source
    material — not an itch cover.)
-2. **Description** (Edit-game → Description): authoring the description copy
-   is out of scope for this repo's publication tooling — the sibling repos'
-   pattern is a paste-verbatim `docs/itch-page-description.md` file
-   (see BoundPronouns'). Author or paste the description text in the
-   Edit-game form directly.
+2. **Description** (Edit-game → Description): the description copy is
+   authored in this repo at
+   [docs/itch-page-description.md](itch-page-description.md) — paste
+   everything below that file's cut line into the description field,
+   verbatim. If the copy changes, edit the file in the repo first, then
+   re-paste.
 
 ## Step 3 — Export the artifacts and feed the channels
 

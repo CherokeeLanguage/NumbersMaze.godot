@@ -1,0 +1,35 @@
+artifact: spec
+cycles:
+  - round: 1
+    date: 2026-11-11
+    reviewer: fresh-context dispatch (general subagent, no prior context)
+    verdict: FAIL
+    findings:
+      - class: cross-reference sufficiency
+        also_bears: fabricated-claims character
+        location: R-2 (preservation parenthetical)
+        text: R-2 cited "#5's SC-2 instrument" as the URL-tracking criterion; #5's SC-2 is the itch-push.sh fault-condition criterion — no #5 SC carries a URL instrument; #5's URL-tracking lives in R-6's prose and the runbook's Verification step
+        remediation: R-2's parenthetical rewritten in place to cite #5's R-6 (operationalized by the runbook's Verification step)
+    adjudicated_classes:
+      - cross-reference sufficiency: finding (remediated)
+    outcome: revised in place; re-validation round 2 dispatched
+  - round: 2
+    date: 2026-11-11
+    reviewer: fresh-context dispatch (general subagent, no prior context)
+    verdict: FAIL
+    findings:
+      - class: incapable instrument (class 5)
+        location: SC-1 instrument
+        text: grep -E pattern carried escaped pipes ('\|'), which are literal '|' under ERE — zero matches was guaranteed by construction regardless of README content
+        remediation: pattern rewritten with plain alternation ('butler|itch-push|itch\.conf'); instrument empirically shown to detect the tokens in the pre-change README
+      - class: incapable instrument (class 5)
+        location: SC-6 instrument
+        text: same escaped-pipe defect; the stale-store prohibition would have been asserted, not demonstrated
+        remediation: pattern rewritten with plain alternation; instrument shown to detect a planted 'Google Play' line
+      - class: incapable instrument (class 5)
+        location: SC-7 instrument
+        text: filename-presence grep already passed in the pre-change state (the runbook's sibling-pattern sentence names the same filename), so it could not observe the wording change R-6 demands
+        remediation: instrument replaced with the superseded-wording grep ('out of scope for this repo's publication tooling' → zero matches post-change) plus the Step 2 paste-source content read; pre-change state shows exactly one match, so the post-change zero observes the edit
+    adjudicated_classes:
+      - incapable instrument: finding ×3 (all remediated)
+    outcome: revised in place; re-validation round 3 dispatched

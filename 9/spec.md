@@ -82,8 +82,8 @@ untouched.
 - **R-2 — Landing-page URL stays tracked in the README.** The README SHALL
   retain the published page URL as the game's home link, matching `ITCH_URL`
   in `itch.conf.example` — `https://cherokee-language.itch.io/cherokee-numbers-maze`.
-  This preserves #5's URL-tracking criterion (its SC-2 instrument) against
-  the rewrite.
+  This preserves the URL-tracking requirement #5's R-6 carries (the runbook's
+  Verification step operationalizes it) against the rewrite.
 - **R-3 — No deploy fact orphaned.** Every operational fact the removed
   README section carried SHALL remain stated in the repo's tracked
   docs/scripts: the push-only contract (`itch-push.sh` header), the
@@ -138,13 +138,13 @@ untouched.
 
 | ID | Criterion | Class | Instrument | Traces to |
 |---|---|---|---|---|
-| SC-1 | `README.md` contains no deploy/publish procedure | structural | `grep -inE 'butler\|itch-push\|itch\.conf' README.md` returns zero matches, and the README contains no step-numbered deploy section | R-1 |
+| SC-1 | `README.md` contains no deploy/publish procedure | structural | `grep -inE 'butler|itch-push|itch\.conf' README.md` returns zero matches, and the README contains no step-numbered deploy section | R-1 |
 | SC-2 | README states the four R-1 elements: identity (game + Cherokee name), Godot 3.x requirement, local run path, docs index | structural | README read against the four-element list | R-1 |
 | SC-3 | README's URL = `ITCH_URL` in `itch.conf.example` = `https://cherokee-language.itch.io/cherokee-numbers-maze` | structural | string match across both files | R-2 |
 | SC-4 | `docs/itch-page-description.md` exists with the sibling pattern structure: usage-header comment, cut line, verbatim body below | structural | file read (head of file) | R-4 |
 | SC-5 | the description body covers the five R-5 elements | structural | file read against the five-element list | R-5 |
-| SC-6 | the description carries no stale store claims | structural | `grep -inE 'Google Play\|Amazon\|Apple' docs/itch-page-description.md` returns zero matches | R-5 |
-| SC-7 | the runbook's Step 2 description item names `docs/itch-page-description.md` as the paste source | structural | `grep 'itch-page-description' docs/itch-app-setup.md` matches in the Step 2 item | R-6 |
+| SC-6 | the description carries no stale store claims | structural | `grep -inE 'Google Play|Amazon|Apple' docs/itch-page-description.md` returns zero matches | R-5 |
+| SC-7 | the runbook's Step 2 description item names this repo's `docs/itch-page-description.md` as the paste source, replacing the out-of-scope wording | structural | `grep -n "out of scope for this repo's publication tooling" docs/itch-app-setup.md` returns zero matches, and the Step 2 item read shows the paste-source wording | R-6 |
 | SC-8 | every R-3 fact remains stated in the tracked docs/scripts | structural | grep each fact: `itch-push.sh` header (push-only, vendored butler), `docs/itch-app-setup.md` (conf copy, login, push + receipts), `itch.conf.example` (URL) | R-3 |
 
 Every criterion is atomic, binary-verifiable by the stated instrument, and

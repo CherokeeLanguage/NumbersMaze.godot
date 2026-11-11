@@ -33,3 +33,8 @@ spec:
         text: '"that repo is outside the developer-named comparison set and not locally present" — a local checkout of the same origin exists at ../CherokeeLessons.com-broken (stale Forestry-era HEAD, no .issues store); the negation was checkable at write time and, as worded, contradicted by disk'
         remediation: Ground restated to the verified facts — the developer-named comparison set is the sufficient scoping ground and the CherokeeLessons.com issue store is locally absent (stale broken checkout noted); the route decision itself survives
     remediation_note: both findings fixed in .issues/5/spec.md (SC-2 mirrored into the remote body in the same action); round-3 validation dispatched on the revised artifact
+  - round: 3
+    artifact_state: post round-2 remediation
+    verdict: PASS
+    findings: []
+    note: zero-finding verdict — all eight defect classes, all analysis families, and the proactive repo-boundary containment check applied; every factual claim verified against the repo, the three siblings, the research record, and the remote body; live itch namespace and broth URL re-checked

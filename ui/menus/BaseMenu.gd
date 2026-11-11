@@ -30,24 +30,6 @@ func _physics_process(_delta):
 func sfx()->void:
 	_sfx.effect(Consts.fx.box_moved)
 
-"""
-Adjusts MARGIN to account for some TVs with cropping issues.
-'container' must be set by child class
-"""
-func tv_zoom(value:float):
-	value = 1 - value
-	if container == null or not is_instance_valid(container):
-		return
-	if not container is Control:
-		return
-	var control = container as Control
-	var x: = size.x*value/2
-	var y: = size.y*value/2
-	control.margin_bottom=-y
-	control.margin_left=x
-	control.margin_right=-x
-	control.margin_top=y
-
 func _exit_tree() -> void:
 	_music.list=[]
 	_music.stop()

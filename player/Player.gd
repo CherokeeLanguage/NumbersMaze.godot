@@ -7,7 +7,6 @@ enum FACING { NORTH, EAST, SOUTH, WEST}
 onready var FireballNode:PackedScene = PackedScenes.PlayerFireball
 
 onready var animation:AnimationPlayer = $AnimationPlayer
-onready var cameraFollow:RemoteTransform2D = $CameraFollow
 onready var raysNode:Node2D = $Rays
 onready var fbTimer:Timer=$FireBallTimer
 onready var collider:CollisionShape2D = $CollisionShape2D
@@ -109,6 +108,8 @@ func drop_check():
 		if not items.empty():
 			sfx.effect(Consts.fx.drop_it)
 			for item in items:
+				if not is_instance_valid(item):
+					continue 
 				if item is DieNode:
 					if is_instance_valid(item.joint):
 						item.joint.queue_free()

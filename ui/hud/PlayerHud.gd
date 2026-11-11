@@ -13,7 +13,6 @@ onready var colorRect:ColorRect = $ColorRect
 var buttons:Array = []
 var ix:int = 0
 var count:int = 0
-var visible:bool = true setget set_visible
 var size:Vector2
 
 signal quit_level
@@ -74,18 +73,3 @@ func setScore(value:int):
 
 func setChallenge(value:String):
 	challenge.text=value
-
-"""
-Adjusts MARGIN to account for some TVs with cropping issues.
-"""
-func tv_zoom(value:float):
-	print("tv_zoom: "+str(value))
-	value = 1 - value
-	if control == null or not is_instance_valid(control):
-		return
-	var x: = size.x*value/2
-	var y: = size.y*value/2
-	control.margin_bottom=-y
-	control.margin_left=x
-	control.margin_right=-x
-	control.margin_top=y

@@ -92,7 +92,7 @@ func __load_level1()->void:
 	
 func __load_level2()->void:
 	camera.smoothing_enabled=true
-	player.cameraFollow.remote_path = camera.get_path()
+	# player.cameraFollow.remote_path = camera.get_path()
 	
 func _on_LevelMap_challenge_changed(number) -> void:
 	emit_signal("challenge_changed", number)

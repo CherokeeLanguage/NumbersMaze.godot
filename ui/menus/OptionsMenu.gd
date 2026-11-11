@@ -5,12 +5,10 @@ class_name OptionsMenu
 signal master_volume(percent)
 signal fx_volume(percent)
 signal music_volume(percent)
-signal tv_zoom(percent)
 
 onready var master_volume:ProgressBar = $VBox/HBox_2/ProgressBar
 onready var fx_volume:ProgressBar = $VBox/HBox_3/ProgressBar
 onready var music_volume:ProgressBar = $VBox/HBox_4/ProgressBar
-onready var tv_zoom:ProgressBar = $VBox/HBox_1/ProgressBar
 onready var tv_box:HBoxContainer = $VBox/HBox_1
 
 var ix:int = 0
@@ -22,10 +20,8 @@ func _ready() -> void:
 	buttons.append($VBox/HBox_2/MasterVolume)
 	buttons.append($VBox/HBox_3/FxVolume)
 	buttons.append($VBox/HBox_4/MusicVolume)
-	buttons.append($VBox/HBox_1/TvZoom)
 	count = buttons.size()
 	update_buttons()	
-	tv_box.visible = OS.get_name().begins_with("Android")
 	menu_music()
 	
 func _physics_process(delta):
@@ -50,8 +46,6 @@ func inc_value(percent:int)->void:
 			inc_fx_volume(percent*5)
 		2:
 			inc_music_volume(percent*5)
-		3:
-			inc_tv_zoom(percent)
 			
 
 func inc_master_volume(percent:int)->void:
@@ -66,10 +60,6 @@ func inc_music_volume(percent:int)->void:
 	music_volume.value+=percent
 	emit_signal("music_volume", music_volume.value)
 	
-func inc_tv_zoom(percent:int)->void:
-	tv_zoom.value+=percent
-	emit_signal("tv_zoom", tv_zoom.value)
-
 func update_buttons() -> void:
 	sfx()
 	for button in buttons:

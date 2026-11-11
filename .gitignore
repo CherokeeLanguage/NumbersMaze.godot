@@ -1,6 +1,7 @@
 
 # Godot-specific ignores
 .import/
+.godot/
 export.cfg
 export_presets.cfg
 
@@ -12,3 +13,9 @@ data_*/
 /tmp/
 /html5/
 *.aab
+/android/build/
+/.idea/
+/.gradle/
+pepk.jar
+scripts/logs/
+ui/menus/logs/

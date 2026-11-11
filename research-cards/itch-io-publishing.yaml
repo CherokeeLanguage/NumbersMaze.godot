@@ -55,6 +55,22 @@ findings:
     threads: unimplemented on Godot 3.2 HTML5 (docs); no SAB requirement
     note: NumbersMaze's staged html5/ export totals ~45 MB — fits itch's HTML5 limits
 
+  android_toolchain:
+    repo_gradle_template_3_2_4_rc3:
+      values: AGP 4.1.2; compileSdk 29; targetSdk 29; buildTools 30.0.1; ndk 21.4.7075529 (r21); gradle wrapper 6.5
+      source: android/build/config.gradle + android/build/gradle/wrapper/gradle-wrapper.properties in this repo (verified 2026-11-11)
+      jdk_note: gradle 6.5 runs on JDK 8–14-era JVMs — not on JDK 17
+    godot_3_6_editor_template:
+      values: AGP 8.2.0; gradle 8.2; compileSdk/targetSdk 34; buildTools 34.0.0
+      source: android_source.zip config.gradle inside ~/.local/share/godot/templates/3.6.stable/ (verified 2026-11-11)
+      jdk_note: gradle 8.2 runs on JVMs up to 19; AGP 8.x requires JDK 17 minimum
+    godot_3_6_docs_requirements:
+      values: OpenJDK 17; SDK platform-34; build-tools 34.0.0; platform-tools ≥30.0.5; cmdline-tools latest; cmake 3.10.2.4988404; NDK r23c (23.2.8568313)
+      source: https://docs.godotengine.org/en/3.6/tutorials/export/exporting_for_android.html (fetched 2026-11-11)
+    prebuilt_template_path:
+      values: needs no gradle/JDK — the template ships android_release.apk; signing via jarsigner + keystore (the docs' "Setting it up in Godot" lists only the SDK path and the debug keystore)
+      source: same Godot 3.6 docs page (fetched 2026-11-11)
+
 gaps:
   - whether itch's HTML5 ZIP limits are enforced on butler-pushed HTML channels (limits stated in the general HTML5 guide; 30 GB butler cap is separate) — treated as likely applicable, not doc-verified for butler pushes
   - no official statement on .aab handling (community evidence only)

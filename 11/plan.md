@@ -29,8 +29,10 @@ table names.
 **Traces to:** R-4 · SC-3, SC-4.
 
 - **Deliverable:** `docs/itch-app-setup.md` Step 2 item 2's paste
-  instruction states that the copy below the cut line is raw HTML. No other
-  part of the runbook changes.
+  instruction states that the copy below the cut line is raw HTML and that
+  the Description form accepts raw HTML — paste the body source directly
+  and the tags render; markdown is not supported (it shows literally). No
+  other part of the runbook changes.
 - **RED (fails against current state):** I-3 — "raw HTML" has zero matches
   in the runbook today.
 - **GREEN:** the wording touch.

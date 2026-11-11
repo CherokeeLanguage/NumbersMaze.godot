@@ -39,3 +39,10 @@ plan:
       findings: []
       adjudicated_classes: []
       outcome: zero-finding verdict; plan validated against the spec as filed. NOTE (2026-11-11, after validation): the developer observed that rich-text paste into the itch Description field works (live page now renders formatted) — the raw-HTML approach may be superseded by a markdown-source + paste-the-rendered-text workflow; implementation is HELD pending the developer's workflow decision, and on a change of direction this plan is superseded by a revised plan under the revised spec.
+    - round: 2
+      date: 2026-11-11
+      reviewer: fresh-context dispatch (general subagent, no prior context)
+      verdict: PASS
+      findings: []
+      adjudicated_classes: []
+      outcome: zero-finding verdict after the Item 2 amendment (the developer confirmed the Description form accepts raw HTML — paste the source directly; the runbook wording carries that statement). The round-1 NOTE's hold is resolved: the raw-HTML approach stands, implement proceeds.

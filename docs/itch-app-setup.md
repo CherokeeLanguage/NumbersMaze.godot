@@ -48,10 +48,11 @@ research record `.issues/research-cards/itch-io-publishing.yaml`).
    material — not an itch cover.)
 2. **Description** (Edit-game → Description): the description copy is
    authored in this repo at
-   [docs/itch-page-description.md](itch-page-description.md) — paste
-   everything below that file's cut line into the description field,
-   verbatim. If the copy changes, edit the file in the repo first, then
-   re-paste.
+   [docs/itch-page-description.md](itch-page-description.md) — everything
+   below that file's cut line is raw HTML, and the Description form accepts
+   raw HTML: copy the body and paste it directly (the tags render).
+   Markdown is not supported — it shows literally. If the copy changes,
+   edit the file in the repo first, then re-paste.
 
 ## Step 3 — Export the artifacts and feed the channels
 

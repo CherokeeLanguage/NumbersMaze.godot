@@ -57,3 +57,18 @@ cycles:
     findings: []
     adjudicated_classes: []
     outcome: zero-finding verdict; validation loop exits clean; spec approved for downstream stages under the developer's terminal authorization (approved for pr)
+
+plan:
+  cycles:
+    - round: 1
+      date: 2026-11-11
+      reviewer: fresh-context dispatch (general subagent, no prior context)
+      verdict: FAIL
+      findings:
+        - class: factual error in the plan's RED evidence (plan-correctness prong)
+          location: Item 1 RED bullet
+          text: RED stated "I-1 matches the 13 procedure lines"; executing I-1 against the current README matches 7 lines (8, 13, 14, 16, 18, 21, 22) — the count was stated without being run
+          remediation: RED restated with the verified count and line numbers (executed by the writer before restating)
+      adjudicated_classes:
+        - plan factual accuracy (RED evidence): finding (remediated)
+      outcome: revised in place; re-validation round 2 dispatched

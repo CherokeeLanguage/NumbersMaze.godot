@@ -1,1 +1,5 @@
-comments: []
+comments:
+- type: internal
+  body: 'PR #7 opened (feature/itch-publish -> main, squash 2fdf5aa). Verify PASS
+    zero findings. SC-1 pending developer-assisted run per spec Scope.'
+  timestamp: '2026-11-11T15:18:19+00:00'

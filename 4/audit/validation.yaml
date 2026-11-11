@@ -1,0 +1,25 @@
+# Validation record — NumbersMaze.godot#4 (YAML)
+
+spec:
+  - round: 1
+    date: 2026-11-10
+    reviewer: fresh-context subagent (general)
+    verdict: FAIL
+    findings:
+      - class: fabricated-claims
+        target: spec.md Problem section — tracked nested-.idea enumeration
+        ground: listed projectSettingsUpdater.xml as tracked and omitted the nested .gitignore; actual tracked set is .gitignore, gradle.xml, indexLayout.xml, misc.xml, vcs.xml (verified via git ls-files)
+        remediation: enumeration re-derived from git ls-files and corrected in place
+      - class: fabricated-claims
+        target: spec.md Problem/Root-cause-2 — "/.idea/ anchored pattern escapes nested subtree" mechanism
+        ground: git check-ignore --no-index -v attributes the nested match to .gitignore:16:/.idea/ — an ignored directory covers everything beneath it; the files are tracked-but-ignored BECAUSE of the pattern, not despite it
+        remediation: mechanism narrative rewritten to stale-index-entry cause (root cause 3); no .gitignore pattern edit for .idea
+      - class: incapable-instrument
+        target: SC-6 (old) — git check-ignore on the nested .idea file
+        ground: the match already attributes to the unchanged /.idea/ pattern, so the instrument verifies coverage that already exists and cannot detect the (dropped) edit's absence
+        remediation: SC-6 dropped together with the unjustified pattern edit
+      - class: causal-sufficiency
+        target: Approach step 2 — "replace /.idea/ with .idea/"
+        ground: fix element answered to the disproven escape mechanism; no stated cause calls for the edit
+        remediation: pattern edit removed from the approach; approach step 2 now adds .godot/ only
+    outcome: all four findings remediated in place; fresh re-review dispatched
